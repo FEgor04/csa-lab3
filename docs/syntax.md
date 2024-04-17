@@ -7,7 +7,7 @@ line ::= line_instruction | line_variable
 
 line_instruction ::= [ label , ":" , spacing] , instruction
 
-label ::= letter , [ letter ]
+label ::= word
 
 instruction ::= instruction_name , spacing , instruction_arg
 
