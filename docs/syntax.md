@@ -27,8 +27,8 @@ addressation_load_number ::= "#"
 
 
 
-line_variable ::= [ label , ":" , spacing ] , variable_name , spacing , variable_value
-variable_name ::= word
+line_variable ::= [ label , ":" , spacing ] , variable_type , spacing , variable_value
+variable_type ::= "word" | "cstr";
 variable_value ::= number | ( "'" , word , "'" )
 
 
