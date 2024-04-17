@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "csa-lab3"
+version = "0.1.0"
+description = ""
+authors = ["Egor Fedorov <fegor2004@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+[tool.poetry.group.dev.dependencies]
+coverage = "^7.4.4"
+mypy = "^1.9.0"
+pytest = "^8.1.1"
+pytest-golden = "^0.2.2"
+ruff = "^0.3.7"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
