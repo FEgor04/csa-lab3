@@ -1,7 +1,7 @@
 # Синтаксис языка
 
 ```ebnf
-line ::= line_instruction | 
+line ::= line_instruction | line_variable
 
 
 
@@ -27,7 +27,7 @@ addressation_load_number ::= "#"
 
 
 
-line_variable ::= [ label , ":" , spacing ] , 
+line_variable ::= [ label , ":" , spacing ] , variable_name , spacing , variable_value
 variable_name ::= word
 variable_value ::= number | ( "'" , word , "'" )
 
