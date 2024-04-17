@@ -1,9 +1,9 @@
 # Синтаксис языка
 
 ```ebnf
-line ::= line_instruction | line_variable
+program ::= line , [ "\n" , program ]
 
-
+line ::= line_instruction | line_variable | line_org
 
 line_instruction ::= [ label , ":" , spacing] , instruction
 
@@ -13,12 +13,12 @@ instruction ::= instruction_name , spacing , instruction_arg
 
 spacing ::= "\t" , " "
 
-instruction_name ::=   "LD" (* TypeScript-like syntax *)
-                | "ST"
-                | "ADD"
-                | "SUB"
-                | "CMP"
-                | "JMP"
+instruction_name ::=  | "LD" (* TypeScript-like syntax *)
+                      | "ST"
+                      | "ADD"
+                      | "SUB"
+                      | "CMP"
+                      | "JMP"
 
 instruction_arg ::= (addressation_direct , label) | (addressation_load_number , number)
 
@@ -31,6 +31,9 @@ line_variable ::= [ label , ":" , spacing ] , variable_name , spacing , variable
 variable_name ::= word
 variable_value ::= number | ( "'" , word , "'" )
 
+
+
+line_org ::= "ORG" , spacing , positive_number
 
 letter ::= "A" | "B" | ....;
 word = letter , [ word ]
