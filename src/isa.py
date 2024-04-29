@@ -19,6 +19,8 @@ class Opcode(str, Enum):
     JMP = "jmp"
     JZ = "jz"
     HLT = "hlt"
+    # псевдоинструкция для хранения данных. выделяет блок в 32 бит и заполняет укзаанным литералом / числом
+    VAR = "var"
 
     def __str__(self):
         return str(self.value)
