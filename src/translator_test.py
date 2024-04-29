@@ -5,9 +5,19 @@ import unittest
 
 class TestTranslator(unittest.TestCase):
     def test_translate_no_arg(self):
-        lines = ["HLT"]
+        lines = ["HLT", "", ""]
         transformed = parse_lines(lines)
         expected = [Instruction(Opcode.HLT, None)]
+        self.assertEqual(transformed, expected)
+
+    def test_translate_complex(self):
+        lines = ["START: LD KEKW", "JMP START", "KEKW: VAR 'a'"]
+        transformed = parse_lines(lines)
+        expected = [
+            Instruction(Opcode.LD, 2),
+            Instruction(Opcode.JMP, 0),
+            Instruction(Opcode.VAR, "'a'"),
+        ]
         self.assertEqual(transformed, expected)
 
     def test_first_pass(self):
