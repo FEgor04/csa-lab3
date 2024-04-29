@@ -28,3 +28,15 @@ class TestTranslator(unittest.TestCase):
         expected = ("", "LD", "ABSD")
         self.assertEqual(split_instruction(line), expected)
         
+    def test_parse_instruction_no_arg(self):
+        line = "\t\tKEKW:\t\tHLT\t\t\t\t"
+        expected = ("KEKW", "HLT", "")
+        self.assertEqual(split_instruction(line), expected)
+
+    def test_parse_instruction_no_arg_no_label(self):
+        line = "\t\t\tHLT\t\t\t\t"
+        expected = ("", "HLT", "")
+
+    def test_parse_instruction(self):
+        line = "\t\tCOOLLABEL: \tADD\t\tSOMETHING\t\t\t\n";
+        expected = ("COOLLABEL", "ADD", "SOMETHING")
