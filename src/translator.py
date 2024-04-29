@@ -1,9 +1,20 @@
-from isa import Instruction
+from isa import Instruction, Opcode
 import re
 
+def parse_int_or_none(a: str) -> int | None:
+    try:
+        return int(a)
+    except:
+        return None
 
 def parse_lines(lines: list[str]) -> list[Instruction]:
-    return []
+    instructions = []
+    labels = parse_labels(lines)
+    for i in range(len(lines)):
+        line = lines[i]
+        _, opcode, arg = split_instruction(line)
+        instructions += [Instruction(Opcode[opcode], None)]
+    return instructions
 
 
 def parse_labels(lines: list[str]) -> dict[str, int]:
@@ -15,7 +26,6 @@ def parse_labels(lines: list[str]) -> dict[str, int]:
         if label != "":
             labels[label] = i
     return labels
-
 
 def split_instruction(line: str) -> tuple[str, str, str]:
     """Парсит инструкцию и трансформирует ее в кортеж вида (метка, опкод, аргумент)"""

@@ -4,7 +4,6 @@ import unittest
 
 
 class TestTranslator(unittest.TestCase):
-    @unittest.skip("TBD")
     def test_translate_no_arg(self):
         lines = ["HLT"]
         transformed = parse_lines(lines)
