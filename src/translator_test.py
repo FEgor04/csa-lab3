@@ -16,7 +16,7 @@ class TestTranslator(unittest.TestCase):
         expected = [
             Instruction(Opcode.LD, 2),
             Instruction(Opcode.JMP, 0),
-            Instruction(Opcode.VAR, "'a'"),
+            Instruction(Opcode.VAR, "a"),
         ]
         self.assertEqual(transformed, expected)
 

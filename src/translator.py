@@ -22,7 +22,10 @@ def parse_lines(lines: list[str]) -> list[Instruction]:
             continue
         _, opcode, arg_raw = split_instruction(line)
         if opcode == "VAR":
-            instructions += [Instruction(Opcode[opcode], arg_raw)]
+            arg_parsed = parse_int_or_none(arg_raw)
+            if arg_parsed is None:
+                arg_parsed = arg_raw[1:-1]
+            instructions += [Instruction(Opcode[opcode], arg_parsed)]
         else:
             arg_parsed = parse_int_or_none(arg_raw)
             if arg_raw != "" and arg_parsed is None:
