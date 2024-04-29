@@ -13,7 +13,7 @@ instruction ::= instruction_name , spacing , instruction_arg
 
 spacing ::= "\t" , " "
 
-instruction_name ::=  | "LD" (* TypeScript-like syntax *)
+instruction_name ::=  | "LD"
                       | "ST"
                       | "ADD"
                       | "SUB"
