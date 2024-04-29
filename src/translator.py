@@ -1,11 +1,10 @@
 from isa import Instruction, Opcode
-import re
 
 
 def parse_int_or_none(a: str) -> int | None:
     try:
         return int(a)
-    except:
+    except ValueError:
         return None
 
 
@@ -35,7 +34,6 @@ def parse_lines(lines: list[str]) -> list[Instruction]:
 
 
 def parse_labels(lines: list[str]) -> dict[str, int]:
-    pattern = re.compile(r"^([\w\d]+):\s")
     labels = {}
     for i in range(len(lines)):
         line = lines[i]
