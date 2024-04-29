@@ -8,7 +8,7 @@ class TestTranslator(unittest.TestCase):
         lines = ["HLT"]
         transformed = parse_lines(lines)
         expected = [Instruction(Opcode.HLT, None)]
-        self.assertEquals(transformed, expected)
+        self.assertEqual(transformed, expected)
 
     def test_first_pass(self):
         lines = [
@@ -20,5 +20,5 @@ class TestTranslator(unittest.TestCase):
             "LABEL2": 1,
         }
         actual = parse_labels(lines)
-        self.assertEquals(actual, expected_labels)
+        self.assertEqual(actual, expected_labels)
 

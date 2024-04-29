@@ -7,7 +7,7 @@ line ::= line_instruction | line_variable | line_org
 
 line_instruction ::= [ label , ":" , spacing] , instruction
 
-label ::= word
+label ::= word_of_lettrs_and_digits
 
 instruction ::= instruction_name , spacing , instruction_arg
 
@@ -35,9 +35,11 @@ variable_value ::= number | ( "'" , word , "'" )
 
 line_org ::= "ORG" , spacing , positive_number
 
-letter ::= "A" | "B" | ....;
-word = letter , [ word ]
+letter ::= "A" | "B" | .... | "a" | "b" | ...;
+letter_or_digit := letter | digit
+word_of_letters := letter , [ word_of_letters ]
 digit ::= "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
+word_of_lettrs_and_digits := letter_or_digit , word_of_lettrs_and_digits
 positive_number ::= digit , [ positive_number ]
 number ::= [ "+" | "-" ] | positive_number
 
