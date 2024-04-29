@@ -2,6 +2,7 @@ from isa import Instruction, Opcode
 from translator import parse_lines, parse_labels, split_instruction
 import unittest
 
+
 class TestTranslator(unittest.TestCase):
     @unittest.skip("TBD")
     def test_translate_no_arg(self):
@@ -26,7 +27,7 @@ class TestTranslator(unittest.TestCase):
         line = "\t\t\tLD\t\tABSD\t\t"
         expected = ("", "LD", "ABSD")
         self.assertEqual(split_instruction(line), expected)
-        
+
     def test_parse_instruction_no_arg(self):
         line = "\t\tKEKW:\t\tHLT\t\t\t\t"
         expected = ("KEKW", "HLT", "")
