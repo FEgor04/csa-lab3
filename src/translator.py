@@ -11,9 +11,9 @@ def parse_labels(lines: list[str]) -> dict[str, int]:
     labels = {}
     for i in range(len(lines)):
         line = lines[i]
-        labels_for_line = pattern.findall(line)
-        if len(labels_for_line) > 0:
-            labels.update({labels_for_line[0]: i})
+        label, _, _ = split_instruction(line)
+        if label != "":
+            labels[label] = i
     return labels
 
 
