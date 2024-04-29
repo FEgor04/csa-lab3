@@ -1,5 +1,5 @@
 from isa import Instruction, Opcode
-from translator import parse_lines, parse_labels
+from translator import parse_lines, parse_labels, split_instruction
 import unittest
 
 class TestTranslator(unittest.TestCase):
@@ -22,3 +22,9 @@ class TestTranslator(unittest.TestCase):
         actual = parse_labels(lines)
         self.assertEqual(actual, expected_labels)
 
+
+    def test_parse_instruction_no_label(self):
+        line = "\t\t\tLD\t\tABSD\t\t"
+        expected = ("", "LD", "ABSD")
+        self.assertEqual(split_instruction(line), expected)
+        
