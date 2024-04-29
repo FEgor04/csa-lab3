@@ -2,7 +2,7 @@
 """
 
 from enum import Enum
-from collections import namedtuple
+from typing import NamedTuple
 
 class Opcode(str, Enum):
     """Opcode инструкций (и псевдоинструкций).
@@ -19,11 +19,11 @@ class Opcode(str, Enum):
     JZ="jz"
     HLT="hlt"
 
-    def __str__(self: Opcode):
+    def __str__(self):
         return str(self.value)
     
 
-class Insturction(NamedTuple):
+class Instruction(NamedTuple):
     """Инструкция
     `opcode` - опкод инструкции
     `arg` - аргумент инструкции (опционален)
