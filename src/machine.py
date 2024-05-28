@@ -1,4 +1,4 @@
-from enum import Enum
+from enum import Enum, auto
 
 
 class Signal(int, Enum):
@@ -8,7 +8,7 @@ class Signal(int, Enum):
         Automatically generates enum values a power of two
         See: https://docs.python.org/3/library/enum.html#enum.Enum._generate_next_value_
         """
-        return 2 ** (count + 1)
+        return 2 ** (count)
 
 
     # Buffer Register Input
