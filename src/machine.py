@@ -1,4 +1,10 @@
 from isa import Instruction, Opcode, Addressing
+from enum import Enum
+
+
+class ALUOperation(int, Enum):
+    Add = 0
+    Sub = 1
 
 
 class DataPath:
@@ -13,6 +19,7 @@ class DataPath:
         self.buffer_register = 0
         self.input = input
         self.output = []
+        self.alu_out = 0
 
     def read_memory(self) -> Instruction:
         if self.address_register == 2046:  # Input
