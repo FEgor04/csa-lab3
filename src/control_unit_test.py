@@ -69,14 +69,14 @@ class ControlUnitTest(unittest.TestCase):
     def test_execute_load(self):
         initial = [
             Instruction(Opcode.LD, 42, Addressing.IMMEDIATE),
+            Instruction(Opcode.ST, 2, Addressing.IMMEDIATE),
         ]
         data_path = DataPath("", print, initial)
         control_unit = ControlUnit(0, data_path)
-        control_unit.program_fetch()
-        control_unit.address_fetch()
-        control_unit.operand_fetch()
-        control_unit.execute()
+        control_unit.decode_and_execute()
         self.assertEqual(42, data_path.accumulator)
+        control_unit.decode_and_execute()
+        self.assertEqual(42, data_path.memory[2].arg)
 
     def test_execute_add(self):
         initial = [

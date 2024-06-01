@@ -16,6 +16,10 @@ class RegisterSelector(Enum):
 
 
 class DataPath:
+    accumulator: int
+    buffer_register: int
+    address_register: int
+
     def __init__(self, input: str, onOutput, initial_memory: list[Instruction] = []):
         """
         Для простоты реализации в памяти хранятся инструкции.
@@ -54,7 +58,7 @@ class DataPath:
             self.onOutput(self.alu.out)
             return
         assert 0 <= self.address_register < 2046
-        self.memory[self.address_register] = self.alu.out
+        self.memory[self.address_register] = Instruction(Opcode.VAR, self.alu.out)
 
     def signal_latch_adress_register(
         self, sel: RegisterSelector, pc: int, arg: int, address: int, operand: int
@@ -74,15 +78,15 @@ class DataPath:
         self, sel: RegisterSelector, pc: int, arg: int, address: int, operand: int
     ):
         if sel is RegisterSelector.ALU:
-            self.buffer = self.alu.out
+            self.buffer_register = self.alu.out
         elif sel is RegisterSelector.PC:
-            self.buffer = pc
+            self.buffer_register = pc
         elif sel is RegisterSelector.ARG:
-            self.buffer = arg
+            self.buffer_register = arg
         elif sel is RegisterSelector.ADDRESS:
-            self.buffer = address
+            self.buffer_register = address
         elif sel is RegisterSelector.OPERAND:
-            self.buffer = operand
+            self.buffer_register = operand
 
     def signal_latch_accumulator(
         self, sel: RegisterSelector, pc: int, arg: int, address: int, operand: int
@@ -107,7 +111,7 @@ class ControlUnit:
     address: int
     operand: int
 
-    def __init__(self, pc, data_path):
+    def __init__(self, pc: int, data_path: DataPath):
         self.program = None
         self.program_counter = pc
         self.data_path = data_path
@@ -171,6 +175,22 @@ class ControlUnit:
                 self.operand,
             )
             self.signal_latch_pc(False)
+        if self.program.opcode is Opcode.ST:
+            self.data_path.signal_latch_adress_register(
+                RegisterSelector.OPERAND,
+                self.program_counter,
+                self.program.arg,
+                self.address,
+                self.operand,
+            )
+            # Pass accumulator through the ALU
+            self.data_path.alu.signal_sel_left(self.data_path.buffer_register, False)
+            self.data_path.alu.signal_sel_right(self.data_path.accumulator, True)
+            self.data_path.alu.signal_alu_operation(Opcode.ADD, {})
+            assert self.data_path.alu.out == self.data_path.accumulator, "ALU out should become equal to accumulator"
+
+            self.data_path.signal_write_memory()
+            self.signal_latch_pc(False)
         elif self.program.opcode in {
             Opcode.ADD,
             Opcode.SUB,
@@ -185,7 +205,7 @@ class ControlUnit:
                 self.address,
                 self.operand,
             )
-            self.data_path.alu.signal_sel_left(self.data_path.buffer, True)
+            self.data_path.alu.signal_sel_left(self.data_path.buffer_register, True)
             self.data_path.alu.signal_sel_right(self.data_path.accumulator, True)
             self.data_path.alu.signal_alu_operation(self.program.opcode, {})
             self.data_path.signal_latch_accumulator(

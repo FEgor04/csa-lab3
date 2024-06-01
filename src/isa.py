@@ -13,13 +13,16 @@ class Opcode(str, Enum):
     3. Псевдоинструкция только для транслятора (VAR)
     """
 
+    # Arithmetics
     ADD = "add"
     SUB = "sub"
     MUL = "mul"
     DIV = "div"
     MOD = "mod"
+    # Memory
     LD = "ld"
     ST = "st"
+    # Control
     JMP = "jmp"
     JZ = "jz"
     HLT = "hlt"
@@ -53,4 +56,4 @@ class Instruction(NamedTuple):
 
     opcode: Opcode
     arg: int | None
-    addressing: Addressing | None
+    addressing: Addressing | None = Addressing.IMMEDIATE

@@ -20,4 +20,4 @@ class DataPathTest(unittest.TestCase):
         datapath.alu.out = 1024
         datapath.address_register = 521
         datapath.signal_write_memory()
-        self.assertEqual(1024, datapath.memory[521])
+        self.assertEqual(1024, datapath.memory[521].arg)
