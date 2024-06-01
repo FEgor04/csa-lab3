@@ -22,9 +22,7 @@ def parse_lines(lines: list[str]) -> list[Instruction]:
         _, opcode, arg_raw = split_instruction(line)
         arg, addressing = parse_argument(arg_raw, labels)
         if opcode == "VAR":
-            instructions += [
-                Instruction(Opcode[opcode], arg, addressing)
-            ]
+            instructions += [Instruction(Opcode[opcode], arg, addressing)]
         else:
             instructions += [Instruction(Opcode[opcode], arg, addressing)]
     return instructions
@@ -39,12 +37,13 @@ def parse_labels(lines: list[str]) -> dict[str, int]:
             labels[label] = i
     return labels
 
+
 def parse_argument(arg: str, labels: dict[str, int]) -> tuple[str | int, Addressing]:
     if len(arg) == 0:
         return None, None
     addressing = parse_addressing(arg)
     if addressing is Addressing.IMMEDIATE:
-        if arg[0] == "'" and arg[-1] == "'": # is literal
+        if arg[0] == "'" and arg[-1] == "'":  # is literal
             return arg[1:-1], addressing
         if arg.isdecimal():
             return int(arg), addressing

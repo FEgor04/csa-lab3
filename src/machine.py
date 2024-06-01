@@ -151,7 +151,10 @@ class ControlUnit:
 
     def operand_fetch(self):
         assert self.program is not None
-        if self.program.addressing is Addressing.IMMEDIATE or self.program.addressing is None:
+        if (
+            self.program.addressing is Addressing.IMMEDIATE
+            or self.program.addressing is None
+        ):
             self.operand = self.program.arg
             return
         self.data_path.signal_latch_adress_register(
