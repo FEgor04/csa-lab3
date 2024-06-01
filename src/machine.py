@@ -131,3 +131,18 @@ class ControlUnit:
             )
             self.data_path.signal_read_memory()
             self.address = self.data_path.mem_out.arg
+
+    def operand_fetch(self):
+        assert self.program is not None
+        if self.program.addressing is Addressing.IMMEDIATE:
+            self.operand = self.program.arg
+            return
+        assert self.address is not None
+        self.data_path.signal_latch_adress_register(
+            AddressRegisterSelector.ADDRESS,
+            self.program_counter,
+            self.program.arg if self.program is not None else 0,
+            self.address,
+        )
+        self.data_path.signal_read_memory()
+        self.operand = self.data_path.mem_out.arg
