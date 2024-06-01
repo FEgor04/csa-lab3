@@ -20,7 +20,9 @@ class DataPath:
     buffer_register: int
     address_register: int
 
-    def __init__(self, input: str, onOutput, initial_memory: list[Instruction] = []):
+    def __init__(
+        self, input: str, _remove_later, initial_memory: list[Instruction] = []
+    ):
         """
         Для простоты реализации в памяти хранятся инструкции.
         чтобы сохранить число необходимо указать `Opcode.VAR` и `Addressing.Immediate`
@@ -55,7 +57,7 @@ class DataPath:
         if self.address_register == 2046:
             raise Exception("Programm tried to write to input port")
         if self.address_register == 2047:
-            self.onOutput(self.alu.out)
+            self.output += [chr(self.alu.out)]
             return
         assert 0 <= self.address_register < 2046
         self.memory[self.address_register] = Instruction(Opcode.VAR, self.alu.out)

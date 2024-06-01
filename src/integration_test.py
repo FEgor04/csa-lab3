@@ -27,3 +27,15 @@ class IntegrationTest(unittest.TestCase):
         except StopIteration:
             pass
         self.assertEqual(data_path.memory[0].arg, 50)
+
+    def test_output(self):
+        lines = ["LD 'h'", "ST 2047", "HLT"]
+        instructions = parse_lines(lines)
+        data_path = DataPath("", print, instructions)
+        control_unit = ControlUnit(0, data_path)
+        try:
+            for i in range(100):
+                control_unit.decode_and_execute()
+        except StopIteration:
+            pass
+        self.assertEqual(data_path.output, ["h"])
