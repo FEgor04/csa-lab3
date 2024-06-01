@@ -118,7 +118,8 @@ class ControlUnitTest(unittest.TestCase):
         program = [
             Instruction(Opcode.JZ, 2, Addressing.IMMEDIATE),  # 0
             Instruction(Opcode.VAR, 2, Addressing.IMMEDIATE),  # 1
-            Instruction(Opcode.LD, 420, Addressing.IMMEDIATE),  # 2
+            Instruction(Opcode.ADD, 420, Addressing.IMMEDIATE),  # 2, sets NZ to 00
+            Instruction(Opcode.JZ, 0, Addressing.IMMEDIATE),  # 3
         ]
         data_path = DataPath("", print, program)
         control_unit = ControlUnit(0, data_path)
@@ -126,4 +127,7 @@ class ControlUnitTest(unittest.TestCase):
         self.assertEqual(2, control_unit.program_counter)
         control_unit.decode_and_execute()
         self.assertEqual(420, data_path.accumulator)
+        self.assertEqual(False, data_path.alu.zero)
         self.assertEqual(3, control_unit.program_counter)
+        control_unit.decode_and_execute()
+        self.assertEqual(4, control_unit.program_counter)
