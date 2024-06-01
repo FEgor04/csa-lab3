@@ -1,14 +1,9 @@
 from isa import Instruction, Opcode, Addressing
-from enum import Enum
-
-
-class ALUOperation(int, Enum):
-    Add = 0
-    Sub = 1
+from alu import ALU
 
 
 class DataPath:
-    def __init__(self, input: str):
+    def __init__(self, input: str, onOutput):
         """
         Для простоты реализации в памяти хранятся инструкции.
         чтобы сохранить число необходимо указать `Opcode.VAR` и `Addressing.Immediate`
@@ -19,8 +14,8 @@ class DataPath:
         self.buffer_register = 0
         self.input = input
         self.output = []
-        self.alu_out = 0
         self.mem_out = 0
+        self.alu = ALU()
 
     def signal_read_memory(self) -> Instruction:
         if self.address_register == 2046:  # Input
@@ -34,3 +29,20 @@ class DataPath:
             raise Exception("Programm tried to read from output port")
         assert 0 <= self.address_register < 2046
         self.mem_out = self.memory[self.address_register]
+
+    def signal_write_memory(self):
+        if self.address_register == 2046:
+            raise Exception("Programm tried to write to input port")
+        if self.address_register == 2047:
+            self.onOutput(self.alu.out)
+            return
+        assert 0 <= self.address_register < 2046
+        self.memory[self.address_register] = self.alu.out
+
+    def signal_latch_adress_register(self, sel: str | None, pc: int):
+        if sel == "alu":
+            self.address_register = self.alu.out
+        elif sel == "pc":
+            self.address_register = pc
+        else:
+            self.address_register = 0
