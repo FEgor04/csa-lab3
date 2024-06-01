@@ -1,4 +1,4 @@
-from isa import Instruction, Opcode
+from isa import Instruction, Opcode, Addressing
 
 
 def parse_int_or_none(a: str) -> int | None:
@@ -20,18 +20,18 @@ def parse_lines(lines: list[str]) -> list[Instruction]:
         if line == "":
             continue
         _, opcode, arg_raw = split_instruction(line)
+        addressing = parse_addressing(arg_raw)
         if opcode == "VAR":
             arg_parsed = parse_int_or_none(arg_raw)
             if arg_parsed is None:
                 arg_parsed = arg_raw[1:-1]
-            instructions += [Instruction(Opcode[opcode], arg_parsed)]
+            instructions += [Instruction(Opcode[opcode], arg_parsed, None)]
         else:
             arg_parsed = parse_int_or_none(arg_raw)
             if arg_raw != "" and arg_parsed is None:
-                arg_parsed = labels[arg_raw]
-            instructions += [Instruction(Opcode[opcode], arg_parsed)]
+                arg_parsed = labels[arg_raw[1:-1]]
+            instructions += [Instruction(Opcode[opcode], arg_parsed, addressing)]
     return instructions
-
 
 def parse_labels(lines: list[str]) -> dict[str, int]:
     labels = {}
@@ -42,6 +42,14 @@ def parse_labels(lines: list[str]) -> dict[str, int]:
             labels[label] = i
     return labels
 
+def parse_addressing(argument: str) -> Addressing | None:
+    if len(argument) == 0:
+        return None
+    if argument[0] == "(" and argument[-1] == ")":
+        return Addressing.DIRECT
+    if argument[0] == "[" and argument[-1] == "]":
+        return Addressing.INDIRECT
+    return Addressing.IMMEDIATE
 
 def split_instruction(line: str) -> tuple[str, str, str]:
     """Парсит инструкцию и трансформирует ее в кортеж вида (метка, опкод, аргумент)"""

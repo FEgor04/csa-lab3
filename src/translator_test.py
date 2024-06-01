@@ -1,4 +1,4 @@
-from isa import Instruction, Opcode
+from isa import Instruction, Opcode, Addressing
 from translator import parse_lines, parse_labels, split_instruction
 import unittest
 
@@ -7,16 +7,16 @@ class TestTranslator(unittest.TestCase):
     def test_translate_no_arg(self):
         lines = ["HLT", "", ""]
         transformed = parse_lines(lines)
-        expected = [Instruction(Opcode.HLT, None)]
+        expected = [Instruction(Opcode.HLT, None, None)]
         self.assertEqual(transformed, expected)
 
     def test_translate_complex(self):
-        lines = ["START: LD KEKW", "JMP START", "KEKW: VAR 'a'"]
+        lines = ["START: LD (KEKW)", "JMP (START)", "KEKW: VAR 'a'"]
         transformed = parse_lines(lines)
         expected = [
-            Instruction(Opcode.LD, 2),
-            Instruction(Opcode.JMP, 0),
-            Instruction(Opcode.VAR, "a"),
+            Instruction(Opcode.LD, 2, Addressing.DIRECT),
+            Instruction(Opcode.JMP, 0, Addressing.DIRECT),
+            Instruction(Opcode.VAR, "a", None),
         ]
         self.assertEqual(transformed, expected)
 
@@ -51,3 +51,4 @@ class TestTranslator(unittest.TestCase):
         line = "\t\tCOOLLABEL: \tADD\t\tSOMETHING\t\t\t\n"
         expected = ("COOLLABEL", "ADD", "SOMETHING")
         self.assertEqual(split_instruction(line), expected)
+
