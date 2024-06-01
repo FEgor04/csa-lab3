@@ -47,6 +47,7 @@ def parse_addressing(argument: str) -> Addressing | None:
         return Addressing.DIRECT
     if argument[0] == "[" and argument[-1] == "]":
         return Addressing.INDIRECT
+    assert(argument[0] not in ["[", "("] and argument[-1] not in ["]",  ")"])
     return Addressing.IMMEDIATE
 
 def split_instruction(line: str) -> tuple[str, str, str]:
