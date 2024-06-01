@@ -27,6 +27,7 @@ class Opcode(str, Enum):
     def __str__(self):
         return str(self.value)
 
+
 class Addressing(Enum):
     # Операнд - аргумент
     # Пример: `LD 10` - загружает число 10 в аккумулятор

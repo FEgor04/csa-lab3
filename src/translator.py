@@ -23,13 +23,16 @@ def parse_lines(lines: list[str]) -> list[Instruction]:
         addressing = parse_addressing(arg_raw)
         if addressing is Addressing.IMMEDIATE:
             arg_parsed = int(arg_raw) if arg_raw.isdecimal() else arg_raw[1:-1]
-            instructions += [Instruction(Opcode[opcode], arg_parsed, Addressing.IMMEDIATE)]
+            instructions += [
+                Instruction(Opcode[opcode], arg_parsed, Addressing.IMMEDIATE)
+            ]
         else:
             arg_parsed = parse_int_or_none(arg_raw)
             if arg_raw != "" and arg_parsed is None:
                 arg_parsed = labels[arg_raw[1:-1]]
             instructions += [Instruction(Opcode[opcode], arg_parsed, addressing)]
     return instructions
+
 
 def parse_labels(lines: list[str]) -> dict[str, int]:
     labels = {}
@@ -40,6 +43,7 @@ def parse_labels(lines: list[str]) -> dict[str, int]:
             labels[label] = i
     return labels
 
+
 def parse_addressing(argument: str) -> Addressing | None:
     if len(argument) == 0:
         return None
@@ -47,8 +51,9 @@ def parse_addressing(argument: str) -> Addressing | None:
         return Addressing.DIRECT
     if argument[0] == "[" and argument[-1] == "]":
         return Addressing.INDIRECT
-    assert(argument[0] not in ["[", "("] and argument[-1] not in ["]",  ")"])
+    assert argument[0] not in ["[", "("] and argument[-1] not in ["]", ")"]
     return Addressing.IMMEDIATE
+
 
 def split_instruction(line: str) -> tuple[str, str, str]:
     """Парсит инструкцию и трансформирует ее в кортеж вида (метка, опкод, аргумент)"""
