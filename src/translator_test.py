@@ -16,7 +16,7 @@ class TestTranslator(unittest.TestCase):
         expected = [
             Instruction(Opcode.LD, 2, Addressing.DIRECT),
             Instruction(Opcode.JMP, 0, Addressing.DIRECT),
-            Instruction(Opcode.VAR, "a", Addressing.IMMEDIATE),
+            Instruction(Opcode.VAR, ord("a"), Addressing.IMMEDIATE),
         ]
         self.assertEqual(transformed, expected)
 
@@ -71,7 +71,7 @@ class TestTranslator(unittest.TestCase):
         lines = ["ADD 10", "LD 'a'"]
         expected = [
             Instruction(Opcode.ADD, 10, Addressing.IMMEDIATE),
-            Instruction(Opcode.LD, "a", Addressing.IMMEDIATE),
+            Instruction(Opcode.LD, ord("a"), Addressing.IMMEDIATE),
         ]
         transformed = parse_lines(lines)
         self.assertEqual(transformed, expected)

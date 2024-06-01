@@ -15,3 +15,15 @@ class IntegrationTest(unittest.TestCase):
         except StopIteration:
             pass
         self.assertEqual(data_path.memory[0].arg, 10 + 5)
+
+    def test_mul_input(self):
+        lines = ["RESULT: VAR 0", "LD (2046)", "SUB '0'", "MUL 10", "ST RESULT", "HLT"]
+        instructions = parse_lines(lines)
+        data_path = DataPath("5", print, instructions)
+        control_unit = ControlUnit(1, data_path)
+        try:
+            for i in range(100):
+                control_unit.decode_and_execute()
+        except StopIteration:
+            pass
+        self.assertEqual(data_path.memory[0].arg, 50)

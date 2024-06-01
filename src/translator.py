@@ -38,13 +38,13 @@ def parse_labels(lines: list[str]) -> dict[str, int]:
     return labels
 
 
-def parse_argument(arg: str, labels: dict[str, int]) -> tuple[str | int, Addressing]:
+def parse_argument(arg: str, labels: dict[str, int]) -> tuple[int, Addressing]:
     if len(arg) == 0:
         return None, None
     addressing = parse_addressing(arg)
     if addressing is Addressing.IMMEDIATE:
         if arg[0] == "'" and arg[-1] == "'":  # is literal
-            return arg[1:-1], addressing
+            return ord(arg[1]), addressing
         if arg.isdecimal():
             return int(arg), addressing
         return labels[arg], addressing
