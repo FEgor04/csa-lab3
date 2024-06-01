@@ -16,7 +16,7 @@ class TestTranslator(unittest.TestCase):
         expected = [
             Instruction(Opcode.LD, 2, Addressing.DIRECT),
             Instruction(Opcode.JMP, 0, Addressing.DIRECT),
-            Instruction(Opcode.VAR, "a", None),
+            Instruction(Opcode.VAR, "a", Addressing.IMMEDIATE),
         ]
         self.assertEqual(transformed, expected)
 
@@ -52,3 +52,26 @@ class TestTranslator(unittest.TestCase):
         expected = ("COOLLABEL", "ADD", "SOMETHING")
         self.assertEqual(split_instruction(line), expected)
 
+    def test_parse_no_arg(self):
+        lines = ["HLT"]
+        expected = [Instruction(Opcode.HLT, None, None)]
+        transformed = parse_lines(lines)
+        self.assertEqual(transformed, expected)
+
+    def test_translate_indirect(self):
+        lines = ["KEK: LD [LOL]", "LOL: LD [KEK]"]
+        expected = [
+            Instruction(Opcode.LD, 1, Addressing.INDIRECT),
+            Instruction(Opcode.LD, 0, Addressing.INDIRECT),
+        ]
+        transformed = parse_lines(lines)
+        self.assertEqual(transformed, expected)
+
+    def test_immediate(self):
+        lines = ["ADD 10", "LD 'a'"]
+        expected = [
+            Instruction(Opcode.ADD, 10, Addressing.IMMEDIATE),
+            Instruction(Opcode.LD, 'a', Addressing.IMMEDIATE),
+        ]
+        transformed = parse_lines(lines)
+        self.assertEqual(transformed, expected)

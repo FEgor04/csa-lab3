@@ -21,11 +21,9 @@ def parse_lines(lines: list[str]) -> list[Instruction]:
             continue
         _, opcode, arg_raw = split_instruction(line)
         addressing = parse_addressing(arg_raw)
-        if opcode == "VAR":
-            arg_parsed = parse_int_or_none(arg_raw)
-            if arg_parsed is None:
-                arg_parsed = arg_raw[1:-1]
-            instructions += [Instruction(Opcode[opcode], arg_parsed, None)]
+        if addressing is Addressing.IMMEDIATE:
+            arg_parsed = int(arg_raw) if arg_raw.isdecimal() else arg_raw[1:-1]
+            instructions += [Instruction(Opcode[opcode], arg_parsed, Addressing.IMMEDIATE)]
         else:
             arg_parsed = parse_int_or_none(arg_raw)
             if arg_raw != "" and arg_parsed is None:
