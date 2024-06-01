@@ -1,1 +1,27 @@
+from isa import Instruction, Opcode, Addressing
 
+
+class DataPath:
+    def __init__(self, input: str):
+        """
+        Для простоты реализации в памяти хранятся инструкции.
+        чтобы сохранить число необходимо указать `Opcode.VAR` и `Addressing.Immediate`
+        """
+        self.memory = [Instruction(Opcode.VAR, 0, Addressing.IMMEDIATE)] * 2046
+        self.address_register = 0
+        self.accumulator = 0
+        self.buffer_register = 0
+        self.input = input
+        self.output = []
+
+    def read_memory(self) -> Instruction:
+        if self.address_register == 2046:  # Input
+            if len(self.input) == 0:
+                raise EOFError()
+            symbol = ord(self.input[0])
+            self.input = self.input[1:]
+            return Instruction(Opcode.VAR, symbol, Addressing.IMMEDIATE)
+        if self.address_register == 2047:
+            raise Exception("Programm tried to read from output port")
+        assert 0 <= self.address_register < 2046
+        return self.memory[self.address_register]
