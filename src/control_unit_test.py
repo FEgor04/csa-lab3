@@ -65,3 +65,28 @@ class ControlUnitTest(unittest.TestCase):
         control_unit.address_fetch()
         control_unit.operand_fetch()
         self.assertEqual(512, control_unit.operand)
+
+    def test_execute_load(self):
+        initial = [
+            Instruction(Opcode.LD, 42, Addressing.IMMEDIATE),
+        ]
+        data_path = DataPath("", print, initial)
+        control_unit = ControlUnit(0, data_path)
+        control_unit.program_fetch()
+        control_unit.address_fetch()
+        control_unit.operand_fetch()
+        control_unit.execute()
+        self.assertEqual(42, data_path.accumulator)
+
+    def test_execute_add(self):
+        initial = [
+            Instruction(Opcode.LD, 42, Addressing.IMMEDIATE),
+            Instruction(Opcode.ADD, 42, Addressing.IMMEDIATE),
+        ]
+        data_path = DataPath("", print, initial)
+        control_unit = ControlUnit(0, data_path)
+        control_unit.decode_and_execute()
+        self.assertEqual(1, control_unit.program_counter)
+        control_unit.decode_and_execute()
+        self.assertEqual(2, control_unit.program_counter)
+        self.assertEqual(84, data_path.accumulator)

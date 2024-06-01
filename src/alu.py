@@ -53,9 +53,10 @@ class ALU:
         self, operation: ALUOperation, modifiers: set[ALUModifier]
     ):
         left, right = self.process_modifiers(modifiers)
+        print(left, right)
         if operation is ALUOperation.Add:
             self.out = left + right
         if operation is ALUOperation.Sub:
-            self.out = right - left  # accumulator - left
+            self.out = right - left  # accumulator - buffer
         self.negative = self.out < 0
         self.zero = self.out == 0

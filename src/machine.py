@@ -1,21 +1,18 @@
 from isa import Instruction, Opcode, Addressing
-from alu import ALU
+from alu import ALU, ALUOperation
 from enum import Enum
 
 
 class RegisterSelector(Enum):
     ALU = "alu"
     MEM = "mem"
-    # Аргумент инструкции
-    ARG = "argument"
-
-
-class AddressRegisterSelector(Enum):
-    ALU = "alu"
     PC = "pc"
+    # Аргумент инструкции
     ARG = "arg"
     # Адрес операнда, полученный после цикла Address Fetch
     ADDRESS = "address"
+    # Операнд после цикла Operand Fetch
+    OPERAND = "operand"
 
 
 class DataPath:
@@ -60,32 +57,46 @@ class DataPath:
         self.memory[self.address_register] = self.alu.out
 
     def signal_latch_adress_register(
-        self, sel: AddressRegisterSelector, pc: int, arg: int, address: int
+        self, sel: RegisterSelector, pc: int, arg: int, address: int, operand: int
     ):
-        if sel is AddressRegisterSelector.ALU:
+        if sel is RegisterSelector.ALU:
             self.address_register = self.alu.out
-        elif sel is AddressRegisterSelector.PC:
+        elif sel is RegisterSelector.PC:
             self.address_register = pc
-        elif sel is AddressRegisterSelector.ARG:
+        elif sel is RegisterSelector.ARG:
             self.address_register = arg
-        elif sel is AddressRegisterSelector.ADDRESS:
+        elif sel is RegisterSelector.ADDRESS:
             self.address_register = address
+        elif sel is RegisterSelector.OPERAND:
+            self.address_register = operand
 
-    def signal_latch_buffer(self, sel: RegisterSelector, argument: int):
+    def signal_latch_buffer(
+        self, sel: RegisterSelector, pc: int, arg: int, address: int, operand: int
+    ):
         if sel is RegisterSelector.ALU:
             self.buffer = self.alu.out
-        if sel is RegisterSelector.MEM:
-            self.buffer = self.mem_out
-        if sel is RegisterSelector.ARG:
-            self.buffer = self.argument
+        elif sel is RegisterSelector.PC:
+            self.buffer = pc
+        elif sel is RegisterSelector.ARG:
+            self.buffer = arg
+        elif sel is RegisterSelector.ADDRESS:
+            self.buffer = address
+        elif sel is RegisterSelector.OPERAND:
+            self.buffer = operand
 
-    def signal_latch_accumulator(self, sel: RegisterSelector, argument: int):
+    def signal_latch_accumulator(
+        self, sel: RegisterSelector, pc: int, arg: int, address: int, operand: int
+    ):
         if sel is RegisterSelector.ALU:
             self.accumulator = self.alu.out
-        if sel is RegisterSelector.MEM:
-            self.accumulator = self.mem_out
-        if sel is RegisterSelector.ARG:
-            self.accumulator = self.argument
+        elif sel is RegisterSelector.PC:
+            self.accumulator = pc
+        elif sel is RegisterSelector.ARG:
+            self.accumulator = arg
+        elif sel is RegisterSelector.ADDRESS:
+            self.accumulator = address
+        elif sel is RegisterSelector.OPERAND:
+            self.accumulator = operand
 
 
 class ControlUnit:
@@ -103,15 +114,16 @@ class ControlUnit:
         self.address = None
         self.operand = None
 
-    def signal_latch_pc(self, sel: bool, operand: int):
-        self.program_counter = operand if sel else self.program_counter + 1
+    def signal_latch_pc(self, sel: bool):
+        self.program_counter = self.operand if sel else self.program_counter + 1
 
     def program_fetch(self):
         self.data_path.signal_latch_adress_register(
-            "pc",
+            RegisterSelector.PC,
             self.program_counter,
             self.program.arg if self.program is not None else 0,
             self.address,
+            self.operand,
         )
         self.data_path.signal_read_memory()
         self.program = self.data_path.mem_out
@@ -124,10 +136,11 @@ class ControlUnit:
             self.address = self.program.arg
         if self.program.addressing is Addressing.INDIRECT:
             self.data_path.signal_latch_adress_register(
-                AddressRegisterSelector.ARG,
+                RegisterSelector.ARG,
                 self.program_counter,
                 self.program.arg,
                 self.address,
+                self.operand,
             )
             self.data_path.signal_read_memory()
             self.address = self.data_path.mem_out.arg
@@ -139,10 +152,48 @@ class ControlUnit:
             return
         assert self.address is not None
         self.data_path.signal_latch_adress_register(
-            AddressRegisterSelector.ADDRESS,
+            RegisterSelector.ADDRESS,
             self.program_counter,
             self.program.arg if self.program is not None else 0,
             self.address,
+            self.operand,
         )
         self.data_path.signal_read_memory()
         self.operand = self.data_path.mem_out.arg
+
+    def execute(self):
+        if self.program.opcode is Opcode.LD:
+            self.data_path.signal_latch_accumulator(
+                RegisterSelector.OPERAND,
+                self.program_counter,
+                self.program.arg,
+                self.address,
+                self.operand,
+            )
+            self.signal_latch_pc(False)
+        elif self.program.opcode is Opcode.ADD:
+            print("executing add")
+            self.data_path.signal_latch_buffer(
+                RegisterSelector.OPERAND,
+                self.program_counter,
+                self.program.arg,
+                self.address,
+                self.operand,
+            )
+            self.data_path.alu.signal_sel_left(self.data_path.buffer, True)
+            self.data_path.alu.signal_sel_right(self.data_path.accumulator, True)
+            self.data_path.alu.signal_alu_operation(ALUOperation.Add, {})
+            self.data_path.signal_latch_accumulator(
+                RegisterSelector.ALU,
+                self.program_counter,
+                self.program.arg,
+                self.address,
+                self.operand,
+            )
+            self.signal_latch_pc(False)
+
+    def decode_and_execute(self):
+        self.program_fetch()
+        self.address_fetch()
+        self.operand_fetch()
+        self.execute()

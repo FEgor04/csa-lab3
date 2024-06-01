@@ -15,6 +15,9 @@ class Opcode(str, Enum):
 
     ADD = "add"
     SUB = "sub"
+    MUL = "mul"
+    DIV = "div"
+    MOD = "mod"
     LD = "ld"
     ST = "st"
     JMP = "jmp"
