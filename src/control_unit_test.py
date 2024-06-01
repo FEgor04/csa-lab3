@@ -90,3 +90,16 @@ class ControlUnitTest(unittest.TestCase):
         control_unit.decode_and_execute()
         self.assertEqual(2, control_unit.program_counter)
         self.assertEqual(84, data_path.accumulator)
+
+    def test_execute_mod(self):
+        initial = [
+            Instruction(Opcode.LD, 42, Addressing.IMMEDIATE),
+            Instruction(Opcode.MOD, 2, Addressing.IMMEDIATE),
+        ]
+        data_path = DataPath("", print, initial)
+        control_unit = ControlUnit(0, data_path)
+        control_unit.decode_and_execute()
+        self.assertEqual(1, control_unit.program_counter)
+        control_unit.decode_and_execute()
+        self.assertEqual(2, control_unit.program_counter)
+        self.assertEqual(0, data_path.accumulator)

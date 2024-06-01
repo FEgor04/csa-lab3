@@ -1,9 +1,5 @@
+from isa import Opcode
 from enum import Enum
-
-
-class ALUOperation(int, Enum):
-    Add = 0
-    Sub = 1
 
 
 class ALUModifier(int, Enum):
@@ -49,14 +45,18 @@ class ALU:
             right -= 1
         return left, right
 
-    def signal_alu_operation(
-        self, operation: ALUOperation, modifiers: set[ALUModifier]
-    ):
+    def signal_alu_operation(self, operation: Opcode, modifiers: set[ALUModifier]):
         left, right = self.process_modifiers(modifiers)
         print(left, right)
-        if operation is ALUOperation.Add:
+        if operation is Opcode.ADD:
             self.out = left + right
-        if operation is ALUOperation.Sub:
+        if operation is Opcode.SUB:
             self.out = right - left  # accumulator - buffer
+        if operation is Opcode.DIV:
+            self.out = right // left
+        if operation is Opcode.MUL:
+            self.out = right * left
+        if operation is Opcode.MOD:
+            self.out = right % left
         self.negative = self.out < 0
         self.zero = self.out == 0

@@ -1,5 +1,5 @@
 from isa import Instruction, Opcode, Addressing
-from alu import ALU, ALUOperation
+from alu import ALU
 from enum import Enum
 
 
@@ -171,8 +171,13 @@ class ControlUnit:
                 self.operand,
             )
             self.signal_latch_pc(False)
-        elif self.program.opcode is Opcode.ADD:
-            print("executing add")
+        elif self.program.opcode in {
+            Opcode.ADD,
+            Opcode.SUB,
+            Opcode.MUL,
+            Opcode.DIV,
+            Opcode.MOD,
+        }:
             self.data_path.signal_latch_buffer(
                 RegisterSelector.OPERAND,
                 self.program_counter,
@@ -182,7 +187,7 @@ class ControlUnit:
             )
             self.data_path.alu.signal_sel_left(self.data_path.buffer, True)
             self.data_path.alu.signal_sel_right(self.data_path.accumulator, True)
-            self.data_path.alu.signal_alu_operation(ALUOperation.Add, {})
+            self.data_path.alu.signal_alu_operation(self.program.opcode, {})
             self.data_path.signal_latch_accumulator(
                 RegisterSelector.ALU,
                 self.program_counter,
