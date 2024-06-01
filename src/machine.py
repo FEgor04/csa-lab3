@@ -187,7 +187,9 @@ class ControlUnit:
             self.data_path.alu.signal_sel_left(self.data_path.buffer_register, False)
             self.data_path.alu.signal_sel_right(self.data_path.accumulator, True)
             self.data_path.alu.signal_alu_operation(Opcode.ADD, {})
-            assert self.data_path.alu.out == self.data_path.accumulator, "ALU out should become equal to accumulator"
+            assert (
+                self.data_path.alu.out == self.data_path.accumulator
+            ), "ALU out should become equal to accumulator"
 
             self.data_path.signal_write_memory()
             self.signal_latch_pc(False)
@@ -216,6 +218,8 @@ class ControlUnit:
                 self.operand,
             )
             self.signal_latch_pc(False)
+        elif self.program.opcode is Opcode.JMP:
+            self.signal_latch_pc(True)
 
     def decode_and_execute(self):
         self.program_fetch()

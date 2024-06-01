@@ -5,36 +5,36 @@ import unittest
 
 class ControlUnitTest(unittest.TestCase):
     def test_program_fetch(self):
-        initial = [Instruction(Opcode.LD, 50, Addressing.IMMEDIATE)]
-        data_path = DataPath("", print, initial)
+        program = [Instruction(Opcode.LD, 50, Addressing.IMMEDIATE)]
+        data_path = DataPath("", print, program)
         control_unit = ControlUnit(0, data_path)
         control_unit.program_fetch()
-        self.assertEqual(initial[0], control_unit.program)
+        self.assertEqual(program[0], control_unit.program)
 
     def test_address_fetch_direct(self):
-        initial = [Instruction(Opcode.LD, 50, Addressing.DIRECT)]
-        data_path = DataPath("", print, initial)
+        program = [Instruction(Opcode.LD, 50, Addressing.DIRECT)]
+        data_path = DataPath("", print, program)
         control_unit = ControlUnit(0, data_path)
         control_unit.program_fetch()
         control_unit.address_fetch()
         self.assertEqual(50, control_unit.address)
 
     def test_address_fetch_indirect(self):
-        initial = [
+        program = [
             Instruction(Opcode.LD, 1, Addressing.INDIRECT),
             Instruction(Opcode.VAR, 512, Addressing.IMMEDIATE),
         ]
-        data_path = DataPath("", print, initial)
+        data_path = DataPath("", print, program)
         control_unit = ControlUnit(0, data_path)
         control_unit.program_fetch()
         control_unit.address_fetch()
         self.assertEqual(512, control_unit.address)
 
     def test_operand_fetch_immediate(self):
-        initial = [
+        program = [
             Instruction(Opcode.LD, 50, Addressing.IMMEDIATE),
         ]
-        data_path = DataPath("", print, initial)
+        data_path = DataPath("", print, program)
         control_unit = ControlUnit(0, data_path)
         control_unit.program_fetch()
         control_unit.address_fetch()
@@ -42,11 +42,11 @@ class ControlUnitTest(unittest.TestCase):
         self.assertEqual(50, control_unit.operand)
 
     def test_operand_fetch_direct(self):
-        initial = [
+        program = [
             Instruction(Opcode.LD, 1, Addressing.DIRECT),
             Instruction(Opcode.VAR, 512, Addressing.IMMEDIATE),
         ]
-        data_path = DataPath("", print, initial)
+        data_path = DataPath("", print, program)
         control_unit = ControlUnit(0, data_path)
         control_unit.program_fetch()
         control_unit.address_fetch()
@@ -54,12 +54,12 @@ class ControlUnitTest(unittest.TestCase):
         self.assertEqual(512, control_unit.operand)
 
     def test_operand_fetch_indirect(self):
-        initial = [
+        program = [
             Instruction(Opcode.LD, 1, Addressing.INDIRECT),
             Instruction(Opcode.VAR, 2, Addressing.IMMEDIATE),
             Instruction(Opcode.VAR, 512, Addressing.IMMEDIATE),
         ]
-        data_path = DataPath("", print, initial)
+        data_path = DataPath("", print, program)
         control_unit = ControlUnit(0, data_path)
         control_unit.program_fetch()
         control_unit.address_fetch()
@@ -67,11 +67,11 @@ class ControlUnitTest(unittest.TestCase):
         self.assertEqual(512, control_unit.operand)
 
     def test_execute_load(self):
-        initial = [
+        program = [
             Instruction(Opcode.LD, 42, Addressing.IMMEDIATE),
             Instruction(Opcode.ST, 2, Addressing.IMMEDIATE),
         ]
-        data_path = DataPath("", print, initial)
+        data_path = DataPath("", print, program)
         control_unit = ControlUnit(0, data_path)
         control_unit.decode_and_execute()
         self.assertEqual(42, data_path.accumulator)
@@ -79,11 +79,11 @@ class ControlUnitTest(unittest.TestCase):
         self.assertEqual(42, data_path.memory[2].arg)
 
     def test_execute_add(self):
-        initial = [
+        program = [
             Instruction(Opcode.LD, 42, Addressing.IMMEDIATE),
             Instruction(Opcode.ADD, 42, Addressing.IMMEDIATE),
         ]
-        data_path = DataPath("", print, initial)
+        data_path = DataPath("", print, program)
         control_unit = ControlUnit(0, data_path)
         control_unit.decode_and_execute()
         self.assertEqual(1, control_unit.program_counter)
@@ -92,14 +92,24 @@ class ControlUnitTest(unittest.TestCase):
         self.assertEqual(84, data_path.accumulator)
 
     def test_execute_mod(self):
-        initial = [
+        program = [
             Instruction(Opcode.LD, 42, Addressing.IMMEDIATE),
             Instruction(Opcode.MOD, 2, Addressing.IMMEDIATE),
         ]
-        data_path = DataPath("", print, initial)
+        data_path = DataPath("", print, program)
         control_unit = ControlUnit(0, data_path)
         control_unit.decode_and_execute()
         self.assertEqual(1, control_unit.program_counter)
         control_unit.decode_and_execute()
         self.assertEqual(2, control_unit.program_counter)
+        self.assertEqual(0, data_path.accumulator)
+
+    def test_execute_jmp(self):
+        program = [
+            Instruction(Opcode.JMP, 200, Addressing.IMMEDIATE),
+        ]
+        data_path = DataPath("", print, program)
+        control_unit = ControlUnit(0, data_path)
+        control_unit.decode_and_execute()
+        self.assertEqual(200, control_unit.program_counter)
         self.assertEqual(0, data_path.accumulator)
