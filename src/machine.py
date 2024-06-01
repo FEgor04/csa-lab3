@@ -20,15 +20,17 @@ class DataPath:
         self.input = input
         self.output = []
         self.alu_out = 0
+        self.mem_out = 0
 
-    def read_memory(self) -> Instruction:
+    def signal_read_memory(self) -> Instruction:
         if self.address_register == 2046:  # Input
             if len(self.input) == 0:
                 raise EOFError()
             symbol = ord(self.input[0])
             self.input = self.input[1:]
-            return Instruction(Opcode.VAR, symbol, Addressing.IMMEDIATE)
+            self.mem_out = Instruction(Opcode.VAR, symbol, Addressing.IMMEDIATE)
+            return
         if self.address_register == 2047:
             raise Exception("Programm tried to read from output port")
         assert 0 <= self.address_register < 2046
-        return self.memory[self.address_register]
+        self.mem_out = self.memory[self.address_register]

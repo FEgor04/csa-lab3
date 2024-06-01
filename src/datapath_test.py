@@ -7,15 +7,10 @@ class DataPathTest(unittest.TestCase):
     def test_read_input(self):
         datapath = DataPath("kek")
         datapath.address_register = 2046
-        actual = list(
-            map(
-                lambda i: i.arg,
-                [
-                    datapath.read_memory(),
-                    datapath.read_memory(),
-                    datapath.read_memory(),
-                ],
-            )
-        )
-        expected = list(map(lambda c: ord(c), ["k", "e", "k"]))
-        self.assertEqual(expected, actual)
+        datapath.signal_read_memory()
+        self.assertEqual(ord("k"), datapath.mem_out.arg)
+        datapath.signal_read_memory()
+        self.assertEqual(ord("e"), datapath.mem_out.arg)
+        datapath.signal_read_memory()
+        self.assertEqual(ord("k"), datapath.mem_out.arg)
+        self.assertRaises(EOFError, datapath.signal_read_memory)
