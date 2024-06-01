@@ -16,22 +16,24 @@ class ALUModifier(int, Enum):
 
 
 class ALU:
-    alu_right = 0
-    alu_left = 0
-    alu_out = 0
+    right = 0
+    left = 0
+    out = 0
+    negative = False
+    zero = True
 
     def __init__(self):
         pass
 
-    def signal_sel_alu_left(self, buffer: int, signal: bool):
-        self.alu_left = buffer if signal else 0
+    def signal_sel_left(self, buffer: int, signal: bool):
+        self.left = buffer if signal else 0
 
-    def signal_sel_alu_right(self, accumulator: int, signal: bool):
-        self.alu_right = accumulator if signal else 0
+    def signal_sel_right(self, accumulator: int, signal: bool):
+        self.right = accumulator if signal else 0
 
     def process_modifiers(self, modifiers: set[ALUModifier]) -> tuple[int, int]:
-        left = self.alu_left
-        right = self.alu_right
+        left = self.left
+        right = self.right
 
         if ALUModifier.NegLeft in modifiers:
             left *= -1
@@ -52,6 +54,8 @@ class ALU:
     ):
         left, right = self.process_modifiers(modifiers)
         if operation is ALUOperation.Add:
-            self.alu_out = left + right
+            self.out = left + right
         if operation is ALUOperation.Sub:
-            self.alu_out = right - left # accumulator - left
+            self.out = right - left  # accumulator - left
+        self.negative = self.out < 0
+        self.zero = self.out == 0
