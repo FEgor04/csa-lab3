@@ -151,10 +151,9 @@ class ControlUnit:
 
     def operand_fetch(self):
         assert self.program is not None
-        if self.program.addressing is Addressing.IMMEDIATE:
+        if self.program.addressing is Addressing.IMMEDIATE or self.program.addressing is None:
             self.operand = self.program.arg
             return
-        assert self.address is not None
         self.data_path.signal_latch_adress_register(
             RegisterSelector.ADDRESS,
             self.program_counter,
@@ -166,6 +165,10 @@ class ControlUnit:
         self.operand = self.data_path.mem_out.arg
 
     def execute(self):
+        if self.program.opcode is Opcode.VAR:
+            raise Exception("Trying to execute VAR instruction!!!! ")
+        if self.program.opcode is Opcode.HLT:
+            raise StopIteration()
         if self.program.opcode is Opcode.LD:
             self.data_path.signal_latch_accumulator(
                 RegisterSelector.OPERAND,

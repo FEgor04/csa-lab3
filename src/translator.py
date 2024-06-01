@@ -20,17 +20,13 @@ def parse_lines(lines: list[str]) -> list[Instruction]:
         if line == "":
             continue
         _, opcode, arg_raw = split_instruction(line)
-        addressing = parse_addressing(arg_raw)
-        if addressing is Addressing.IMMEDIATE:
-            arg_parsed = int(arg_raw) if arg_raw.isdecimal() else arg_raw[1:-1]
+        arg, addressing = parse_argument(arg_raw, labels)
+        if opcode == "VAR":
             instructions += [
-                Instruction(Opcode[opcode], arg_parsed, Addressing.IMMEDIATE)
+                Instruction(Opcode[opcode], arg, addressing)
             ]
         else:
-            arg_parsed = parse_int_or_none(arg_raw)
-            if arg_raw != "" and arg_parsed is None:
-                arg_parsed = labels[arg_raw[1:-1]]
-            instructions += [Instruction(Opcode[opcode], arg_parsed, addressing)]
+            instructions += [Instruction(Opcode[opcode], arg, addressing)]
     return instructions
 
 
@@ -42,6 +38,19 @@ def parse_labels(lines: list[str]) -> dict[str, int]:
         if is_label(label):
             labels[label] = i
     return labels
+
+def parse_argument(arg: str, labels: dict[str, int]) -> tuple[str | int, Addressing]:
+    if len(arg) == 0:
+        return None, None
+    addressing = parse_addressing(arg)
+    if addressing is Addressing.IMMEDIATE:
+        if arg[0] == "'" and arg[-1] == "'": # is literal
+            return arg[1:-1], addressing
+        if arg.isdecimal():
+            return int(arg), addressing
+        return labels[arg], addressing
+    stripped = arg[1:-1]
+    return int(stripped) if stripped.isdecimal() else labels[stripped], addressing
 
 
 def parse_addressing(argument: str) -> Addressing | None:
