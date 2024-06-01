@@ -11,12 +11,16 @@ class RegisterSelector(Enum):
 
 
 class DataPath:
-    def __init__(self, input: str, onOutput):
+    def __init__(self, input: str, onOutput, initial_memory: list[Instruction] = []):
         """
         Для простоты реализации в памяти хранятся инструкции.
         чтобы сохранить число необходимо указать `Opcode.VAR` и `Addressing.Immediate`
         """
         self.memory = [Instruction(Opcode.VAR, 0, Addressing.IMMEDIATE)] * 2046
+
+        for i in range(len(initial_memory)):
+            self.memory[i] = initial_memory[i]
+
         self.address_register: int = 0
         self.accumulator: int = 0
         self.buffer_register: int = 0
@@ -70,3 +74,22 @@ class DataPath:
             self.accumulator = self.mem_out
         if sel is RegisterSelector.ARG:
             self.accumulator = self.argument
+
+
+class ControlUnit:
+    program: Instruction
+    program_counter: int
+    data_path: DataPath
+
+    def __init__(self, pc, data_path):
+        self.program = None
+        self.program_counter = pc
+        self.data_path = data_path
+
+    def signal_latch_pc(self, sel: bool, operand: int):
+        self.program_counter = operand if sel else self.program_counter + 1
+
+    def program_fetch(self):
+        self.data_path.signal_latch_adress_register("pc", self.program_counter)
+        self.data_path.signal_read_memory()
+        self.program = self.data_path.mem_out
