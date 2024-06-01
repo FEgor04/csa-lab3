@@ -10,6 +10,14 @@ class RegisterSelector(Enum):
     ARG = "argument"
 
 
+class AddressRegisterSelector(Enum):
+    ALU = "alu"
+    PC = "pc"
+    ARG = "arg"
+    # Адрес операнда, полученный после цикла Address Fetch
+    ADDRESS = "address"
+
+
 class DataPath:
     def __init__(self, input: str, onOutput, initial_memory: list[Instruction] = []):
         """
@@ -51,13 +59,17 @@ class DataPath:
         assert 0 <= self.address_register < 2046
         self.memory[self.address_register] = self.alu.out
 
-    def signal_latch_adress_register(self, sel: str | None, pc: int):
-        if sel == "alu":
+    def signal_latch_adress_register(
+        self, sel: AddressRegisterSelector, pc: int, arg: int, address: int
+    ):
+        if sel is AddressRegisterSelector.ALU:
             self.address_register = self.alu.out
-        elif sel == "pc":
+        elif sel is AddressRegisterSelector.PC:
             self.address_register = pc
-        else:
-            self.address_register = 0
+        elif sel is AddressRegisterSelector.ARG:
+            self.address_register = arg
+        elif sel is AddressRegisterSelector.ADDRESS:
+            self.address_register = address
 
     def signal_latch_buffer(self, sel: RegisterSelector, argument: int):
         if sel is RegisterSelector.ALU:
@@ -81,15 +93,41 @@ class ControlUnit:
     program_counter: int
     data_path: DataPath
 
+    address: int
+    operand: int
+
     def __init__(self, pc, data_path):
         self.program = None
         self.program_counter = pc
         self.data_path = data_path
+        self.address = None
+        self.operand = None
 
     def signal_latch_pc(self, sel: bool, operand: int):
         self.program_counter = operand if sel else self.program_counter + 1
 
     def program_fetch(self):
-        self.data_path.signal_latch_adress_register("pc", self.program_counter)
+        self.data_path.signal_latch_adress_register(
+            "pc",
+            self.program_counter,
+            self.program.arg if self.program is not None else 0,
+            self.address,
+        )
         self.data_path.signal_read_memory()
         self.program = self.data_path.mem_out
+
+    def address_fetch(self):
+        assert self.program is not None
+        if self.program.addressing is Addressing.IMMEDIATE:
+            return
+        if self.program.addressing is Addressing.DIRECT:
+            self.address = self.program.arg
+        if self.program.addressing is Addressing.INDIRECT:
+            self.data_path.signal_latch_adress_register(
+                AddressRegisterSelector.ARG,
+                self.program_counter,
+                self.program.arg,
+                self.address,
+            )
+            self.data_path.signal_read_memory()
+            self.address = self.data_path.mem_out.arg
