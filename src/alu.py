@@ -49,14 +49,16 @@ class ALU:
         left, right = self.process_modifiers(modifiers)
         print(left, right)
         if operation is Opcode.ADD:
-            self.out = left + right
-        if operation is Opcode.SUB:
-            self.out = right - left  # accumulator - buffer
+            out = left + right
+        if operation in {Opcode.SUB, Opcode.CMP}:
+            out = right - left  # accumulator - buffer
         if operation is Opcode.DIV:
-            self.out = right // left
+            out = right // left
         if operation is Opcode.MUL:
-            self.out = right * left
+            out = right * left
         if operation is Opcode.MOD:
-            self.out = right % left
-        self.negative = self.out < 0
-        self.zero = self.out == 0
+            out = right % left
+        if operation is not Opcode.CMP:
+            self.out = out
+        self.negative = out < 0
+        self.zero = out == 0

@@ -199,6 +199,7 @@ class ControlUnit:
             Opcode.MUL,
             Opcode.DIV,
             Opcode.MOD,
+            Opcode.CMP
         }:
             self.data_path.signal_latch_buffer(
                 RegisterSelector.OPERAND,

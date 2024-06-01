@@ -131,3 +131,21 @@ class ControlUnitTest(unittest.TestCase):
         self.assertEqual(3, control_unit.program_counter)
         control_unit.decode_and_execute()
         self.assertEqual(4, control_unit.program_counter)
+
+    def test_cmp(self):
+        program = [
+            Instruction(Opcode.LD, 420, Addressing.IMMEDIATE),
+            Instruction(Opcode.CMP, 0, Addressing.IMMEDIATE),
+            Instruction(Opcode.LD, -420, Addressing.IMMEDIATE),
+            Instruction(Opcode.CMP, 0, Addressing.IMMEDIATE),
+        ]
+        data_path = DataPath("", print, program)
+        control_unit = ControlUnit(0, data_path)
+        control_unit.decode_and_execute()
+        control_unit.decode_and_execute()
+        self.assertEqual(control_unit.data_path.alu.zero, False)
+        self.assertEqual(control_unit.data_path.alu.negative, False)
+        control_unit.decode_and_execute()
+        control_unit.decode_and_execute()
+        self.assertEqual(control_unit.data_path.alu.zero, False)
+        self.assertEqual(control_unit.data_path.alu.negative, True)

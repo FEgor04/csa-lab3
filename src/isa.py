@@ -19,6 +19,7 @@ class Opcode(str, Enum):
     MUL = "mul"
     DIV = "div"
     MOD = "mod"
+    CMP = "cmp"
     # Memory
     LD = "ld"
     ST = "st"
