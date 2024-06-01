@@ -113,3 +113,17 @@ class ControlUnitTest(unittest.TestCase):
         control_unit.decode_and_execute()
         self.assertEqual(200, control_unit.program_counter)
         self.assertEqual(0, data_path.accumulator)
+
+    def test_jz(self):
+        program = [
+            Instruction(Opcode.JZ, 2, Addressing.IMMEDIATE),  # 0
+            Instruction(Opcode.VAR, 2, Addressing.IMMEDIATE),  # 1
+            Instruction(Opcode.LD, 420, Addressing.IMMEDIATE),  # 2
+        ]
+        data_path = DataPath("", print, program)
+        control_unit = ControlUnit(0, data_path)
+        control_unit.decode_and_execute()
+        self.assertEqual(2, control_unit.program_counter)
+        control_unit.decode_and_execute()
+        self.assertEqual(420, data_path.accumulator)
+        self.assertEqual(3, control_unit.program_counter)

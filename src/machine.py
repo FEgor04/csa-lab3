@@ -220,6 +220,8 @@ class ControlUnit:
             self.signal_latch_pc(False)
         elif self.program.opcode is Opcode.JMP:
             self.signal_latch_pc(True)
+        elif self.program.opcode is Opcode.JZ:
+            self.signal_latch_pc(self.data_path.alu.zero)
 
     def decode_and_execute(self):
         self.program_fetch()
