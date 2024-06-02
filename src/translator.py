@@ -16,6 +16,7 @@ def is_label(s: str) -> bool:
 
 
 def parse_lines(lines: list[str]) -> list[Instruction]:
+    lines = expand_lines(lines)
     instructions = []
     labels = parse_labels(lines)
     for i in range(len(lines)):
@@ -80,6 +81,7 @@ def split_instruction(line: str) -> tuple[str, str, str]:
         return "", splitted[0], ""
     return "", "", ""
 
+
 def expand_lines(lines: list[str]) -> list[str]:
     ans = []
     var_pattern = re.compile(r"(\w+:\s)?VAR\s'(\w+)'")
@@ -89,7 +91,7 @@ def expand_lines(lines: list[str]) -> list[str]:
             ans += [line]
             continue
         groups = match.groups()
-        if len(groups) == 1: # VAR 'test'
+        if len(groups) == 1:  # VAR 'test'
             label = None
             value = groups[0]
         else:
@@ -104,6 +106,7 @@ def expand_lines(lines: list[str]) -> list[str]:
                 ans += [f"VAR '{c}'"]
 
     return ans
+
 
 def convert_to_json(instructions: list[Instruction], pc: int) -> str:
     code = {

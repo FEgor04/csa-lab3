@@ -76,7 +76,6 @@ class TestTranslator(unittest.TestCase):
         transformed, _ = parse_lines(lines)
         self.assertEqual(transformed, expected)
 
-
     def test_expand_instructions_with_label(self):
         lines = ["ADD 'a'", "TEST: VAR 'hell'"]
         expected = ["ADD 'a'", "TEST: VAR 'h'", "VAR 'e'", "VAR 'l'", "VAR 'l'"]

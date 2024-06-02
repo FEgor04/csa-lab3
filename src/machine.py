@@ -1,7 +1,6 @@
 from isa import Instruction, Opcode, Addressing, read_json
 from alu import ALU
 from enum import Enum
-import json
 import sys
 
 
@@ -244,6 +243,7 @@ class ControlUnit:
     def __repr__(self):
         return f"{self.program_counter:6d} | {self.data_path.accumulator:6d} | {self.data_path.buffer_register:6d} | {self.data_path.address_register:6d}"
 
+
 def simulate(instructions: list[Instruction], pc, input) -> str:
     data_path = DataPath(input, 0, instructions)
     control_unit = ControlUnit(pc, data_path)
@@ -258,6 +258,7 @@ def simulate(instructions: list[Instruction], pc, input) -> str:
         print("Programm tried to read empty input")
     return "".join(data_path.output)
 
+
 if __name__ == "__main__":
     assert len(sys.argv) == 3, "Wrong arguments: machine.py <code_file> <input_file>"
     _, code_file, input_file = sys.argv
@@ -265,4 +266,3 @@ if __name__ == "__main__":
         instructions, pc = read_json(f.read())
     output = simulate(instructions, pc, "")
     print(output)
-
