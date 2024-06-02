@@ -244,7 +244,9 @@ class ControlUnit:
         return f"{self.program_counter:6d} | {self.data_path.accumulator:6d} | {self.data_path.buffer_register:6d} | {self.data_path.address_register:6d}"
 
 
-def simulate(instructions: list[Instruction], pc, input) -> str:
+def simulate(
+    instructions: list[Instruction], pc, input
+) -> tuple[str, DataPath, ControlUnit]:
     data_path = DataPath(input, 0, instructions)
     control_unit = ControlUnit(pc, data_path)
     try:
