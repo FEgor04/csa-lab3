@@ -62,5 +62,27 @@ class IntegrationTest(unittest.TestCase):
             "STOP: HLT",
         ]
         instructions, pc = parse_lines(lines)
-        output = simulate(instructions, pc, "")
+        output, _, _ = simulate(instructions, pc, "")
         self.assertEqual("hello, world\0", output)
+
+    def tset_input_name(self):
+        lines = [
+            "BUFFER_START: VAR 500",
+            "I: VAR 0",
+            "START: LD (BUFFER_START)",
+            "ST I",
+            "CYCLE: LD 2047",
+            "ST [I]",
+            "CMP 0",
+            "JZ STOP",
+            "LD (I)",
+            "ADD 1",
+            "ST I",
+            "JMP CYCLE",
+            "STOP: HLT",
+        ]
+        instructions, pc = parse_lines(lines)
+        name = "Egor Fedorov"
+        output, data_path, control_unit = simulate(instructions, pc, name)
+        buffer = "".join(list(map(lambda i: i.arg, chr(data_path.memory[500:505]))))
+        self.assertEqual(buffer, name)

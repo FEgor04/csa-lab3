@@ -255,7 +255,7 @@ def simulate(instructions: list[Instruction], pc, input) -> str:
         print("Program haulted successfully")
     except EOFError:
         print("Program tried to read empty input")
-    return "".join(data_path.output)
+    return "".join(data_path.output), data_path, control_unit
 
 
 if __name__ == "__main__":
@@ -266,5 +266,5 @@ if __name__ == "__main__":
         input += "\0"
     with open(code_file, "r") as f:
         instructions, pc = read_json(f.read())
-    output = simulate(instructions, pc, input)
+    output, _, _ = simulate(instructions, pc, input)
     print(output)
