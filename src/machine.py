@@ -221,13 +221,14 @@ class ControlUnit:
             self.data_path.alu.signal_sel_left(self.data_path.buffer_register, True)
             self.data_path.alu.signal_sel_right(self.data_path.accumulator, True)
             self.data_path.alu.signal_alu_operation(self.program.opcode, {})
-            self.data_path.signal_latch_accumulator(
-                RegisterSelector.ALU,
-                self.program_counter,
-                self.program.arg,
-                self.address,
-                self.operand,
-            )
+            if self.program.opcode is not Opcode.CMP:
+                self.data_path.signal_latch_accumulator(
+                    RegisterSelector.ALU,
+                    self.program_counter,
+                    self.program.arg,
+                    self.address,
+                    self.operand,
+                )
             self.signal_latch_pc(False)
         elif self.program.opcode is Opcode.JMP:
             self.signal_latch_pc(True)
