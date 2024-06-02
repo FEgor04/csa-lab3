@@ -77,3 +77,14 @@ def read_json(code_json: str):
             )
         ]
     return instructions, pc
+
+
+def is_arithmetic_instruction(opcode: Opcode):
+    return opcode in {
+        Opcode.ADD,
+        Opcode.SUB,
+        Opcode.MUL,
+        Opcode.DIV,
+        Opcode.MOD,
+        Opcode.CMP,
+    }

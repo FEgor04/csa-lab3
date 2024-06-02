@@ -4,7 +4,7 @@ import sys
 from enum import Enum
 
 from alu import ALU
-from isa import Addressing, Instruction, Opcode, read_json
+from isa import Addressing, Instruction, Opcode, is_arithmetic_instruction, read_json
 
 
 class RegisterSelector(Enum):
@@ -161,62 +161,64 @@ class ControlUnit:
         self.data_path.signal_read_memory()
         self.operand = self.data_path.mem_out.arg
 
+    def _execute_ld(self):
+        self.data_path.signal_latch_accumulator(
+            RegisterSelector.OPERAND,
+            self.program_counter,
+            self.program.arg,
+            self.address,
+            self.operand,
+        )
+        self.signal_latch_pc(False)
+
+    def _execute_arithmetic(self):
+        self.data_path.signal_latch_buffer(
+            RegisterSelector.OPERAND,
+            self.program_counter,
+            self.program.arg,
+            self.address,
+            self.operand,
+        )
+        self.data_path.alu.signal_sel_left(self.data_path.buffer_register, True)
+        self.data_path.alu.signal_sel_right(self.data_path.accumulator, True)
+        self.data_path.alu.signal_alu_operation(self.program.opcode, {})
+        if self.program.opcode is not Opcode.CMP:
+            self.data_path.signal_latch_accumulator(
+                RegisterSelector.ALU,
+                self.program_counter,
+                self.program.arg,
+                self.address,
+                self.operand,
+            )
+        self.signal_latch_pc(False)
+
+    def _execute_st(self):
+        self.data_path.signal_latch_adress_register(
+            RegisterSelector.OPERAND,
+            self.program_counter,
+            self.program.arg,
+            self.address,
+            self.operand,
+        )
+        # Pass accumulator through the ALU
+        self.data_path.alu.signal_sel_left(self.data_path.buffer_register, False)
+        self.data_path.alu.signal_sel_right(self.data_path.accumulator, True)
+        self.data_path.alu.signal_alu_operation(Opcode.ADD, {})
+        assert self.data_path.alu.out == self.data_path.accumulator, "ALU out should become equal to accumulator"
+
+        self.data_path.signal_write_memory()
+        self.signal_latch_pc(False)
+
     def execute(self):
         assert self.program.opcode is not Opcode.VAR, "program tried to execute VAR instruction"
         if self.program.opcode is Opcode.HLT:
             raise StopIteration()
         if self.program.opcode is Opcode.LD:
-            self.data_path.signal_latch_accumulator(
-                RegisterSelector.OPERAND,
-                self.program_counter,
-                self.program.arg,
-                self.address,
-                self.operand,
-            )
-            self.signal_latch_pc(False)
+            self._execute_ld()
         if self.program.opcode is Opcode.ST:
-            self.data_path.signal_latch_adress_register(
-                RegisterSelector.OPERAND,
-                self.program_counter,
-                self.program.arg,
-                self.address,
-                self.operand,
-            )
-            # Pass accumulator through the ALU
-            self.data_path.alu.signal_sel_left(self.data_path.buffer_register, False)
-            self.data_path.alu.signal_sel_right(self.data_path.accumulator, True)
-            self.data_path.alu.signal_alu_operation(Opcode.ADD, {})
-            assert self.data_path.alu.out == self.data_path.accumulator, "ALU out should become equal to accumulator"
-
-            self.data_path.signal_write_memory()
-            self.signal_latch_pc(False)
-        elif self.program.opcode in {
-            Opcode.ADD,
-            Opcode.SUB,
-            Opcode.MUL,
-            Opcode.DIV,
-            Opcode.MOD,
-            Opcode.CMP,
-        }:
-            self.data_path.signal_latch_buffer(
-                RegisterSelector.OPERAND,
-                self.program_counter,
-                self.program.arg,
-                self.address,
-                self.operand,
-            )
-            self.data_path.alu.signal_sel_left(self.data_path.buffer_register, True)
-            self.data_path.alu.signal_sel_right(self.data_path.accumulator, True)
-            self.data_path.alu.signal_alu_operation(self.program.opcode, {})
-            if self.program.opcode is not Opcode.CMP:
-                self.data_path.signal_latch_accumulator(
-                    RegisterSelector.ALU,
-                    self.program_counter,
-                    self.program.arg,
-                    self.address,
-                    self.operand,
-                )
-            self.signal_latch_pc(False)
+            self._execute_st()
+        elif is_arithmetic_instruction(self.program.opcode):
+            self._execute_arithmetic()
         elif self.program.opcode is Opcode.JMP:
             self.signal_latch_pc(True)
         elif self.program.opcode is Opcode.JZ:
