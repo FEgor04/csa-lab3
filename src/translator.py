@@ -1,6 +1,7 @@
 import json
 import sys
 from isa import Instruction, Opcode, Addressing
+import re
 
 
 def parse_int_or_none(a: str) -> int | None:
@@ -79,6 +80,30 @@ def split_instruction(line: str) -> tuple[str, str, str]:
         return "", splitted[0], ""
     return "", "", ""
 
+def expand_lines(lines: list[str]) -> list[str]:
+    ans = []
+    var_pattern = re.compile(r"(\w+:\s)?VAR\s'(\w+)'")
+    for line in lines:
+        match = var_pattern.match(line)
+        if match is None:
+            ans += [line]
+            continue
+        groups = match.groups()
+        if len(groups) == 1: # VAR 'test'
+            label = None
+            value = groups[0]
+        else:
+            label = groups[0]
+            value = groups[1]
+        if label:
+            ans += [f"{label}VAR '{value[0]}'"]
+            for c in value[1:]:
+                ans += [f"VAR '{c}'"]
+        else:
+            for c in value:
+                ans += [f"VAR '{c}'"]
+
+    return ans
 
 def convert_to_json(instructions: list[Instruction], pc: int) -> str:
     code = {

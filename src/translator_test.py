@@ -1,5 +1,5 @@
 from isa import Instruction, Opcode, Addressing
-from translator import parse_lines, parse_labels, split_instruction
+from translator import parse_lines, parse_labels, split_instruction, expand_lines
 import unittest
 
 
@@ -75,3 +75,14 @@ class TestTranslator(unittest.TestCase):
         ]
         transformed, _ = parse_lines(lines)
         self.assertEqual(transformed, expected)
+
+
+    def test_expand_instructions_with_label(self):
+        lines = ["ADD 'a'", "TEST: VAR 'hell'"]
+        expected = ["ADD 'a'", "TEST: VAR 'h'", "VAR 'e'", "VAR 'l'", "VAR 'l'"]
+        self.assertEqual(expand_lines(lines), expected)
+
+    def test_expand_instructions_without_label(self):
+        lines = ["ADD 'a'", "VAR 'hell'"]
+        expected = ["ADD 'a'", "VAR 'h'", "VAR 'e'", "VAR 'l'", "VAR 'l'"]
+        self.assertEqual(expand_lines(lines), expected)
