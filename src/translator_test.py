@@ -17,6 +17,7 @@ class TestTranslator(unittest.TestCase):
             Instruction(Opcode.LD, 2, Addressing.DIRECT),
             Instruction(Opcode.JMP, 0, Addressing.DIRECT),
             Instruction(Opcode.VAR, ord("a"), Addressing.IMMEDIATE),
+            Instruction(Opcode.VAR, 0, Addressing.IMMEDIATE),
         ]
         self.assertEqual(transformed, expected)
 
@@ -78,10 +79,17 @@ class TestTranslator(unittest.TestCase):
 
     def test_expand_instructions_with_label(self):
         lines = ["ADD 'a'", "TEST: VAR 'hell'"]
-        expected = ["ADD 'a'", "TEST: VAR 'h'", "VAR 'e'", "VAR 'l'", "VAR 'l'"]
+        expected = [
+            "ADD 'a'",
+            "TEST: VAR 'h'",
+            "VAR 'e'",
+            "VAR 'l'",
+            "VAR 'l'",
+            "VAR 0",
+        ]
         self.assertEqual(expand_lines(lines), expected)
 
     def test_expand_instructions_without_label(self):
         lines = ["ADD 'a'", "VAR 'hell'"]
-        expected = ["ADD 'a'", "VAR 'h'", "VAR 'e'", "VAR 'l'", "VAR 'l'"]
+        expected = ["ADD 'a'", "VAR 'h'", "VAR 'e'", "VAR 'l'", "VAR 'l'", "VAR 0"]
         self.assertEqual(expand_lines(lines), expected)

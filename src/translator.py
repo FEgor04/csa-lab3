@@ -83,6 +83,17 @@ def split_instruction(line: str) -> tuple[str, str, str]:
 
 
 def expand_lines(lines: list[str]) -> list[str]:
+    """
+    Переводит инструкции выделения памяти вида `VAR 's'`
+    в набор инструкций:
+    ````
+    VAR 's[0]'
+    VAR 's[1]'
+    ...
+    VAR 's[n-1]'
+    VAR 0
+    ```
+    """
     ans = []
     var_pattern = re.compile(r"(\w+:\s)?VAR\s'(\w+)'")
     for line in lines:
@@ -104,6 +115,7 @@ def expand_lines(lines: list[str]) -> list[str]:
         else:
             for c in value:
                 ans += [f"VAR '{c}'"]
+        ans += ["VAR 0"]
 
     return ans
 
