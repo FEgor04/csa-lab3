@@ -24,8 +24,6 @@ def parse_lines(lines: list[str]) -> list[Instruction]:
         if line == "":
             continue
         _, opcode, arg_raw = split_instruction(line)
-        print(line)
-        print(opcode, arg_raw)
         arg, addressing = parse_argument(arg_raw, labels)
         instructions += [Instruction(Opcode[opcode], arg, addressing)]
     pc = labels["START"] if "START" in labels else 0
@@ -74,12 +72,10 @@ def split_instruction(line: str) -> tuple[str, str, str]:
     if match is None:
         return "", line, ""
     splitted = match.groups()
-    print(splitted)
     if len(splitted) >= 3:
         label = splitted[0]
         opcode = splitted[1]
         arg = splitted[2]
-        print(label, opcode, arg)
         return (
             label.strip().split(":")[0] if label else "",
             opcode.strip(),
