@@ -1,6 +1,6 @@
 import unittest
 from translator import parse_lines
-from machine import DataPath, ControlUnit
+from machine import DataPath, ControlUnit, simulate
 
 
 class IntegrationTest(unittest.TestCase):
@@ -46,3 +46,21 @@ class IntegrationTest(unittest.TestCase):
         except StopIteration:
             pass
         self.assertEqual(data_path.output, ["h"])
+
+    def test_hello_world(self):
+        lines = [
+            "HELLO: VAR 'hello, world'",
+            "I: VAR HELLO",
+            "START: LD [I]",
+            "ST 2047",
+            "CMP 0",
+            "JZ STOP",
+            "LD (I)",
+            "ADD 1",
+            "ST I",
+            "JMP START",
+            "STOP: HLT",
+        ]
+        instructions, pc = parse_lines(lines)
+        output = simulate(instructions, pc, "")
+        self.assertEqual("hello, world\0", output)

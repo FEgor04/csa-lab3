@@ -93,3 +93,22 @@ class TestTranslator(unittest.TestCase):
         lines = ["ADD 'a'", "VAR 'hell'"]
         expected = ["ADD 'a'", "VAR 'h'", "VAR 'e'", "VAR 'l'", "VAR 'l'", "VAR 0"]
         self.assertEqual(expand_lines(lines), expected)
+
+    def test_expand_instructions_long_word(self):
+        lines = ["VAR 'hello, world'"]
+        expected = [
+            "VAR 'h'",
+            "VAR 'e'",
+            "VAR 'l'",
+            "VAR 'l'",
+            "VAR 'o'",
+            "VAR ','",
+            "VAR ' '",
+            "VAR 'w'",
+            "VAR 'o'",
+            "VAR 'r'",
+            "VAR 'l'",
+            "VAR 'd'",
+            "VAR 0",
+        ]
+        self.assertEqual(expand_lines(lines), expected)

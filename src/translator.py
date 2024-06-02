@@ -24,6 +24,8 @@ def parse_lines(lines: list[str]) -> list[Instruction]:
         if line == "":
             continue
         _, opcode, arg_raw = split_instruction(line)
+        print(line)
+        print(opcode, arg_raw)
         arg, addressing = parse_argument(arg_raw, labels)
         instructions += [Instruction(Opcode[opcode], arg, addressing)]
     pc = labels["START"] if "START" in labels else 0
@@ -67,19 +69,22 @@ def parse_addressing(argument: str) -> Addressing | None:
 
 def split_instruction(line: str) -> tuple[str, str, str]:
     """Парсит инструкцию и трансформирует ее в кортеж вида (метка, опкод, аргумент)"""
-    splitted = line.split()
-    if len(splitted) == 3:
-        label, opcode, arg = splitted
-        return label.split(":")[0], opcode, arg
-    if len(splitted) == 2:
-        if splitted[0].find(":") != -1:
-            label, opcode = splitted
-            return label.split(":")[0], opcode, ""
-        opcode, arg = splitted
-        return "", opcode, arg
-    if len(splitted) == 1:
-        return "", splitted[0], ""
-    return "", "", ""
+    pattern = re.compile(r"\s*(\w+:\s*)?(\w+)(\s*.+)?$")
+    match = pattern.match(line)
+    if match is None:
+        return "", line, ""
+    splitted = match.groups()
+    print(splitted)
+    if len(splitted) >= 3:
+        label = splitted[0]
+        opcode = splitted[1]
+        arg = splitted[2]
+        print(label, opcode, arg)
+        return (
+            label.strip().split(":")[0] if label else "",
+            opcode.strip(),
+            arg.strip() if arg else "",
+        )
 
 
 def expand_lines(lines: list[str]) -> list[str]:
@@ -95,7 +100,7 @@ def expand_lines(lines: list[str]) -> list[str]:
     ```
     """
     ans = []
-    var_pattern = re.compile(r"(\w+:\s)?VAR\s'(\w+)'")
+    var_pattern = re.compile(r"(\w+:\s)?VAR\s'(.+)'")
     for line in lines:
         match = var_pattern.match(line)
         if match is None:
