@@ -35,7 +35,7 @@ class Opcode(str, Enum):
         return str(self.value)
 
 
-class Addressing(Enum):
+class Addressing(str, Enum):
     # Операнд - аргумент
     # Пример: `LD 10` - загружает число 10 в аккумулятор
     IMMEDIATE = "immediate"

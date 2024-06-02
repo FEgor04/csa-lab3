@@ -1,3 +1,5 @@
+import json
+import sys
 from isa import Instruction, Opcode, Addressing
 
 
@@ -21,11 +23,9 @@ def parse_lines(lines: list[str]) -> list[Instruction]:
             continue
         _, opcode, arg_raw = split_instruction(line)
         arg, addressing = parse_argument(arg_raw, labels)
-        if opcode == "VAR":
-            instructions += [Instruction(Opcode[opcode], arg, addressing)]
-        else:
-            instructions += [Instruction(Opcode[opcode], arg, addressing)]
-    return instructions
+        instructions += [Instruction(Opcode[opcode], arg, addressing)]
+    pc = labels["START"] if "START" in labels else 0
+    return instructions, pc
 
 
 def parse_labels(lines: list[str]) -> dict[str, int]:
@@ -78,3 +78,23 @@ def split_instruction(line: str) -> tuple[str, str, str]:
     if len(splitted) == 1:
         return "", splitted[0], ""
     return "", "", ""
+
+def convert_to_json(instructions: list[Instruction], pc: int) -> str:
+    code = {
+        "pc": pc,
+        "instructions": instructions,
+    }
+    return json.dumps(code)
+
+def main(input, output):
+    with open(input, encoding="utf-8") as f:
+        lines = f.readlines()
+    instructions, pc = parse_lines(lines)
+    json = convert_to_json(instructions, pc)
+    with open(output, "w", encoding="utf-8") as f:
+        f.write(json)
+
+if __name__ == "__main__":
+    assert len(sys.argv) == 3, "Wrong arguments: translator.py <input_file> <target_file>"
+    _, input, output = sys.argv
+    main(input, output)
