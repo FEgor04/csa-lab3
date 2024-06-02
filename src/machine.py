@@ -60,6 +60,7 @@ class DataPath:
             raise Exception("Programm tried to write to input port")
         if self.address_register == 2047:
             self.output += [chr(self.alu.out)]
+            print("Output!!!", chr(self.alu.out))
             return
         assert 0 <= self.address_register < 2046
         self.memory[self.address_register] = Instruction(Opcode.VAR, self.alu.out)
@@ -247,7 +248,7 @@ def simulate(instructions: list[Instruction], pc, input) -> str:
     data_path = DataPath(input, 0, instructions)
     control_unit = ControlUnit(pc, data_path)
     try:
-        for i in range(10000):
+        for i in range(1000000):
             print(f"instruction #{i}")
             control_unit.decode_and_execute()
             print(control_unit.__repr__())
