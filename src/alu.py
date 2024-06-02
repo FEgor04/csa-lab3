@@ -47,7 +47,6 @@ class ALU:
 
     def signal_alu_operation(self, operation: Opcode, modifiers: set[ALUModifier]):
         left, right = self.process_modifiers(modifiers)
-        print(left, right)
         if operation is Opcode.ADD:
             out = left + right
         if operation in {Opcode.SUB, Opcode.CMP}:

@@ -240,13 +240,17 @@ class ControlUnit:
         self.operand_fetch()
         self.execute()
 
+    def __repr__(self):
+        return f"{self.program_counter:6d} | {self.data_path.accumulator:6d} | {self.data_path.buffer_register:6d} | {self.data_path.address_register:6d}"
+
 def simulate(instructions: list[Instruction], pc, input) -> str:
     data_path = DataPath(input, 0, instructions)
     control_unit = ControlUnit(pc, data_path)
     try:
         for i in range(10000):
-            print("executing instruction #", i)
+            print(f"instruction #{i}")
             control_unit.decode_and_execute()
+            print(control_unit.__repr__())
     except StopIteration:
         print("HLT!")
     except EOFError:
@@ -258,7 +262,6 @@ if __name__ == "__main__":
     _, code_file, input_file = sys.argv
     with open(code_file, "r") as f:
         instructions, pc = read_json(f.read())
-    print(instructions, pc)
     output = simulate(instructions, pc, "")
     print(output)
 
