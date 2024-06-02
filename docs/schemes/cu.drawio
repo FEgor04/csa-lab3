@@ -1,6 +1,6 @@
-<mxfile host="Electron" modified="2024-06-01T12:25:11.098Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.4.8 Chrome/124.0.6367.233 Electron/30.0.9 Safari/537.36" etag="HYV8M2GCc7Kc_wYuoplv" version="24.4.8" type="device">
+<mxfile host="Electron" modified="2024-06-02T13:20:56.538Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.4.8 Chrome/124.0.6367.233 Electron/30.0.9 Safari/537.36" etag="3RIK_tZRHD7YxQLDoZUu" version="24.4.8" type="device">
   <diagram id="v-JDOOZyUSPcI_IkAvMy" name="Страница — 1">
-    <mxGraphModel dx="893" dy="518" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1302" dy="756" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -23,7 +23,7 @@
         <mxCell id="FJJfB8WgnBZrv7iy5En1-1" value="Program Counter" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="340" y="280" width="80" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="l8fY_HSaeyg_I-ThemF9-2" value="MEM_OUT as Program" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;shape=flexArrow;" parent="1" source="FJJfB8WgnBZrv7iy5En1-3" target="l8fY_HSaeyg_I-ThemF9-1" edge="1">
+        <mxCell id="l8fY_HSaeyg_I-ThemF9-2" value="MEM_OUT" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;shape=flexArrow;" parent="1" source="FJJfB8WgnBZrv7iy5En1-3" target="l8fY_HSaeyg_I-ThemF9-1" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="2pBVzTrBkefimx51iDCW-1" value="ALU Flags (N Z)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="FJJfB8WgnBZrv7iy5En1-3" target="l8fY_HSaeyg_I-ThemF9-1" edge="1">
@@ -52,7 +52,7 @@
         <mxCell id="l8fY_HSaeyg_I-ThemF9-9" value="Operand" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.75;entryY=1;entryDx=0;entryDy=0;shape=flexArrow;" parent="1" source="l8fY_HSaeyg_I-ThemF9-1" target="l8fY_HSaeyg_I-ThemF9-6" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="_M4kIuiefyNLeUh48SrU-3" value="OPERAND ADDRESS (after Address Fetch) as ADDRESS" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.75;entryY=1;entryDx=0;entryDy=0;shape=flexArrow;" edge="1" parent="1" source="l8fY_HSaeyg_I-ThemF9-1" target="FJJfB8WgnBZrv7iy5En1-3">
+        <mxCell id="_M4kIuiefyNLeUh48SrU-3" value="OPERAND ADDRESS (after Address Fetch) as ADDRESS" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.75;entryY=1;entryDx=0;entryDy=0;shape=flexArrow;" parent="1" source="l8fY_HSaeyg_I-ThemF9-1" target="FJJfB8WgnBZrv7iy5En1-3" edge="1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="985" y="550" />
@@ -74,8 +74,15 @@
             <mxPoint x="250" y="400" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="_M4kIuiefyNLeUh48SrU-2" value="PROGRAM ARG as ARG" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.355;entryY=1.013;entryDx=0;entryDy=0;entryPerimeter=0;shape=flexArrow;" edge="1" parent="1" source="l8fY_HSaeyg_I-ThemF9-1" target="FJJfB8WgnBZrv7iy5En1-3">
+        <mxCell id="_M4kIuiefyNLeUh48SrU-2" value="PROGRAM ARG" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.6;entryY=1.006;entryDx=0;entryDy=0;entryPerimeter=0;shape=flexArrow;" parent="1" source="l8fY_HSaeyg_I-ThemF9-1" target="FJJfB8WgnBZrv7iy5En1-3" edge="1">
           <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GlB5oJ8vr-Ac1lH39GME-1" value="OPERAND (after Operand Fetch)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.88;entryY=0.988;entryDx=0;entryDy=0;entryPerimeter=0;shape=flexArrow;" edge="1" parent="1" source="l8fY_HSaeyg_I-ThemF9-1" target="FJJfB8WgnBZrv7iy5En1-3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1024" y="580" />
+            </Array>
+          </mxGeometry>
         </mxCell>
       </root>
     </mxGraphModel>

@@ -18,7 +18,7 @@ class ControlUnitTest(unittest.TestCase):
         control_unit = ControlUnit(0, data_path)
         control_unit.program_fetch()
         control_unit.address_fetch()
-        assert 50 == control_unit.address
+        assert 50 == control_unit.data_path.address_register
 
     def test_address_fetch_indirect(self):
         program = [
@@ -29,7 +29,7 @@ class ControlUnitTest(unittest.TestCase):
         control_unit = ControlUnit(0, data_path)
         control_unit.program_fetch()
         control_unit.address_fetch()
-        assert 512 == control_unit.address
+        assert 512 == control_unit.data_path.address_register
 
     def test_operand_fetch_immediate(self):
         program = [
@@ -40,7 +40,7 @@ class ControlUnitTest(unittest.TestCase):
         control_unit.program_fetch()
         control_unit.address_fetch()
         control_unit.operand_fetch()
-        assert 50 == control_unit.operand
+        assert 50 == control_unit.data_path.mem_out.arg
 
     def test_operand_fetch_direct(self):
         program = [
@@ -52,7 +52,7 @@ class ControlUnitTest(unittest.TestCase):
         control_unit.program_fetch()
         control_unit.address_fetch()
         control_unit.operand_fetch()
-        assert 512 == control_unit.operand
+        assert 512 == control_unit.data_path.mem_out.arg
 
     def test_operand_fetch_indirect(self):
         program = [
@@ -65,7 +65,7 @@ class ControlUnitTest(unittest.TestCase):
         control_unit.program_fetch()
         control_unit.address_fetch()
         control_unit.operand_fetch()
-        assert 512 == control_unit.operand
+        assert 512 == control_unit.data_path.mem_out.arg
 
     def test_execute_load(self):
         program = [

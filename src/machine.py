@@ -11,13 +11,6 @@ class RegisterSelector(Enum):
     ALU = "alu"
     MEM = "mem"
     PC = "pc"
-    # Аргумент инструкции
-    ARG = "arg"
-    # Адрес операнда, полученный после цикла Address Fetch
-    ADDRESS = "address"
-    # Операнд после цикла Operand Fetch
-    OPERAND = "operand"
-
 
 class DataPath:
     accumulator: int
@@ -63,42 +56,30 @@ class DataPath:
         assert 0 <= self.address_register < 2046
         self.memory[self.address_register] = Instruction(Opcode.VAR, self.alu.out)
 
-    def signal_latch_adress_register(self, sel: RegisterSelector, pc: int, arg: int, address: int, operand: int):
+    def signal_latch_address_register(self, sel: RegisterSelector, pc: int):
         if sel is RegisterSelector.ALU:
             self.address_register = self.alu.out
         elif sel is RegisterSelector.PC:
             self.address_register = pc
-        elif sel is RegisterSelector.ARG:
-            self.address_register = arg
-        elif sel is RegisterSelector.ADDRESS:
-            self.address_register = address
-        elif sel is RegisterSelector.OPERAND:
-            self.address_register = operand
+        elif sel is RegisterSelector.MEM:
+            self.address_register = self.mem_out.arg
 
-    def signal_latch_buffer(self, sel: RegisterSelector, pc: int, arg: int, address: int, operand: int):
+    def signal_latch_buffer(self, sel: RegisterSelector, pc: int):
         if sel is RegisterSelector.ALU:
             self.buffer_register = self.alu.out
         elif sel is RegisterSelector.PC:
             self.buffer_register = pc
-        elif sel is RegisterSelector.ARG:
-            self.buffer_register = arg
-        elif sel is RegisterSelector.ADDRESS:
-            self.buffer_register = address
-        elif sel is RegisterSelector.OPERAND:
-            self.buffer_register = operand
+        elif sel is RegisterSelector.MEM:
+            self.buffer_register = self.mem_out.arg
 
-    def signal_latch_accumulator(self, sel: RegisterSelector, pc: int, arg: int, address: int, operand: int):
+    def signal_latch_accumulator(self, sel: RegisterSelector, pc: int):
         if sel is RegisterSelector.ALU:
             self.accumulator = self.alu.out
         elif sel is RegisterSelector.PC:
             self.accumulator = pc
-        elif sel is RegisterSelector.ARG:
-            self.accumulator = arg
-        elif sel is RegisterSelector.ADDRESS:
-            self.accumulator = address
-        elif sel is RegisterSelector.OPERAND:
-            self.accumulator = operand
-
+        elif sel is RegisterSelector.MEM:
+            self.accumulator = self.mem_out.arg
+        
 
 class ControlUnit:
     program: Instruction
@@ -108,97 +89,84 @@ class ControlUnit:
     address: int
     operand: int
 
+    _tick: int = 0
+
+    def tick(self):
+        self._tick += 1
+
     def __init__(self, pc: int, data_path: DataPath):
         self.program = None
         self.program_counter = pc
         self.data_path = data_path
-        self.address = None
-        self.operand = None
 
     def signal_latch_pc(self, sel: bool):
-        self.program_counter = self.operand if sel else self.program_counter + 1
+        self.program_counter = self.data_path.mem_out.arg if sel else self.program_counter + 1
+
+    def signal_latch_address_register(self, sel: RegisterSelector):
+        self.data_path.signal_latch_address_register(sel, self.program_counter)
+
+    def signal_latch_buffer(self, sel: RegisterSelector):
+        self.data_path.signal_latch_buffer(sel, self.program_counter)
+
+    def signal_latch_accumulator(self, sel: RegisterSelector):
+        self.data_path.signal_latch_accumulator(sel, self.program_counter)
 
     def program_fetch(self):
-        self.data_path.signal_latch_adress_register(
+        self.signal_latch_address_register(
             RegisterSelector.PC,
-            self.program_counter,
-            self.program.arg if self.program is not None else 0,
-            self.address,
-            self.operand,
         )
         self.data_path.signal_read_memory()
         self.program = self.data_path.mem_out
+        self.tick()
 
     def address_fetch(self):
+        """
+        Цикл получения адреса операнда.
+        После него AR содержит адрес операнда текущей инструкции.
+        """
         assert self.program is not None
         if self.program.addressing is Addressing.IMMEDIATE:
             return
         if self.program.addressing is Addressing.DIRECT:
-            self.address = self.program.arg
+            self.signal_latch_address_register(RegisterSelector.MEM)
         if self.program.addressing is Addressing.INDIRECT:
-            self.data_path.signal_latch_adress_register(
-                RegisterSelector.ARG,
-                self.program_counter,
-                self.program.arg,
-                self.address,
-                self.operand,
-            )
+            self.signal_latch_address_register(RegisterSelector.MEM)
             self.data_path.signal_read_memory()
-            self.address = self.data_path.mem_out.arg
+            self.tick()
+            self.signal_latch_address_register(RegisterSelector.MEM)
 
     def operand_fetch(self):
+        """
+        Цикл получения операнда
+        После него MEM_OUT содержит операнд текущей инструкции.
+        """
         assert self.program is not None
         if self.program.addressing is Addressing.IMMEDIATE or self.program.addressing is None:
-            self.operand = self.program.arg
             return
-        self.data_path.signal_latch_adress_register(
-            RegisterSelector.ADDRESS,
-            self.program_counter,
-            self.program.arg if self.program is not None else 0,
-            self.address,
-            self.operand,
-        )
         self.data_path.signal_read_memory()
-        self.operand = self.data_path.mem_out.arg
 
     def _execute_ld(self):
-        self.data_path.signal_latch_accumulator(
-            RegisterSelector.OPERAND,
-            self.program_counter,
-            self.program.arg,
-            self.address,
-            self.operand,
+        self.signal_latch_accumulator(
+            RegisterSelector.MEM,
         )
         self.signal_latch_pc(False)
 
     def _execute_arithmetic(self):
-        self.data_path.signal_latch_buffer(
-            RegisterSelector.OPERAND,
-            self.program_counter,
-            self.program.arg,
-            self.address,
-            self.operand,
+        self.signal_latch_buffer(
+            RegisterSelector.MEM,
         )
         self.data_path.alu.signal_sel_left(self.data_path.buffer_register, True)
         self.data_path.alu.signal_sel_right(self.data_path.accumulator, True)
         self.data_path.alu.signal_alu_operation(self.program.opcode, {})
         if self.program.opcode is not Opcode.CMP:
-            self.data_path.signal_latch_accumulator(
+            self.signal_latch_accumulator(
                 RegisterSelector.ALU,
-                self.program_counter,
-                self.program.arg,
-                self.address,
-                self.operand,
             )
         self.signal_latch_pc(False)
 
     def _execute_st(self):
-        self.data_path.signal_latch_adress_register(
-            RegisterSelector.OPERAND,
-            self.program_counter,
-            self.program.arg,
-            self.address,
-            self.operand,
+        self.signal_latch_address_register(
+            RegisterSelector.MEM,
         )
         # Pass accumulator through the ALU
         self.data_path.alu.signal_sel_left(self.data_path.buffer_register, False)
