@@ -1,6 +1,8 @@
-from isa import Instruction, Opcode, Addressing
+from isa import Instruction, Opcode, Addressing, read_json
 from alu import ALU
 from enum import Enum
+import json
+import sys
 
 
 class RegisterSelector(Enum):
@@ -237,3 +239,26 @@ class ControlUnit:
         self.address_fetch()
         self.operand_fetch()
         self.execute()
+
+def simulate(instructions: list[Instruction], pc, input) -> str:
+    data_path = DataPath(input, 0, instructions)
+    control_unit = ControlUnit(pc, data_path)
+    try:
+        for i in range(10000):
+            print("executing instruction #", i)
+            control_unit.decode_and_execute()
+    except StopIteration:
+        print("HLT!")
+    except EOFError:
+        print("Programm tried to read empty input")
+    return "".join(data_path.output)
+
+if __name__ == "__main__":
+    assert len(sys.argv) == 3, "Wrong arguments: machine.py <code_file> <input_file>"
+    _, code_file, input_file = sys.argv
+    with open(code_file, "r") as f:
+        instructions, pc = read_json(f.read())
+    print(instructions, pc)
+    output = simulate(instructions, pc, "")
+    print(output)
+

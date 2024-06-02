@@ -2,6 +2,7 @@
 
 from enum import Enum
 from typing import NamedTuple
+import json
 
 
 class Opcode(str, Enum):
@@ -58,3 +59,13 @@ class Instruction(NamedTuple):
     opcode: Opcode
     arg: int | None
     addressing: Addressing | None = Addressing.IMMEDIATE
+
+def read_json(input: str):
+    code = json.loads(input)
+    instructions_raw = code["instructions"]
+    pc = code["pc"]
+    instructions: list[Instruction] = []
+    for (opcode, arg, addressing) in instructions_raw:
+        instructions += [Instruction(Opcode[opcode.upper()], arg, Addressing[addressing.upper()] if addressing is not None else addressing)]
+    return instructions, pc
+
