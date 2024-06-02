@@ -1,5 +1,8 @@
-from isa import Opcode
+from __future__ import annotations
+
 from enum import Enum
+
+from isa import Opcode
 
 
 class ALUModifier(int, Enum):

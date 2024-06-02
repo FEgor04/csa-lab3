@@ -1,6 +1,7 @@
-from isa import Instruction, Opcode, Addressing
-from machine import DataPath, ControlUnit
 import unittest
+
+from isa import Addressing, Instruction, Opcode
+from machine import ControlUnit, DataPath
 
 
 class ControlUnitTest(unittest.TestCase):
@@ -9,7 +10,7 @@ class ControlUnitTest(unittest.TestCase):
         data_path = DataPath("", print, program)
         control_unit = ControlUnit(0, data_path)
         control_unit.program_fetch()
-        self.assertEqual(program[0], control_unit.program)
+        assert program[0] == control_unit.program
 
     def test_address_fetch_direct(self):
         program = [Instruction(Opcode.LD, 50, Addressing.DIRECT)]
@@ -17,7 +18,7 @@ class ControlUnitTest(unittest.TestCase):
         control_unit = ControlUnit(0, data_path)
         control_unit.program_fetch()
         control_unit.address_fetch()
-        self.assertEqual(50, control_unit.address)
+        assert 50 == control_unit.address
 
     def test_address_fetch_indirect(self):
         program = [
@@ -28,7 +29,7 @@ class ControlUnitTest(unittest.TestCase):
         control_unit = ControlUnit(0, data_path)
         control_unit.program_fetch()
         control_unit.address_fetch()
-        self.assertEqual(512, control_unit.address)
+        assert 512 == control_unit.address
 
     def test_operand_fetch_immediate(self):
         program = [
@@ -39,7 +40,7 @@ class ControlUnitTest(unittest.TestCase):
         control_unit.program_fetch()
         control_unit.address_fetch()
         control_unit.operand_fetch()
-        self.assertEqual(50, control_unit.operand)
+        assert 50 == control_unit.operand
 
     def test_operand_fetch_direct(self):
         program = [
@@ -51,7 +52,7 @@ class ControlUnitTest(unittest.TestCase):
         control_unit.program_fetch()
         control_unit.address_fetch()
         control_unit.operand_fetch()
-        self.assertEqual(512, control_unit.operand)
+        assert 512 == control_unit.operand
 
     def test_operand_fetch_indirect(self):
         program = [
@@ -64,7 +65,7 @@ class ControlUnitTest(unittest.TestCase):
         control_unit.program_fetch()
         control_unit.address_fetch()
         control_unit.operand_fetch()
-        self.assertEqual(512, control_unit.operand)
+        assert 512 == control_unit.operand
 
     def test_execute_load(self):
         program = [
@@ -74,9 +75,9 @@ class ControlUnitTest(unittest.TestCase):
         data_path = DataPath("", print, program)
         control_unit = ControlUnit(0, data_path)
         control_unit.decode_and_execute()
-        self.assertEqual(42, data_path.accumulator)
+        assert 42 == data_path.accumulator
         control_unit.decode_and_execute()
-        self.assertEqual(42, data_path.memory[2].arg)
+        assert 42 == data_path.memory[2].arg
 
     def test_execute_add(self):
         program = [
@@ -86,10 +87,10 @@ class ControlUnitTest(unittest.TestCase):
         data_path = DataPath("", print, program)
         control_unit = ControlUnit(0, data_path)
         control_unit.decode_and_execute()
-        self.assertEqual(1, control_unit.program_counter)
+        assert 1 == control_unit.program_counter
         control_unit.decode_and_execute()
-        self.assertEqual(2, control_unit.program_counter)
-        self.assertEqual(84, data_path.accumulator)
+        assert 2 == control_unit.program_counter
+        assert 84 == data_path.accumulator
 
     def test_execute_mod(self):
         program = [
@@ -99,10 +100,10 @@ class ControlUnitTest(unittest.TestCase):
         data_path = DataPath("", print, program)
         control_unit = ControlUnit(0, data_path)
         control_unit.decode_and_execute()
-        self.assertEqual(1, control_unit.program_counter)
+        assert 1 == control_unit.program_counter
         control_unit.decode_and_execute()
-        self.assertEqual(2, control_unit.program_counter)
-        self.assertEqual(0, data_path.accumulator)
+        assert 2 == control_unit.program_counter
+        assert 0 == data_path.accumulator
 
     def test_execute_jmp(self):
         program = [
@@ -111,8 +112,8 @@ class ControlUnitTest(unittest.TestCase):
         data_path = DataPath("", print, program)
         control_unit = ControlUnit(0, data_path)
         control_unit.decode_and_execute()
-        self.assertEqual(200, control_unit.program_counter)
-        self.assertEqual(0, data_path.accumulator)
+        assert 200 == control_unit.program_counter
+        assert 0 == data_path.accumulator
 
     def test_jz(self):
         program = [
@@ -124,13 +125,13 @@ class ControlUnitTest(unittest.TestCase):
         data_path = DataPath("", print, program)
         control_unit = ControlUnit(0, data_path)
         control_unit.decode_and_execute()
-        self.assertEqual(2, control_unit.program_counter)
+        assert 2 == control_unit.program_counter
         control_unit.decode_and_execute()
-        self.assertEqual(420, data_path.accumulator)
-        self.assertEqual(False, data_path.alu.zero)
-        self.assertEqual(3, control_unit.program_counter)
+        assert 420 == data_path.accumulator
+        assert False is data_path.alu.zero
+        assert 3 == control_unit.program_counter
         control_unit.decode_and_execute()
-        self.assertEqual(4, control_unit.program_counter)
+        assert 4 == control_unit.program_counter
 
     def test_cmp(self):
         program = [
@@ -143,11 +144,11 @@ class ControlUnitTest(unittest.TestCase):
         control_unit = ControlUnit(0, data_path)
         control_unit.decode_and_execute()
         control_unit.decode_and_execute()
-        self.assertEqual(control_unit.data_path.alu.zero, False)
-        self.assertEqual(control_unit.data_path.alu.negative, False)
-        self.assertEqual(control_unit.data_path.accumulator, 420)
+        assert control_unit.data_path.alu.zero is False
+        assert control_unit.data_path.alu.negative is False
+        assert control_unit.data_path.accumulator == 420
         control_unit.decode_and_execute()
         control_unit.decode_and_execute()
-        self.assertEqual(control_unit.data_path.alu.zero, False)
-        self.assertEqual(control_unit.data_path.alu.negative, True)
-        self.assertEqual(control_unit.data_path.accumulator, -420)
+        assert control_unit.data_path.alu.zero is False
+        assert control_unit.data_path.alu.negative is True
+        assert control_unit.data_path.accumulator == -420

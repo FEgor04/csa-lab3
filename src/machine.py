@@ -1,7 +1,10 @@
-from isa import Instruction, Opcode, Addressing, read_json
-from alu import ALU
-from enum import Enum
+from __future__ import annotations
+
 import sys
+from enum import Enum
+
+from alu import ALU
+from isa import Addressing, Instruction, Opcode, read_json
 
 
 class RegisterSelector(Enum):
@@ -21,9 +24,7 @@ class DataPath:
     buffer_register: int
     address_register: int
 
-    def __init__(
-        self, input: str, _remove_later, initial_memory: list[Instruction] = []
-    ):
+    def __init__(self, input_str: str, _remove_later, initial_memory: list[Instruction] = []):
         """
         Для простоты реализации в памяти хранятся инструкции.
         чтобы сохранить число необходимо указать `Opcode.VAR` и `Addressing.Immediate`
@@ -36,12 +37,13 @@ class DataPath:
         self.address_register: int = 0
         self.accumulator: int = 0
         self.buffer_register: int = 0
-        self.input = input
+        self.input = input_str
         self.output = []
         self.mem_out = 0
         self.alu = ALU()
 
     def signal_read_memory(self) -> Instruction:
+        assert self.address_register != 2047, "program tried to read from output port"
         if self.address_register == 2046:  # Input
             if len(self.input) == 0:
                 raise EOFError()
@@ -49,14 +51,11 @@ class DataPath:
             self.input = self.input[1:]
             self.mem_out = Instruction(Opcode.VAR, symbol, Addressing.IMMEDIATE)
             return
-        if self.address_register == 2047:
-            raise Exception("Programm tried to read from output port")
         assert 0 <= self.address_register < 2046
         self.mem_out = self.memory[self.address_register]
 
     def signal_write_memory(self):
-        if self.address_register == 2046:
-            raise Exception("Programm tried to write to input port")
+        assert self.address_register != 2046, "program tried to write to input port"
         if self.address_register == 2047:
             char = chr(self.alu.out)
             self.output += [char]
@@ -64,9 +63,7 @@ class DataPath:
         assert 0 <= self.address_register < 2046
         self.memory[self.address_register] = Instruction(Opcode.VAR, self.alu.out)
 
-    def signal_latch_adress_register(
-        self, sel: RegisterSelector, pc: int, arg: int, address: int, operand: int
-    ):
+    def signal_latch_adress_register(self, sel: RegisterSelector, pc: int, arg: int, address: int, operand: int):
         if sel is RegisterSelector.ALU:
             self.address_register = self.alu.out
         elif sel is RegisterSelector.PC:
@@ -78,9 +75,7 @@ class DataPath:
         elif sel is RegisterSelector.OPERAND:
             self.address_register = operand
 
-    def signal_latch_buffer(
-        self, sel: RegisterSelector, pc: int, arg: int, address: int, operand: int
-    ):
+    def signal_latch_buffer(self, sel: RegisterSelector, pc: int, arg: int, address: int, operand: int):
         if sel is RegisterSelector.ALU:
             self.buffer_register = self.alu.out
         elif sel is RegisterSelector.PC:
@@ -92,9 +87,7 @@ class DataPath:
         elif sel is RegisterSelector.OPERAND:
             self.buffer_register = operand
 
-    def signal_latch_accumulator(
-        self, sel: RegisterSelector, pc: int, arg: int, address: int, operand: int
-    ):
+    def signal_latch_accumulator(self, sel: RegisterSelector, pc: int, arg: int, address: int, operand: int):
         if sel is RegisterSelector.ALU:
             self.accumulator = self.alu.out
         elif sel is RegisterSelector.PC:
@@ -155,10 +148,7 @@ class ControlUnit:
 
     def operand_fetch(self):
         assert self.program is not None
-        if (
-            self.program.addressing is Addressing.IMMEDIATE
-            or self.program.addressing is None
-        ):
+        if self.program.addressing is Addressing.IMMEDIATE or self.program.addressing is None:
             self.operand = self.program.arg
             return
         self.data_path.signal_latch_adress_register(
@@ -172,8 +162,7 @@ class ControlUnit:
         self.operand = self.data_path.mem_out.arg
 
     def execute(self):
-        if self.program.opcode is Opcode.VAR:
-            raise Exception("Trying to execute VAR instruction!!!! ")
+        assert self.program.opcode is not Opcode.VAR, "program tried to execute VAR instruction"
         if self.program.opcode is Opcode.HLT:
             raise StopIteration()
         if self.program.opcode is Opcode.LD:
@@ -197,9 +186,7 @@ class ControlUnit:
             self.data_path.alu.signal_sel_left(self.data_path.buffer_register, False)
             self.data_path.alu.signal_sel_right(self.data_path.accumulator, True)
             self.data_path.alu.signal_alu_operation(Opcode.ADD, {})
-            assert (
-                self.data_path.alu.out == self.data_path.accumulator
-            ), "ALU out should become equal to accumulator"
+            assert self.data_path.alu.out == self.data_path.accumulator, "ALU out should become equal to accumulator"
 
             self.data_path.signal_write_memory()
             self.signal_latch_pc(False)
@@ -245,10 +232,8 @@ class ControlUnit:
         return f"{self.program_counter:6d} | {self.data_path.accumulator:6d} | {self.data_path.buffer_register:6d} | {self.data_path.address_register:6d}"
 
 
-def simulate(
-    instructions: list[Instruction], pc, input
-) -> tuple[str, DataPath, ControlUnit]:
-    data_path = DataPath(input, 0, instructions)
+def simulate(instructions: list[Instruction], pc, input_text) -> tuple[str, DataPath, ControlUnit]:
+    data_path = DataPath(input_text, 0, instructions)
     control_unit = ControlUnit(pc, data_path)
     try:
         for i in range(1000000):
@@ -264,10 +249,10 @@ def simulate(
 if __name__ == "__main__":
     assert len(sys.argv) == 3, "Wrong arguments: machine.py <code_file> <input_file>"
     _, code_file, input_file = sys.argv
-    with open(input_file, "r") as f:
-        input = f.read()
-        input += "\0"
-    with open(code_file, "r") as f:
+    with open(input_file) as f:
+        input_text = f.read()
+        input_text += "\0"
+    with open(code_file) as f:
         instructions, pc = read_json(f.read())
-    output, _, _ = simulate(instructions, pc, input)
+    output, _, _ = simulate(instructions, pc, input_text)
     print(output)

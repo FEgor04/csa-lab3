@@ -1,6 +1,7 @@
-from machine import DataPath
-
 import unittest
+
+import pytest
+from machine import DataPath
 
 
 class DataPathTest(unittest.TestCase):
@@ -8,16 +9,16 @@ class DataPathTest(unittest.TestCase):
         datapath = DataPath("kek", print)
         datapath.address_register = 2046
         datapath.signal_read_memory()
-        self.assertEqual(ord("k"), datapath.mem_out.arg)
+        assert ord("k") == datapath.mem_out.arg
         datapath.signal_read_memory()
-        self.assertEqual(ord("e"), datapath.mem_out.arg)
+        assert ord("e") == datapath.mem_out.arg
         datapath.signal_read_memory()
-        self.assertEqual(ord("k"), datapath.mem_out.arg)
-        self.assertRaises(EOFError, datapath.signal_read_memory)
+        assert ord("k") == datapath.mem_out.arg
+        pytest.raises(EOFError, datapath.signal_read_memory)
 
     def test_write_memory(self):
         datapath = DataPath("", print)
         datapath.alu.out = 1024
         datapath.address_register = 521
         datapath.signal_write_memory()
-        self.assertEqual(1024, datapath.memory[521].arg)
+        assert 1024 == datapath.memory[521].arg

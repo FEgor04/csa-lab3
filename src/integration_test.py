@@ -1,6 +1,7 @@
 import unittest
+
+from machine import ControlUnit, DataPath, simulate
 from translator import parse_lines
-from machine import DataPath, ControlUnit, simulate
 
 
 class IntegrationTest(unittest.TestCase):
@@ -14,7 +15,7 @@ class IntegrationTest(unittest.TestCase):
                 control_unit.decode_and_execute()
         except StopIteration:
             pass
-        self.assertEqual(data_path.memory[0].arg, 10 + 5)
+        assert data_path.memory[0].arg == 10 + 5
 
     def test_mul_input(self):
         lines = [
@@ -33,7 +34,7 @@ class IntegrationTest(unittest.TestCase):
                 control_unit.decode_and_execute()
         except StopIteration:
             pass
-        self.assertEqual(data_path.memory[0].arg, 50)
+        assert data_path.memory[0].arg == 50
 
     def test_output(self):
         lines = ["START: LD 'h'", "ST 2047", "HLT"]
@@ -45,7 +46,7 @@ class IntegrationTest(unittest.TestCase):
                 control_unit.decode_and_execute()
         except StopIteration:
             pass
-        self.assertEqual(data_path.output, ["h"])
+        assert data_path.output == ["h"]
 
     def test_hello_world(self):
         lines = [
@@ -63,7 +64,7 @@ class IntegrationTest(unittest.TestCase):
         ]
         instructions, pc = parse_lines(lines)
         output, _, _ = simulate(instructions, pc, "")
-        self.assertEqual("hello, world\0", output)
+        assert "hello, world\x00" == output
 
     def test_username(self):
         lines = [
@@ -91,4 +92,4 @@ class IntegrationTest(unittest.TestCase):
             buffer += chr(data_path.memory[i].arg)
             i += 1
         buffer += "\0"
-        self.assertEqual(buffer, name)
+        assert buffer == name

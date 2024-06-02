@@ -1,7 +1,10 @@
+from __future__ import annotations
+
 import json
-import sys
-from isa import Instruction, Opcode, Addressing
 import re
+import sys
+
+from isa import Addressing, Instruction, Opcode
 
 
 def parse_int_or_none(a: str) -> int | None:
@@ -61,7 +64,8 @@ def parse_addressing(argument: str) -> Addressing | None:
         return Addressing.DIRECT
     if argument[0] == "[" and argument[-1] == "]":
         return Addressing.INDIRECT
-    assert argument[0] not in ["[", "("] and argument[-1] not in ["]", ")"]
+    assert argument[0] not in ["[", "("]
+    assert argument[-1] not in ["]", ")"]
     return Addressing.IMMEDIATE
 
 
@@ -81,6 +85,7 @@ def split_instruction(line: str) -> tuple[str, str, str]:
             opcode.strip(),
             arg.strip() if arg else "",
         )
+    return None
 
 
 def expand_lines(lines: list[str]) -> list[str]:
@@ -129,18 +134,16 @@ def convert_to_json(instructions: list[Instruction], pc: int) -> str:
     return json.dumps(code)
 
 
-def main(input, output):
-    with open(input, encoding="utf-8") as f:
+def main(input_file, output_file):
+    with open(input_file, encoding="utf-8") as f:
         lines = f.readlines()
     instructions, pc = parse_lines(lines)
     json = convert_to_json(instructions, pc)
-    with open(output, "w", encoding="utf-8") as f:
+    with open(output_file, "w", encoding="utf-8") as f:
         f.write(json)
 
 
 if __name__ == "__main__":
-    assert (
-        len(sys.argv) == 3
-    ), "Wrong arguments: translator.py <input_file> <target_file>"
-    _, input, output = sys.argv
-    main(input, output)
+    assert len(sys.argv) == 3, "Wrong arguments: translator.py <input_file> <target_file>"
+    _, input_file, output_file = sys.argv
+    main(input_file, output_file)

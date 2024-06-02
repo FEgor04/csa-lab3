@@ -1,8 +1,10 @@
 """Файл с описанием архитекутуры инструкций (и псевдо-инструкций)"""
 
+from __future__ import annotations
+
+import json
 from enum import Enum
 from typing import NamedTuple
-import json
 
 
 class Opcode(str, Enum):
@@ -61,8 +63,8 @@ class Instruction(NamedTuple):
     addressing: Addressing | None = Addressing.IMMEDIATE
 
 
-def read_json(input: str):
-    code = json.loads(input)
+def read_json(code_json: str):
+    code = json.loads(code_json)
     instructions_raw = code["instructions"]
     pc = code["pc"]
     instructions: list[Instruction] = []
@@ -71,9 +73,7 @@ def read_json(input: str):
             Instruction(
                 Opcode[opcode.upper()],
                 arg,
-                Addressing[addressing.upper()]
-                if addressing is not None
-                else addressing,
+                Addressing[addressing.upper()] if addressing is not None else addressing,
             )
         ]
     return instructions, pc

@@ -1,6 +1,7 @@
-from isa import Instruction, Opcode, Addressing
-from translator import parse_lines, parse_labels, split_instruction, expand_lines
 import unittest
+
+from isa import Addressing, Instruction, Opcode
+from translator import expand_lines, parse_labels, parse_lines, split_instruction
 
 
 class TestTranslator(unittest.TestCase):
@@ -8,7 +9,7 @@ class TestTranslator(unittest.TestCase):
         lines = ["HLT", "", ""]
         transformed, _ = parse_lines(lines)
         expected = [Instruction(Opcode.HLT, None, None)]
-        self.assertEqual(transformed, expected)
+        assert transformed == expected
 
     def test_translate_complex(self):
         lines = ["START: LD (KEKW)", "JMP (START)", "KEKW: VAR 'a'"]
@@ -19,7 +20,7 @@ class TestTranslator(unittest.TestCase):
             Instruction(Opcode.VAR, ord("a"), Addressing.IMMEDIATE),
             Instruction(Opcode.VAR, 0, Addressing.IMMEDIATE),
         ]
-        self.assertEqual(transformed, expected)
+        assert transformed == expected
 
     def test_first_pass(self):
         lines = [
@@ -31,33 +32,33 @@ class TestTranslator(unittest.TestCase):
             "LABEL2": 1,
         }
         actual = parse_labels(lines)
-        self.assertEqual(actual, expected_labels)
+        assert actual == expected_labels
 
     def test_parse_instruction_no_label(self):
         line = "\t\t\tLD\t\tABSD\t\t"
         expected = ("", "LD", "ABSD")
-        self.assertEqual(split_instruction(line), expected)
+        assert split_instruction(line) == expected
 
     def test_parse_instruction_no_arg(self):
         line = "\t\tKEKW:\t\tHLT\t\t\t\t"
         expected = ("KEKW", "HLT", "")
-        self.assertEqual(split_instruction(line), expected)
+        assert split_instruction(line) == expected
 
     def test_parse_instruction_no_arg_no_label(self):
         line = "\t\t\tHLT\t\t\t\t"
         expected = ("", "HLT", "")
-        self.assertEqual(split_instruction(line), expected)
+        assert split_instruction(line) == expected
 
     def test_parse_instruction(self):
         line = "\t\tCOOLLABEL: \tADD\t\tSOMETHING\t\t\t\n"
         expected = ("COOLLABEL", "ADD", "SOMETHING")
-        self.assertEqual(split_instruction(line), expected)
+        assert split_instruction(line) == expected
 
     def test_parse_no_arg(self):
         lines = ["HLT"]
         expected = [Instruction(Opcode.HLT, None, None)]
         transformed, _ = parse_lines(lines)
-        self.assertEqual(transformed, expected)
+        assert transformed == expected
 
     def test_translate_indirect(self):
         lines = ["KEK: LD [LOL]", "LOL: LD [KEK]"]
@@ -66,7 +67,7 @@ class TestTranslator(unittest.TestCase):
             Instruction(Opcode.LD, 0, Addressing.INDIRECT),
         ]
         transformed, _ = parse_lines(lines)
-        self.assertEqual(transformed, expected)
+        assert transformed == expected
 
     def test_immediate(self):
         lines = ["ADD 10", "LD 'a'"]
@@ -75,7 +76,7 @@ class TestTranslator(unittest.TestCase):
             Instruction(Opcode.LD, ord("a"), Addressing.IMMEDIATE),
         ]
         transformed, _ = parse_lines(lines)
-        self.assertEqual(transformed, expected)
+        assert transformed == expected
 
     def test_expand_instructions_with_label(self):
         lines = ["ADD 'a'", "TEST: VAR 'hell'"]
@@ -87,12 +88,12 @@ class TestTranslator(unittest.TestCase):
             "VAR 'l'",
             "VAR 0",
         ]
-        self.assertEqual(expand_lines(lines), expected)
+        assert expand_lines(lines) == expected
 
     def test_expand_instructions_without_label(self):
         lines = ["ADD 'a'", "VAR 'hell'"]
         expected = ["ADD 'a'", "VAR 'h'", "VAR 'e'", "VAR 'l'", "VAR 'l'", "VAR 0"]
-        self.assertEqual(expand_lines(lines), expected)
+        assert expand_lines(lines) == expected
 
     def test_expand_instructions_long_word(self):
         lines = ["VAR 'hello, world'"]
@@ -111,4 +112,4 @@ class TestTranslator(unittest.TestCase):
             "VAR 'd'",
             "VAR 0",
         ]
-        self.assertEqual(expand_lines(lines), expected)
+        assert expand_lines(lines) == expected
