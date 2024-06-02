@@ -6,13 +6,13 @@ import unittest
 class TestTranslator(unittest.TestCase):
     def test_translate_no_arg(self):
         lines = ["HLT", "", ""]
-        transformed = parse_lines(lines)
+        transformed, _ = parse_lines(lines)
         expected = [Instruction(Opcode.HLT, None, None)]
         self.assertEqual(transformed, expected)
 
     def test_translate_complex(self):
         lines = ["START: LD (KEKW)", "JMP (START)", "KEKW: VAR 'a'"]
-        transformed = parse_lines(lines)
+        transformed, _ = parse_lines(lines)
         expected = [
             Instruction(Opcode.LD, 2, Addressing.DIRECT),
             Instruction(Opcode.JMP, 0, Addressing.DIRECT),
@@ -55,7 +55,7 @@ class TestTranslator(unittest.TestCase):
     def test_parse_no_arg(self):
         lines = ["HLT"]
         expected = [Instruction(Opcode.HLT, None, None)]
-        transformed = parse_lines(lines)
+        transformed, _ = parse_lines(lines)
         self.assertEqual(transformed, expected)
 
     def test_translate_indirect(self):
@@ -64,7 +64,7 @@ class TestTranslator(unittest.TestCase):
             Instruction(Opcode.LD, 1, Addressing.INDIRECT),
             Instruction(Opcode.LD, 0, Addressing.INDIRECT),
         ]
-        transformed = parse_lines(lines)
+        transformed, _ = parse_lines(lines)
         self.assertEqual(transformed, expected)
 
     def test_immediate(self):
@@ -73,5 +73,5 @@ class TestTranslator(unittest.TestCase):
             Instruction(Opcode.ADD, 10, Addressing.IMMEDIATE),
             Instruction(Opcode.LD, ord("a"), Addressing.IMMEDIATE),
         ]
-        transformed = parse_lines(lines)
+        transformed, _ = parse_lines(lines)
         self.assertEqual(transformed, expected)

@@ -79,12 +79,14 @@ def split_instruction(line: str) -> tuple[str, str, str]:
         return "", splitted[0], ""
     return "", "", ""
 
+
 def convert_to_json(instructions: list[Instruction], pc: int) -> str:
     code = {
         "pc": pc,
         "instructions": instructions,
     }
     return json.dumps(code)
+
 
 def main(input, output):
     with open(input, encoding="utf-8") as f:
@@ -94,7 +96,10 @@ def main(input, output):
     with open(output, "w", encoding="utf-8") as f:
         f.write(json)
 
+
 if __name__ == "__main__":
-    assert len(sys.argv) == 3, "Wrong arguments: translator.py <input_file> <target_file>"
+    assert (
+        len(sys.argv) == 3
+    ), "Wrong arguments: translator.py <input_file> <target_file>"
     _, input, output = sys.argv
     main(input, output)
