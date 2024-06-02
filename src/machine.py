@@ -58,7 +58,8 @@ class DataPath:
         if self.address_register == 2046:
             raise Exception("Programm tried to write to input port")
         if self.address_register == 2047:
-            self.output += [chr(self.alu.out)]
+            char = chr(self.alu.out)
+            self.output += [char]
             return
         assert 0 <= self.address_register < 2046
         self.memory[self.address_register] = Instruction(Opcode.VAR, self.alu.out)
@@ -260,7 +261,10 @@ def simulate(instructions: list[Instruction], pc, input) -> str:
 if __name__ == "__main__":
     assert len(sys.argv) == 3, "Wrong arguments: machine.py <code_file> <input_file>"
     _, code_file, input_file = sys.argv
+    with open(input_file, "r") as f:
+        input = f.read()
+        input += "\0"
     with open(code_file, "r") as f:
         instructions, pc = read_json(f.read())
-    output = simulate(instructions, pc, "")
+    output = simulate(instructions, pc, input)
     print(output)
