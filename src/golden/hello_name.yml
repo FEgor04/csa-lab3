@@ -619,7 +619,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #15
   DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
   DEBUG   machine:signal_read_memory Reading memory on AR #2046
-  INFO    machine:signal_read_memory Read: ' ' (0)
+  INFO    machine:signal_read_memory Read: '\x00' (0)
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
   INFO    machine:decode_and_execute Executed instruction `ld 2046`

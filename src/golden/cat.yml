@@ -1,0 +1,414 @@
+in_source: |-
+  START: LD (2046)
+  CMP 0
+  JZ STOP
+  ST 2047
+  JMP START
+  STOP: HLT
+in_stdin: hello world!!!
+out_log: |
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #0
+  DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
+  DEBUG   machine:signal_read_memory Reading memory on AR #2046
+  INFO    machine:signal_read_memory Read: 'h' (104)
+  DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
+  DEBUG   machine:signal_latch_pc PC <- PC + 1
+  INFO    machine:decode_and_execute Executed instruction `ld 2046`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #1
+  DEBUG   machine:signal_latch_pc PC <- PC + 1
+  INFO    machine:decode_and_execute Executed instruction `cmp 0`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #2
+  DEBUG   machine:signal_latch_pc PC <- PC + 1
+  INFO    machine:decode_and_execute Executed instruction `jz 5`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #3
+  DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
+  DEBUG   machine:signal_write_memory Writing to memory on AR #2047
+  INFO    machine:signal_write_memory Output: 'h' (104)
+  DEBUG   machine:signal_latch_pc PC <- PC + 1
+  INFO    machine:decode_and_execute Executed instruction `st 2047`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #4
+  DEBUG   machine:signal_latch_pc PC <- MEM_OUT
+  INFO    machine:decode_and_execute Executed instruction `jmp 0`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #0
+  DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
+  DEBUG   machine:signal_read_memory Reading memory on AR #2046
+  INFO    machine:signal_read_memory Read: 'e' (101)
+  DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
+  DEBUG   machine:signal_latch_pc PC <- PC + 1
+  INFO    machine:decode_and_execute Executed instruction `ld 2046`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #1
+  DEBUG   machine:signal_latch_pc PC <- PC + 1
+  INFO    machine:decode_and_execute Executed instruction `cmp 0`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #2
+  DEBUG   machine:signal_latch_pc PC <- PC + 1
+  INFO    machine:decode_and_execute Executed instruction `jz 5`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #3
+  DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
+  DEBUG   machine:signal_write_memory Writing to memory on AR #2047
+  INFO    machine:signal_write_memory Output: 'e' (101)
+  DEBUG   machine:signal_latch_pc PC <- PC + 1
+  INFO    machine:decode_and_execute Executed instruction `st 2047`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #4
+  DEBUG   machine:signal_latch_pc PC <- MEM_OUT
+  INFO    machine:decode_and_execute Executed instruction `jmp 0`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #0
+  DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
+  DEBUG   machine:signal_read_memory Reading memory on AR #2046
+  INFO    machine:signal_read_memory Read: 'l' (108)
+  DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
+  DEBUG   machine:signal_latch_pc PC <- PC + 1
+  INFO    machine:decode_and_execute Executed instruction `ld 2046`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #1
+  DEBUG   machine:signal_latch_pc PC <- PC + 1
+  INFO    machine:decode_and_execute Executed instruction `cmp 0`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #2
+  DEBUG   machine:signal_latch_pc PC <- PC + 1
+  INFO    machine:decode_and_execute Executed instruction `jz 5`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #3
+  DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
+  DEBUG   machine:signal_write_memory Writing to memory on AR #2047
+  INFO    machine:signal_write_memory Output: 'l' (108)
+  DEBUG   machine:signal_latch_pc PC <- PC + 1
+  INFO    machine:decode_and_execute Executed instruction `st 2047`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #4
+  DEBUG   machine:signal_latch_pc PC <- MEM_OUT
+  INFO    machine:decode_and_execute Executed instruction `jmp 0`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #0
+  DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
+  DEBUG   machine:signal_read_memory Reading memory on AR #2046
+  INFO    machine:signal_read_memory Read: 'l' (108)
+  DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
+  DEBUG   machine:signal_latch_pc PC <- PC + 1
+  INFO    machine:decode_and_execute Executed instruction `ld 2046`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #1
+  DEBUG   machine:signal_latch_pc PC <- PC + 1
+  INFO    machine:decode_and_execute Executed instruction `cmp 0`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #2
+  DEBUG   machine:signal_latch_pc PC <- PC + 1
+  INFO    machine:decode_and_execute Executed instruction `jz 5`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #3
+  DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
+  DEBUG   machine:signal_write_memory Writing to memory on AR #2047
+  INFO    machine:signal_write_memory Output: 'l' (108)
+  DEBUG   machine:signal_latch_pc PC <- PC + 1
+  INFO    machine:decode_and_execute Executed instruction `st 2047`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #4
+  DEBUG   machine:signal_latch_pc PC <- MEM_OUT
+  INFO    machine:decode_and_execute Executed instruction `jmp 0`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #0
+  DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
+  DEBUG   machine:signal_read_memory Reading memory on AR #2046
+  INFO    machine:signal_read_memory Read: 'o' (111)
+  DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
+  DEBUG   machine:signal_latch_pc PC <- PC + 1
+  INFO    machine:decode_and_execute Executed instruction `ld 2046`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #1
+  DEBUG   machine:signal_latch_pc PC <- PC + 1
+  INFO    machine:decode_and_execute Executed instruction `cmp 0`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #2
+  DEBUG   machine:signal_latch_pc PC <- PC + 1
+  INFO    machine:decode_and_execute Executed instruction `jz 5`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #3
+  DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
+  DEBUG   machine:signal_write_memory Writing to memory on AR #2047
+  INFO    machine:signal_write_memory Output: 'o' (111)
+  DEBUG   machine:signal_latch_pc PC <- PC + 1
+  INFO    machine:decode_and_execute Executed instruction `st 2047`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #4
+  DEBUG   machine:signal_latch_pc PC <- MEM_OUT
+  INFO    machine:decode_and_execute Executed instruction `jmp 0`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #0
+  DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
+  DEBUG   machine:signal_read_memory Reading memory on AR #2046
+  INFO    machine:signal_read_memory Read: ' ' (32)
+  DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
+  DEBUG   machine:signal_latch_pc PC <- PC + 1
+  INFO    machine:decode_and_execute Executed instruction `ld 2046`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #1
+  DEBUG   machine:signal_latch_pc PC <- PC + 1
+  INFO    machine:decode_and_execute Executed instruction `cmp 0`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #2
+  DEBUG   machine:signal_latch_pc PC <- PC + 1
+  INFO    machine:decode_and_execute Executed instruction `jz 5`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #3
+  DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
+  DEBUG   machine:signal_write_memory Writing to memory on AR #2047
+  INFO    machine:signal_write_memory Output: ' ' (32)
+  DEBUG   machine:signal_latch_pc PC <- PC + 1
+  INFO    machine:decode_and_execute Executed instruction `st 2047`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #4
+  DEBUG   machine:signal_latch_pc PC <- MEM_OUT
+  INFO    machine:decode_and_execute Executed instruction `jmp 0`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #0
+  DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
+  DEBUG   machine:signal_read_memory Reading memory on AR #2046
+  INFO    machine:signal_read_memory Read: 'w' (119)
+  DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
+  DEBUG   machine:signal_latch_pc PC <- PC + 1
+  INFO    machine:decode_and_execute Executed instruction `ld 2046`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #1
+  DEBUG   machine:signal_latch_pc PC <- PC + 1
+  INFO    machine:decode_and_execute Executed instruction `cmp 0`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #2
+  DEBUG   machine:signal_latch_pc PC <- PC + 1
+  INFO    machine:decode_and_execute Executed instruction `jz 5`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #3
+  DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
+  DEBUG   machine:signal_write_memory Writing to memory on AR #2047
+  INFO    machine:signal_write_memory Output: 'w' (119)
+  DEBUG   machine:signal_latch_pc PC <- PC + 1
+  INFO    machine:decode_and_execute Executed instruction `st 2047`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #4
+  DEBUG   machine:signal_latch_pc PC <- MEM_OUT
+  INFO    machine:decode_and_execute Executed instruction `jmp 0`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #0
+  DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
+  DEBUG   machine:signal_read_memory Reading memory on AR #2046
+  INFO    machine:signal_read_memory Read: 'o' (111)
+  DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
+  DEBUG   machine:signal_latch_pc PC <- PC + 1
+  INFO    machine:decode_and_execute Executed instruction `ld 2046`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #1
+  DEBUG   machine:signal_latch_pc PC <- PC + 1
+  INFO    machine:decode_and_execute Executed instruction `cmp 0`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #2
+  DEBUG   machine:signal_latch_pc PC <- PC + 1
+  INFO    machine:decode_and_execute Executed instruction `jz 5`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #3
+  DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
+  DEBUG   machine:signal_write_memory Writing to memory on AR #2047
+  INFO    machine:signal_write_memory Output: 'o' (111)
+  DEBUG   machine:signal_latch_pc PC <- PC + 1
+  INFO    machine:decode_and_execute Executed instruction `st 2047`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #4
+  DEBUG   machine:signal_latch_pc PC <- MEM_OUT
+  INFO    machine:decode_and_execute Executed instruction `jmp 0`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #0
+  DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
+  DEBUG   machine:signal_read_memory Reading memory on AR #2046
+  INFO    machine:signal_read_memory Read: 'r' (114)
+  DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
+  DEBUG   machine:signal_latch_pc PC <- PC + 1
+  INFO    machine:decode_and_execute Executed instruction `ld 2046`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #1
+  DEBUG   machine:signal_latch_pc PC <- PC + 1
+  INFO    machine:decode_and_execute Executed instruction `cmp 0`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #2
+  DEBUG   machine:signal_latch_pc PC <- PC + 1
+  INFO    machine:decode_and_execute Executed instruction `jz 5`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #3
+  DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
+  DEBUG   machine:signal_write_memory Writing to memory on AR #2047
+  INFO    machine:signal_write_memory Output: 'r' (114)
+  DEBUG   machine:signal_latch_pc PC <- PC + 1
+  INFO    machine:decode_and_execute Executed instruction `st 2047`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #4
+  DEBUG   machine:signal_latch_pc PC <- MEM_OUT
+  INFO    machine:decode_and_execute Executed instruction `jmp 0`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #0
+  DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
+  DEBUG   machine:signal_read_memory Reading memory on AR #2046
+  INFO    machine:signal_read_memory Read: 'l' (108)
+  DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
+  DEBUG   machine:signal_latch_pc PC <- PC + 1
+  INFO    machine:decode_and_execute Executed instruction `ld 2046`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #1
+  DEBUG   machine:signal_latch_pc PC <- PC + 1
+  INFO    machine:decode_and_execute Executed instruction `cmp 0`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #2
+  DEBUG   machine:signal_latch_pc PC <- PC + 1
+  INFO    machine:decode_and_execute Executed instruction `jz 5`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #3
+  DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
+  DEBUG   machine:signal_write_memory Writing to memory on AR #2047
+  INFO    machine:signal_write_memory Output: 'l' (108)
+  DEBUG   machine:signal_latch_pc PC <- PC + 1
+  INFO    machine:decode_and_execute Executed instruction `st 2047`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #4
+  DEBUG   machine:signal_latch_pc PC <- MEM_OUT
+  INFO    machine:decode_and_execute Executed instruction `jmp 0`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #0
+  DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
+  DEBUG   machine:signal_read_memory Reading memory on AR #2046
+  INFO    machine:signal_read_memory Read: 'd' (100)
+  DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
+  DEBUG   machine:signal_latch_pc PC <- PC + 1
+  INFO    machine:decode_and_execute Executed instruction `ld 2046`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #1
+  DEBUG   machine:signal_latch_pc PC <- PC + 1
+  INFO    machine:decode_and_execute Executed instruction `cmp 0`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #2
+  DEBUG   machine:signal_latch_pc PC <- PC + 1
+  INFO    machine:decode_and_execute Executed instruction `jz 5`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #3
+  DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
+  DEBUG   machine:signal_write_memory Writing to memory on AR #2047
+  INFO    machine:signal_write_memory Output: 'd' (100)
+  DEBUG   machine:signal_latch_pc PC <- PC + 1
+  INFO    machine:decode_and_execute Executed instruction `st 2047`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #4
+  DEBUG   machine:signal_latch_pc PC <- MEM_OUT
+  INFO    machine:decode_and_execute Executed instruction `jmp 0`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #0
+  DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
+  DEBUG   machine:signal_read_memory Reading memory on AR #2046
+  INFO    machine:signal_read_memory Read: '!' (33)
+  DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
+  DEBUG   machine:signal_latch_pc PC <- PC + 1
+  INFO    machine:decode_and_execute Executed instruction `ld 2046`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #1
+  DEBUG   machine:signal_latch_pc PC <- PC + 1
+  INFO    machine:decode_and_execute Executed instruction `cmp 0`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #2
+  DEBUG   machine:signal_latch_pc PC <- PC + 1
+  INFO    machine:decode_and_execute Executed instruction `jz 5`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #3
+  DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
+  DEBUG   machine:signal_write_memory Writing to memory on AR #2047
+  INFO    machine:signal_write_memory Output: '!' (33)
+  DEBUG   machine:signal_latch_pc PC <- PC + 1
+  INFO    machine:decode_and_execute Executed instruction `st 2047`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #4
+  DEBUG   machine:signal_latch_pc PC <- MEM_OUT
+  INFO    machine:decode_and_execute Executed instruction `jmp 0`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #0
+  DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
+  DEBUG   machine:signal_read_memory Reading memory on AR #2046
+  INFO    machine:signal_read_memory Read: '!' (33)
+  DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
+  DEBUG   machine:signal_latch_pc PC <- PC + 1
+  INFO    machine:decode_and_execute Executed instruction `ld 2046`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #1
+  DEBUG   machine:signal_latch_pc PC <- PC + 1
+  INFO    machine:decode_and_execute Executed instruction `cmp 0`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #2
+  DEBUG   machine:signal_latch_pc PC <- PC + 1
+  INFO    machine:decode_and_execute Executed instruction `jz 5`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #3
+  DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
+  DEBUG   machine:signal_write_memory Writing to memory on AR #2047
+  INFO    machine:signal_write_memory Output: '!' (33)
+  DEBUG   machine:signal_latch_pc PC <- PC + 1
+  INFO    machine:decode_and_execute Executed instruction `st 2047`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #4
+  DEBUG   machine:signal_latch_pc PC <- MEM_OUT
+  INFO    machine:decode_and_execute Executed instruction `jmp 0`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #0
+  DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
+  DEBUG   machine:signal_read_memory Reading memory on AR #2046
+  INFO    machine:signal_read_memory Read: '!' (33)
+  DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
+  DEBUG   machine:signal_latch_pc PC <- PC + 1
+  INFO    machine:decode_and_execute Executed instruction `ld 2046`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #1
+  DEBUG   machine:signal_latch_pc PC <- PC + 1
+  INFO    machine:decode_and_execute Executed instruction `cmp 0`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #2
+  DEBUG   machine:signal_latch_pc PC <- PC + 1
+  INFO    machine:decode_and_execute Executed instruction `jz 5`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #3
+  DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
+  DEBUG   machine:signal_write_memory Writing to memory on AR #2047
+  INFO    machine:signal_write_memory Output: '!' (33)
+  DEBUG   machine:signal_latch_pc PC <- PC + 1
+  INFO    machine:decode_and_execute Executed instruction `st 2047`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #4
+  DEBUG   machine:signal_latch_pc PC <- MEM_OUT
+  INFO    machine:decode_and_execute Executed instruction `jmp 0`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #0
+  DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
+  DEBUG   machine:signal_read_memory Reading memory on AR #2046
+  INFO    machine:signal_read_memory Read: '\x00' (0)
+  DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
+  DEBUG   machine:signal_latch_pc PC <- PC + 1
+  INFO    machine:decode_and_execute Executed instruction `ld 2046`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #1
+  DEBUG   machine:signal_latch_pc PC <- PC + 1
+  INFO    machine:decode_and_execute Executed instruction `cmp 0`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #2
+  DEBUG   machine:signal_latch_pc PC <- MEM_OUT
+  INFO    machine:decode_and_execute Executed instruction `jz 5`
+  DEBUG   machine:signal_latch_address_register AR <- PC
+  DEBUG   machine:signal_read_memory Reading memory on AR #5
+out_stdout: |
+  ============================================================
+  Program halted successfully
+  hello world!!!
+  Total instructions 73
+  Total ticks 162
+out_code: '{"pc": 0, "instructions": [["ld", 2046, "direct"], ["cmp", 0, "immediate"],
+  ["jz", 5, "immediate"], ["st", 2047, "immediate"], ["jmp", 0, "immediate"], ["hlt",
+  null, null]]}'
