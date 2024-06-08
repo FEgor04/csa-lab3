@@ -67,8 +67,7 @@ class Instruction(NamedTuple):
             return f"{self.opcode} {self.arg}"
         if self.addressing is Addressing.DIRECT:
             return f"{self.opcode} ({self.arg})"
-        elif self.addressing is Addressing.INDIRECT:
-            return f"{self.opcode} [{self.arg}]"
+        return f"{self.opcode} [{self.arg}]"
 
 
 def read_json(code_json: str):

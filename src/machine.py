@@ -115,6 +115,7 @@ class ControlUnit:
 
     def tick(self):
         self._tick += 1
+        self.logger.debug("tick!", extra=self.get_extra())
 
     def get_current_tick(self) -> int:
         return self._tick
@@ -249,12 +250,16 @@ class ControlUnit:
             self.tick()
 
     def decode_and_execute(self):
+        ticks_before = self.get_current_tick()
         self.program_fetch()
         self.address_fetch()
         self.operand_fetch()
         self.execute()
         self._instruction_number += 1
-        self.logger.info(f"Executed instruction `{self.program}`", extra=self.get_extra())
+        ticks_after = self.get_current_tick()
+        self.logger.info(
+            f"Executed instruction `{self.program}` in {ticks_after - ticks_before} ticks", extra=self.get_extra()
+        )
 
 
 def simulate(
