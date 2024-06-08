@@ -62,6 +62,14 @@ class Instruction(NamedTuple):
     arg: int | None
     addressing: Addressing | None = Addressing.IMMEDIATE
 
+    def __repr__(self):
+        arg_str = str(self.arg)
+        if self.addressing is Addressing.DIRECT:
+            arg_str = "(" + arg_str + ")"
+        elif self.addressing is Addressing.INDIRECT:
+            arg_str = "[" + arg_str + "]"
+        return f"{self.opcode} {arg_str}"
+
 
 def read_json(code_json: str):
     code = json.loads(code_json)

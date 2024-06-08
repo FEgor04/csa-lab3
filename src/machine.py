@@ -38,7 +38,7 @@ class DataPath:
         sh = logging.StreamHandler(sys.stderr)
         sh.setFormatter(
             logging.Formatter(
-                "%(name)s\t%(levelname)s\tacc: %(acc)05d, ar: %(ar)04d, alu_out: " "%(alu_out)05d\t\t%(message)s"
+                "%(name)s\t%(levelname)s\tacc: %(acc)05d, ar: %(ar)04d, alu: " "%(alu_out)05d\t\t\t\t%(message)s"
             )
         )
         self.logger.addHandler(sh)
@@ -58,7 +58,7 @@ class DataPath:
             if len(self.input) == 0:
                 self.logger.warning("Input buffer is empty!")
                 raise EOFError()
-            self.logger.debug(f"Read symbol {self.input[0]} ({ord(self.input[0])})", extra=self._get_extra())
+            self.logger.info(f"Read: '{self.input[0]}' ({ord(self.input[0])})", extra=self._get_extra())
             symbol = ord(self.input[0])
             self.input = self.input[1:]
             self.mem_out = Instruction(Opcode.VAR, symbol, Addressing.IMMEDIATE)
@@ -71,7 +71,7 @@ class DataPath:
         self.logger.debug(f"Writing to memory on AR #{self.address_register}", extra=self._get_extra())
         if self.address_register == 2047:
             char = chr(self.alu.out)
-            self.logger.debug(f"Output: {chr(self.alu.out)} ({self.alu.out})", extra=self._get_extra())
+            self.logger.info(f"Output: '{chr(self.alu.out)}' ({self.alu.out})", extra=self._get_extra())
             self.output += [char]
             return
         assert 0 <= self.address_register < 2046
@@ -127,6 +127,8 @@ class ControlUnit:
             "instruction": self._instruction_number,
             "tick": self.get_current_tick(),
             "pc": self.program_counter,
+            "acc": self.data_path.accumulator,
+            "ar": self.data_path.address_register,
         }
 
     def __init__(self, pc: int, data_path: DataPath):
@@ -137,7 +139,8 @@ class ControlUnit:
         sh = logging.StreamHandler(sys.stderr)
         sh.setFormatter(
             logging.Formatter(
-                "%(name)s\t%(levelname)s\tPC: %(pc)04d, tick: %(tick)06d, instr: %(instruction)05d\t\t%(message)s"
+                "%(name)s\t%(levelname)s\tPC: %(pc)04d, tick: %(tick)06d, instr: %(instruction)05d, acc: %(acc)05d, "
+                "ar: %(ar)04d\t%(message)s"
             )
         )
         self.logger.addHandler(sh)
@@ -251,28 +254,36 @@ class ControlUnit:
         self.operand_fetch()
         self.execute()
         self._instruction_number += 1
+        self.logger.info(f"Executed instruction `{self.program.opcode} {self.program.arg}`", extra=self.get_extra())
 
 
-def simulate(instructions: list[Instruction], pc, input_text) -> tuple[str, DataPath, ControlUnit]:
+def simulate(
+    instructions: list[Instruction], pc: int, input_text: str, debug_mode: bool = False
+) -> tuple[str, DataPath, ControlUnit]:
     data_path = DataPath(input_text, instructions)
+    data_path.logger.setLevel(logging.DEBUG if debug_mode else logging.INFO)
     control_unit = ControlUnit(pc, data_path)
+    control_unit.logger.setLevel(logging.DEBUG if debug_mode else logging.INFO)
     try:
         for i in range(1000000):
             control_unit.decode_and_execute()
     except StopIteration:
-        print("Program haulted successfully")
+        print("Program halted successfully")
     except EOFError:
         print("Program tried to read empty input")
     return "".join(data_path.output), data_path, control_unit
 
 
 if __name__ == "__main__":
-    assert len(sys.argv) == 3, "Wrong arguments: machine.py <code_file> <input_file>"
-    _, code_file, input_file = sys.argv
+    assert len(sys.argv) in [3, 4], "Wrong arguments: machine.py <code_file> <input_file> <debug: true | false>"
+    _, code_file, input_file = sys.argv[:3]
     with open(input_file) as f:
         input_text = f.read()
         input_text += "\0"
     with open(code_file) as f:
         instructions, pc = read_json(f.read())
-    output, _datapath, _control_unit = simulate(instructions, pc, input_text)
+    debug = (sys.argv[3].lower() == "true") if len(sys.argv) == 4 else False
+    output, _datapath, _control_unit = simulate(instructions, pc, input_text, debug)
     print(output)
+    print("Total instructions", _control_unit.get_instruction_number())
+    print("Total ticks", _control_unit.get_current_tick())
