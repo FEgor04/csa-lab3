@@ -258,7 +258,7 @@ class ControlUnit:
 
 
 def simulate(
-    instructions: list[Instruction], pc: int, input_text: str, debug_mode: bool = False
+        instructions: list[Instruction], pc: int, input_text: str, debug_mode: bool = False
 ) -> tuple[str, DataPath, ControlUnit]:
     data_path = DataPath(input_text, instructions)
     data_path.logger.setLevel(logging.DEBUG if debug_mode else logging.INFO)
@@ -274,16 +274,20 @@ def simulate(
     return "".join(data_path.output), data_path, control_unit
 
 
-if __name__ == "__main__":
-    assert len(sys.argv) in [3, 4], "Wrong arguments: machine.py <code_file> <input_file> <debug: true | false>"
-    _, code_file, input_file = sys.argv[:3]
+def main(code_file: str, input_file: str, debug: bool):
     with open(input_file) as f:
         input_text = f.read()
         input_text += "\0"
     with open(code_file) as f:
         instructions, pc = read_json(f.read())
-    debug = (sys.argv[3].lower() == "true") if len(sys.argv) == 4 else False
     output, _datapath, _control_unit = simulate(instructions, pc, input_text, debug)
     print(output)
     print("Total instructions", _control_unit.get_instruction_number())
     print("Total ticks", _control_unit.get_current_tick())
+
+
+if __name__ == "__main__":
+    assert len(sys.argv) in [3, 4], "Wrong arguments: machine.py <code_file> <input_file> <debug: true | false>"
+    _, code_file, input_file = sys.argv[:3]
+    debug = (sys.argv[3].lower() == "true") if len(sys.argv) == 4 else False
+    main(code_file, input_file, debug)

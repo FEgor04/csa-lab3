@@ -1,9 +1,9 @@
 HELLO: VAR 'hello, world'
 I: VAR HELLO
 START: LD [I]
-ST 2047
 CMP 0
 JZ STOP
+ST 2047
 LD (I)
 ADD 1
 ST I
