@@ -12,9 +12,11 @@ class RegisterSelector(Enum):
     MEM = "mem"
     PC = "pc"
 
+
 class DataPath:
     accumulator: int
     address_register: int
+    mem_out: Instruction
 
     def __init__(self, input_str: str, _remove_later, initial_memory: list[Instruction] = []):
         """
@@ -29,11 +31,10 @@ class DataPath:
         self.address_register: int = 0
         self.accumulator: int = 0
         self.input = input_str
-        self.output = []
-        self.mem_out = 0
+        self.output: list[str] = []
         self.alu = ALU()
 
-    def signal_read_memory(self) -> Instruction:
+    def signal_read_memory(self):
         assert self.address_register != 2047, "program tried to read from output port"
         if self.address_register == 2046:  # Input
             if len(self.input) == 0:
@@ -60,6 +61,7 @@ class DataPath:
         elif sel is RegisterSelector.PC:
             self.address_register = pc
         elif sel is RegisterSelector.MEM:
+            assert self.mem_out.arg is not None, "mem_out should have an argument"
             self.address_register = self.mem_out.arg
 
     def signal_latch_accumulator(self, sel: RegisterSelector, pc: int):
@@ -68,8 +70,9 @@ class DataPath:
         elif sel is RegisterSelector.PC:
             self.accumulator = pc
         elif sel is RegisterSelector.MEM:
+            assert self.mem_out.arg is not None, "mem_out should have an argument"
             self.accumulator = self.mem_out.arg
-        
+
 
 class ControlUnit:
     program: Instruction
@@ -92,12 +95,15 @@ class ControlUnit:
         return self._instruction_number
 
     def __init__(self, pc: int, data_path: DataPath):
-        self.program = None
         self.program_counter = pc
         self.data_path = data_path
 
     def signal_latch_pc(self, sel: bool):
-        self.program_counter = self.data_path.mem_out.arg if sel else self.program_counter + 1
+        if sel:
+            assert self.data_path.mem_out.arg is not None, "instruction should have an argument"
+            self.program_counter = self.data_path.mem_out.arg
+        else:
+            self.program_counter = self.program_counter + 1
 
     def signal_latch_address_register(self, sel: RegisterSelector):
         self.data_path.signal_latch_address_register(sel, self.program_counter)
@@ -225,5 +231,5 @@ if __name__ == "__main__":
         input_text += "\0"
     with open(code_file) as f:
         instructions, pc = read_json(f.read())
-    output, _, _ = simulate(instructions, pc, input_text)
+    output, _datapath, _control_unit = simulate(instructions, pc, input_text)
     print(output)

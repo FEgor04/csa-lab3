@@ -18,13 +18,13 @@ def is_label(s: str) -> bool:
     return s != "" and parse_int_or_none(s) is None and s[0] != "'" and s[-1] != "'"
 
 
-def parse_lines(lines: list[str]) -> list[Instruction]:
+def parse_lines(lines: list[str]) -> tuple[list[Instruction], int]:
     lines = expand_lines(lines)
     instructions = []
     labels = parse_labels(lines)
     for i in range(len(lines)):
         line = lines[i]
-        if line == "":
+        if line.strip() == "":
             continue
         _, opcode, arg_raw = split_instruction(line)
         arg, addressing = parse_argument(arg_raw, labels)
@@ -43,7 +43,7 @@ def parse_labels(lines: list[str]) -> dict[str, int]:
     return labels
 
 
-def parse_argument(arg: str, labels: dict[str, int]) -> tuple[int, Addressing]:
+def parse_argument(arg: str, labels: dict[str, int]) -> tuple[int | None, Addressing | None]:
     if len(arg) == 0:
         return None, None
     addressing = parse_addressing(arg)
@@ -57,9 +57,8 @@ def parse_argument(arg: str, labels: dict[str, int]) -> tuple[int, Addressing]:
     return int(stripped) if stripped.isdecimal() else labels[stripped], addressing
 
 
-def parse_addressing(argument: str) -> Addressing | None:
-    if len(argument) == 0:
-        return None
+def parse_addressing(argument: str) -> Addressing:
+    assert len(argument) != 0, "argument shouldn't be empty"
     if argument[0] == "(" and argument[-1] == ")":
         return Addressing.DIRECT
     if argument[0] == "[" and argument[-1] == "]":
@@ -76,16 +75,14 @@ def split_instruction(line: str) -> tuple[str, str, str]:
     if match is None:
         return "", line, ""
     splitted = match.groups()
-    if len(splitted) >= 3:
-        label = splitted[0]
-        opcode = splitted[1]
-        arg = splitted[2]
-        return (
-            label.strip().split(":")[0] if label else "",
-            opcode.strip(),
-            arg.strip() if arg else "",
-        )
-    return None
+    label = splitted[0]
+    opcode = splitted[1]
+    arg = splitted[2]
+    return (
+        label.strip().split(":")[0] if label else "",
+        opcode.strip(),
+        arg.strip() if arg else "",
+    )
 
 
 def expand_lines(lines: list[str]) -> list[str]:
