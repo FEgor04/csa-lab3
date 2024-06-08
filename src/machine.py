@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import logging
 import sys
 from enum import Enum
 
@@ -33,12 +34,28 @@ class DataPath:
         self.input = input_str
         self.output: list[str] = []
         self.alu = ALU()
+        self.logger = logging.getLogger(self.__class__.__name__)
+        sh = logging.StreamHandler(sys.stderr)
+        sh.setFormatter(logging.Formatter("%(name)s\t%(levelname)s\tacc: %(acc)05d, ar: %(ar)04d, alu_out: "
+                                          "%(alu_out)05d\t\t%(message)s"))
+        self.logger.addHandler(sh)
+        self.logger.setLevel(logging.DEBUG)
+
+    def _get_extra(self):
+        return {
+            "acc": self.accumulator,
+            "ar": self.address_register,
+            "alu_out": self.alu.out,
+        }
 
     def signal_read_memory(self):
         assert self.address_register != 2047, "program tried to read from output port"
+        self.logger.debug(f"Reading memory on AR #{self.address_register}", extra=self._get_extra())
         if self.address_register == 2046:  # Input
             if len(self.input) == 0:
+                self.logger.warning(f"Input buffer is empty!")
                 raise EOFError()
+            self.logger.debug(f"Read symbol {self.input[0]} ({ord(self.input[0])})", extra=self._get_extra())
             symbol = ord(self.input[0])
             self.input = self.input[1:]
             self.mem_out = Instruction(Opcode.VAR, symbol, Addressing.IMMEDIATE)
@@ -48,8 +65,10 @@ class DataPath:
 
     def signal_write_memory(self):
         assert self.address_register != 2046, "program tried to write to input port"
+        self.logger.debug(f"Writing to memory on AR #{self.address_register}", extra=self._get_extra())
         if self.address_register == 2047:
             char = chr(self.alu.out)
+            self.logger.debug(f"Output: {chr(self.alu.out)} ({self.alu.out})", extra=self._get_extra())
             self.output += [char]
             return
         assert 0 <= self.address_register < 2046
@@ -57,20 +76,26 @@ class DataPath:
 
     def signal_latch_address_register(self, sel: RegisterSelector, pc: int):
         if sel is RegisterSelector.ALU:
+            self.logger.debug("AR <- ALU_OUT", extra=self._get_extra())
             self.address_register = self.alu.out
         elif sel is RegisterSelector.PC:
+            self.logger.debug("AR <- PC", extra=self._get_extra())
             self.address_register = pc
         elif sel is RegisterSelector.MEM:
             assert self.mem_out.arg is not None, "mem_out should have an argument"
+            self.logger.debug("AR <- MEM_OUT", extra=self._get_extra())
             self.address_register = self.mem_out.arg
 
     def signal_latch_accumulator(self, sel: RegisterSelector, pc: int):
         if sel is RegisterSelector.ALU:
+            self.logger.debug("ACC <- ALU_OUT", extra=self._get_extra())
             self.accumulator = self.alu.out
         elif sel is RegisterSelector.PC:
+            self.logger.debug("ACC <- PC", extra=self._get_extra())
             self.accumulator = pc
         elif sel is RegisterSelector.MEM:
             assert self.mem_out.arg is not None, "mem_out should have an argument"
+            self.logger.debug("ACC <- MEM_OUT", extra=self._get_extra())
             self.accumulator = self.mem_out.arg
 
 
@@ -94,16 +119,31 @@ class ControlUnit:
     def get_instruction_number(self) -> int:
         return self._instruction_number
 
+    def get_extra(self):
+        return {
+            "instruction": self._instruction_number,
+            "tick": self.get_current_tick(),
+            "pc": self.program_counter,
+        }
+
     def __init__(self, pc: int, data_path: DataPath):
         self.program_counter = pc
         self.data_path = data_path
+        self.logger = logging.getLogger(self.__class__.__name__)
+        self.logger.handlers.clear()
+        sh = logging.StreamHandler(sys.stderr)
+        sh.setFormatter(logging.Formatter("%(name)s\t%(levelname)s\tPC: %(pc)04d, tick: %(tick)06d, instr: %(instruction)05d\t\t%(message)s"))
+        self.logger.addHandler(sh)
+        self.logger.setLevel(logging.DEBUG)
 
     def signal_latch_pc(self, sel: bool):
         if sel:
             assert self.data_path.mem_out.arg is not None, "instruction should have an argument"
             self.program_counter = self.data_path.mem_out.arg
+            self.logger.debug("PC <- MEM_OUT", extra=self.get_extra())
         else:
             self.program_counter = self.program_counter + 1
+            self.logger.debug("PC <- PC + 1", extra=self.get_extra())
 
     def signal_latch_address_register(self, sel: RegisterSelector):
         self.data_path.signal_latch_address_register(sel, self.program_counter)
@@ -205,9 +245,6 @@ class ControlUnit:
         self.execute()
         self._instruction_number += 1
 
-    def __repr__(self):
-        return f"{self.program_counter:6d} | {self.data_path.accumulator:6d} | {self.data_path.address_register:6d} | {self.get_instruction_number():6d} | {self.get_current_tick():6d}"
-
 
 def simulate(instructions: list[Instruction], pc, input_text) -> tuple[str, DataPath, ControlUnit]:
     data_path = DataPath(input_text, 0, instructions)
@@ -215,7 +252,6 @@ def simulate(instructions: list[Instruction], pc, input_text) -> tuple[str, Data
     try:
         for i in range(1000000):
             control_unit.decode_and_execute()
-            print(control_unit.__repr__())
     except StopIteration:
         print("Program haulted successfully")
     except EOFError:
