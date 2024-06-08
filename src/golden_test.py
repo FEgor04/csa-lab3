@@ -16,6 +16,7 @@ def test_translator_and_machine(golden, caplog):
         source = os.path.join(tmpdirname, "source.asm")
         input_stream = os.path.join(tmpdirname, "input.txt")
         target = os.path.join(tmpdirname, "target.json")
+        debug_log = golden.get("debug_log", True)
 
         with open(source, "w", encoding="utf-8") as file:
             file.write(golden["in_source"])
@@ -25,7 +26,7 @@ def test_translator_and_machine(golden, caplog):
         with contextlib.redirect_stdout(io.StringIO()) as stdout:
             translator.main(source, target)
             print("============================================================")
-            machine.main(target, input_stream, True)
+            machine.main(target, input_stream, debug_log)
 
         with open(target, encoding="utf-8") as file:
             code = file.read()
