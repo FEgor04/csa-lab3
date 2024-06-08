@@ -14,7 +14,6 @@ class RegisterSelector(Enum):
 
 class DataPath:
     accumulator: int
-    buffer_register: int
     address_register: int
 
     def __init__(self, input_str: str, _remove_later, initial_memory: list[Instruction] = []):
@@ -29,7 +28,6 @@ class DataPath:
 
         self.address_register: int = 0
         self.accumulator: int = 0
-        self.buffer_register: int = 0
         self.input = input_str
         self.output = []
         self.mem_out = 0
@@ -63,14 +61,6 @@ class DataPath:
             self.address_register = pc
         elif sel is RegisterSelector.MEM:
             self.address_register = self.mem_out.arg
-
-    def signal_latch_buffer(self, sel: RegisterSelector, pc: int):
-        if sel is RegisterSelector.ALU:
-            self.buffer_register = self.alu.out
-        elif sel is RegisterSelector.PC:
-            self.buffer_register = pc
-        elif sel is RegisterSelector.MEM:
-            self.buffer_register = self.mem_out.arg
 
     def signal_latch_accumulator(self, sel: RegisterSelector, pc: int):
         if sel is RegisterSelector.ALU:
@@ -111,9 +101,6 @@ class ControlUnit:
 
     def signal_latch_address_register(self, sel: RegisterSelector):
         self.data_path.signal_latch_address_register(sel, self.program_counter)
-
-    def signal_latch_buffer(self, sel: RegisterSelector):
-        self.data_path.signal_latch_buffer(sel, self.program_counter)
 
     def signal_latch_accumulator(self, sel: RegisterSelector):
         self.data_path.signal_latch_accumulator(sel, self.program_counter)
@@ -166,10 +153,7 @@ class ControlUnit:
         self.tick()
 
     def _execute_arithmetic(self):
-        self.signal_latch_buffer(
-            RegisterSelector.MEM,
-        )
-        self.data_path.alu.signal_sel_left(self.data_path.buffer_register, True)
+        self.data_path.alu.signal_sel_left(self.data_path.mem_out.arg, True)
         self.data_path.alu.signal_sel_right(self.data_path.accumulator, True)
         self.data_path.alu.signal_alu_operation(self.program.opcode, {})
         if self.program.opcode is not Opcode.CMP:
@@ -184,7 +168,7 @@ class ControlUnit:
             RegisterSelector.MEM,
         )
         # Pass accumulator through the ALU
-        self.data_path.alu.signal_sel_left(self.data_path.buffer_register, False)
+        self.data_path.alu.signal_sel_left(self.data_path.mem_out.arg, False)
         self.data_path.alu.signal_sel_right(self.data_path.accumulator, True)
         self.data_path.alu.signal_alu_operation(Opcode.ADD, {})
         self.data_path.signal_write_memory()
@@ -216,7 +200,7 @@ class ControlUnit:
         self._instruction_number += 1
 
     def __repr__(self):
-        return f"{self.program_counter:6d} | {self.data_path.accumulator:6d} | {self.data_path.buffer_register:6d} | {self.data_path.address_register:6d} | {self.get_instruction_number():6d} | {self.get_current_tick():6d}"
+        return f"{self.program_counter:6d} | {self.data_path.accumulator:6d} | {self.data_path.address_register:6d} | {self.get_instruction_number():6d} | {self.get_current_tick():6d}"
 
 
 def simulate(instructions: list[Instruction], pc, input_text) -> tuple[str, DataPath, ControlUnit]:
