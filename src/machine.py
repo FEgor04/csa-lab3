@@ -58,7 +58,7 @@ class DataPath:
             if len(self.input) == 0:
                 self.logger.warning("Input buffer is empty!")
                 raise EOFError()
-            self.logger.info(f"Read: {repr(self.input[0])} ({ord(self.input[0])})", extra=self._get_extra())
+            self.logger.info(f"Read: {self.input[0]!r} ({ord(self.input[0])})", extra=self._get_extra())
             symbol = ord(self.input[0])
             self.input = self.input[1:]
             self.mem_out = Instruction(Opcode.VAR, symbol, Addressing.IMMEDIATE)
@@ -71,7 +71,7 @@ class DataPath:
         self.logger.debug(f"Writing to memory on AR #{self.address_register}", extra=self._get_extra())
         if self.address_register == 2047:
             char = chr(self.alu.out)
-            self.logger.info(f"Output: {repr(chr(self.alu.out))} ({self.alu.out})", extra=self._get_extra())
+            self.logger.info(f"Output: {chr(self.alu.out)!r} ({self.alu.out})", extra=self._get_extra())
             self.output += [char]
             return
         assert 0 <= self.address_register < 2046
@@ -258,7 +258,7 @@ class ControlUnit:
 
 
 def simulate(
-        instructions: list[Instruction], pc: int, input_text: str, debug_mode: bool = False
+    instructions: list[Instruction], pc: int, input_text: str, debug_mode: bool = False
 ) -> tuple[str, DataPath, ControlUnit]:
     data_path = DataPath(input_text, instructions)
     data_path.logger.setLevel(logging.DEBUG if debug_mode else logging.INFO)
