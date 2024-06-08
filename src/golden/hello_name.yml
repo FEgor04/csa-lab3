@@ -56,7 +56,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #11
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 11`
+  INFO    machine:decode_and_execute Executed instruction `ld (11)`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #14
   DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
@@ -70,7 +70,7 @@ out_log: |
   INFO    machine:signal_read_memory Read: 'E' (69)
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 2046`
+  INFO    machine:decode_and_execute Executed instruction `ld (2046)`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #16
   DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
@@ -78,7 +78,7 @@ out_log: |
   DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
   DEBUG   machine:signal_write_memory Writing to memory on AR #500
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `st 12`
+  INFO    machine:decode_and_execute Executed instruction `st (12)`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #17
   DEBUG   machine:signal_latch_pc PC <- PC + 1
@@ -93,7 +93,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #12
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld (12)`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #20
   DEBUG   machine:signal_latch_accumulator ACC <- ALU_OUT
@@ -116,7 +116,7 @@ out_log: |
   INFO    machine:signal_read_memory Read: 'g' (103)
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 2046`
+  INFO    machine:decode_and_execute Executed instruction `ld (2046)`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #16
   DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
@@ -124,7 +124,7 @@ out_log: |
   DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
   DEBUG   machine:signal_write_memory Writing to memory on AR #501
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `st 12`
+  INFO    machine:decode_and_execute Executed instruction `st (12)`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #17
   DEBUG   machine:signal_latch_pc PC <- PC + 1
@@ -139,7 +139,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #12
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld (12)`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #20
   DEBUG   machine:signal_latch_accumulator ACC <- ALU_OUT
@@ -162,7 +162,7 @@ out_log: |
   INFO    machine:signal_read_memory Read: 'o' (111)
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 2046`
+  INFO    machine:decode_and_execute Executed instruction `ld (2046)`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #16
   DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
@@ -170,7 +170,7 @@ out_log: |
   DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
   DEBUG   machine:signal_write_memory Writing to memory on AR #502
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `st 12`
+  INFO    machine:decode_and_execute Executed instruction `st (12)`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #17
   DEBUG   machine:signal_latch_pc PC <- PC + 1
@@ -185,7 +185,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #12
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld (12)`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #20
   DEBUG   machine:signal_latch_accumulator ACC <- ALU_OUT
@@ -208,7 +208,7 @@ out_log: |
   INFO    machine:signal_read_memory Read: 'r' (114)
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 2046`
+  INFO    machine:decode_and_execute Executed instruction `ld (2046)`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #16
   DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
@@ -216,7 +216,7 @@ out_log: |
   DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
   DEBUG   machine:signal_write_memory Writing to memory on AR #503
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `st 12`
+  INFO    machine:decode_and_execute Executed instruction `st (12)`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #17
   DEBUG   machine:signal_latch_pc PC <- PC + 1
@@ -231,7 +231,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #12
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld (12)`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #20
   DEBUG   machine:signal_latch_accumulator ACC <- ALU_OUT
@@ -254,7 +254,7 @@ out_log: |
   INFO    machine:signal_read_memory Read: ' ' (32)
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 2046`
+  INFO    machine:decode_and_execute Executed instruction `ld (2046)`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #16
   DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
@@ -262,7 +262,7 @@ out_log: |
   DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
   DEBUG   machine:signal_write_memory Writing to memory on AR #504
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `st 12`
+  INFO    machine:decode_and_execute Executed instruction `st (12)`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #17
   DEBUG   machine:signal_latch_pc PC <- PC + 1
@@ -277,7 +277,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #12
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld (12)`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #20
   DEBUG   machine:signal_latch_accumulator ACC <- ALU_OUT
@@ -300,7 +300,7 @@ out_log: |
   INFO    machine:signal_read_memory Read: 'F' (70)
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 2046`
+  INFO    machine:decode_and_execute Executed instruction `ld (2046)`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #16
   DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
@@ -308,7 +308,7 @@ out_log: |
   DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
   DEBUG   machine:signal_write_memory Writing to memory on AR #505
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `st 12`
+  INFO    machine:decode_and_execute Executed instruction `st (12)`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #17
   DEBUG   machine:signal_latch_pc PC <- PC + 1
@@ -323,7 +323,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #12
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld (12)`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #20
   DEBUG   machine:signal_latch_accumulator ACC <- ALU_OUT
@@ -346,7 +346,7 @@ out_log: |
   INFO    machine:signal_read_memory Read: 'e' (101)
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 2046`
+  INFO    machine:decode_and_execute Executed instruction `ld (2046)`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #16
   DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
@@ -354,7 +354,7 @@ out_log: |
   DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
   DEBUG   machine:signal_write_memory Writing to memory on AR #506
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `st 12`
+  INFO    machine:decode_and_execute Executed instruction `st (12)`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #17
   DEBUG   machine:signal_latch_pc PC <- PC + 1
@@ -369,7 +369,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #12
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld (12)`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #20
   DEBUG   machine:signal_latch_accumulator ACC <- ALU_OUT
@@ -392,7 +392,7 @@ out_log: |
   INFO    machine:signal_read_memory Read: 'd' (100)
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 2046`
+  INFO    machine:decode_and_execute Executed instruction `ld (2046)`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #16
   DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
@@ -400,7 +400,7 @@ out_log: |
   DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
   DEBUG   machine:signal_write_memory Writing to memory on AR #507
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `st 12`
+  INFO    machine:decode_and_execute Executed instruction `st (12)`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #17
   DEBUG   machine:signal_latch_pc PC <- PC + 1
@@ -415,7 +415,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #12
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld (12)`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #20
   DEBUG   machine:signal_latch_accumulator ACC <- ALU_OUT
@@ -438,7 +438,7 @@ out_log: |
   INFO    machine:signal_read_memory Read: 'o' (111)
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 2046`
+  INFO    machine:decode_and_execute Executed instruction `ld (2046)`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #16
   DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
@@ -446,7 +446,7 @@ out_log: |
   DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
   DEBUG   machine:signal_write_memory Writing to memory on AR #508
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `st 12`
+  INFO    machine:decode_and_execute Executed instruction `st (12)`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #17
   DEBUG   machine:signal_latch_pc PC <- PC + 1
@@ -461,7 +461,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #12
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld (12)`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #20
   DEBUG   machine:signal_latch_accumulator ACC <- ALU_OUT
@@ -484,7 +484,7 @@ out_log: |
   INFO    machine:signal_read_memory Read: 'r' (114)
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 2046`
+  INFO    machine:decode_and_execute Executed instruction `ld (2046)`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #16
   DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
@@ -492,7 +492,7 @@ out_log: |
   DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
   DEBUG   machine:signal_write_memory Writing to memory on AR #509
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `st 12`
+  INFO    machine:decode_and_execute Executed instruction `st (12)`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #17
   DEBUG   machine:signal_latch_pc PC <- PC + 1
@@ -507,7 +507,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #12
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld (12)`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #20
   DEBUG   machine:signal_latch_accumulator ACC <- ALU_OUT
@@ -530,7 +530,7 @@ out_log: |
   INFO    machine:signal_read_memory Read: 'o' (111)
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 2046`
+  INFO    machine:decode_and_execute Executed instruction `ld (2046)`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #16
   DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
@@ -538,7 +538,7 @@ out_log: |
   DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
   DEBUG   machine:signal_write_memory Writing to memory on AR #510
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `st 12`
+  INFO    machine:decode_and_execute Executed instruction `st (12)`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #17
   DEBUG   machine:signal_latch_pc PC <- PC + 1
@@ -553,7 +553,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #12
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld (12)`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #20
   DEBUG   machine:signal_latch_accumulator ACC <- ALU_OUT
@@ -576,7 +576,7 @@ out_log: |
   INFO    machine:signal_read_memory Read: 'v' (118)
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 2046`
+  INFO    machine:decode_and_execute Executed instruction `ld (2046)`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #16
   DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
@@ -584,7 +584,7 @@ out_log: |
   DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
   DEBUG   machine:signal_write_memory Writing to memory on AR #511
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `st 12`
+  INFO    machine:decode_and_execute Executed instruction `st (12)`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #17
   DEBUG   machine:signal_latch_pc PC <- PC + 1
@@ -599,7 +599,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #12
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld (12)`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #20
   DEBUG   machine:signal_latch_accumulator ACC <- ALU_OUT
@@ -622,7 +622,7 @@ out_log: |
   INFO    machine:signal_read_memory Read: '\x00' (0)
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 2046`
+  INFO    machine:decode_and_execute Executed instruction `ld (2046)`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #16
   DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
@@ -630,7 +630,7 @@ out_log: |
   DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
   DEBUG   machine:signal_write_memory Writing to memory on AR #512
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `st 12`
+  INFO    machine:decode_and_execute Executed instruction `st (12)`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #17
   DEBUG   machine:signal_latch_pc PC <- PC + 1
@@ -658,7 +658,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #0
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld [12]`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #26
   DEBUG   machine:signal_latch_pc PC <- PC + 1
@@ -680,7 +680,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #12
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld (12)`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #30
   DEBUG   machine:signal_latch_accumulator ACC <- ALU_OUT
@@ -704,7 +704,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #1
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld [12]`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #26
   DEBUG   machine:signal_latch_pc PC <- PC + 1
@@ -726,7 +726,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #12
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld (12)`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #30
   DEBUG   machine:signal_latch_accumulator ACC <- ALU_OUT
@@ -750,7 +750,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #2
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld [12]`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #26
   DEBUG   machine:signal_latch_pc PC <- PC + 1
@@ -772,7 +772,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #12
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld (12)`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #30
   DEBUG   machine:signal_latch_accumulator ACC <- ALU_OUT
@@ -796,7 +796,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #3
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld [12]`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #26
   DEBUG   machine:signal_latch_pc PC <- PC + 1
@@ -818,7 +818,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #12
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld (12)`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #30
   DEBUG   machine:signal_latch_accumulator ACC <- ALU_OUT
@@ -842,7 +842,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #4
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld [12]`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #26
   DEBUG   machine:signal_latch_pc PC <- PC + 1
@@ -864,7 +864,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #12
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld (12)`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #30
   DEBUG   machine:signal_latch_accumulator ACC <- ALU_OUT
@@ -888,7 +888,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #5
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld [12]`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #26
   DEBUG   machine:signal_latch_pc PC <- PC + 1
@@ -910,7 +910,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #12
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld (12)`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #30
   DEBUG   machine:signal_latch_accumulator ACC <- ALU_OUT
@@ -934,7 +934,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #6
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld [12]`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #26
   DEBUG   machine:signal_latch_pc PC <- PC + 1
@@ -956,7 +956,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #12
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld (12)`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #30
   DEBUG   machine:signal_latch_accumulator ACC <- ALU_OUT
@@ -980,7 +980,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #7
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld [12]`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #26
   DEBUG   machine:signal_latch_pc PC <- PC + 1
@@ -995,7 +995,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #11
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 11`
+  INFO    machine:decode_and_execute Executed instruction `ld (11)`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #34
   DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
@@ -1010,7 +1010,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #500
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld [12]`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #36
   DEBUG   machine:signal_latch_pc PC <- PC + 1
@@ -1027,7 +1027,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #500
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld [12]`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #39
   DEBUG   machine:signal_latch_pc PC <- PC + 1
@@ -1049,7 +1049,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #12
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld (12)`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #43
   DEBUG   machine:signal_latch_accumulator ACC <- ALU_OUT
@@ -1073,7 +1073,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #501
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld [12]`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #36
   DEBUG   machine:signal_latch_pc PC <- PC + 1
@@ -1090,7 +1090,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #501
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld [12]`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #39
   DEBUG   machine:signal_latch_pc PC <- PC + 1
@@ -1112,7 +1112,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #12
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld (12)`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #43
   DEBUG   machine:signal_latch_accumulator ACC <- ALU_OUT
@@ -1136,7 +1136,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #502
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld [12]`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #36
   DEBUG   machine:signal_latch_pc PC <- PC + 1
@@ -1153,7 +1153,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #502
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld [12]`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #39
   DEBUG   machine:signal_latch_pc PC <- PC + 1
@@ -1175,7 +1175,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #12
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld (12)`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #43
   DEBUG   machine:signal_latch_accumulator ACC <- ALU_OUT
@@ -1199,7 +1199,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #503
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld [12]`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #36
   DEBUG   machine:signal_latch_pc PC <- PC + 1
@@ -1216,7 +1216,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #503
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld [12]`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #39
   DEBUG   machine:signal_latch_pc PC <- PC + 1
@@ -1238,7 +1238,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #12
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld (12)`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #43
   DEBUG   machine:signal_latch_accumulator ACC <- ALU_OUT
@@ -1262,7 +1262,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #504
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld [12]`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #36
   DEBUG   machine:signal_latch_pc PC <- PC + 1
@@ -1279,7 +1279,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #504
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld [12]`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #39
   DEBUG   machine:signal_latch_pc PC <- PC + 1
@@ -1301,7 +1301,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #12
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld (12)`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #43
   DEBUG   machine:signal_latch_accumulator ACC <- ALU_OUT
@@ -1325,7 +1325,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #505
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld [12]`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #36
   DEBUG   machine:signal_latch_pc PC <- PC + 1
@@ -1342,7 +1342,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #505
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld [12]`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #39
   DEBUG   machine:signal_latch_pc PC <- PC + 1
@@ -1364,7 +1364,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #12
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld (12)`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #43
   DEBUG   machine:signal_latch_accumulator ACC <- ALU_OUT
@@ -1388,7 +1388,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #506
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld [12]`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #36
   DEBUG   machine:signal_latch_pc PC <- PC + 1
@@ -1405,7 +1405,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #506
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld [12]`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #39
   DEBUG   machine:signal_latch_pc PC <- PC + 1
@@ -1427,7 +1427,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #12
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld (12)`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #43
   DEBUG   machine:signal_latch_accumulator ACC <- ALU_OUT
@@ -1451,7 +1451,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #507
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld [12]`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #36
   DEBUG   machine:signal_latch_pc PC <- PC + 1
@@ -1468,7 +1468,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #507
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld [12]`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #39
   DEBUG   machine:signal_latch_pc PC <- PC + 1
@@ -1490,7 +1490,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #12
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld (12)`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #43
   DEBUG   machine:signal_latch_accumulator ACC <- ALU_OUT
@@ -1514,7 +1514,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #508
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld [12]`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #36
   DEBUG   machine:signal_latch_pc PC <- PC + 1
@@ -1531,7 +1531,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #508
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld [12]`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #39
   DEBUG   machine:signal_latch_pc PC <- PC + 1
@@ -1553,7 +1553,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #12
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld (12)`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #43
   DEBUG   machine:signal_latch_accumulator ACC <- ALU_OUT
@@ -1577,7 +1577,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #509
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld [12]`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #36
   DEBUG   machine:signal_latch_pc PC <- PC + 1
@@ -1594,7 +1594,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #509
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld [12]`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #39
   DEBUG   machine:signal_latch_pc PC <- PC + 1
@@ -1616,7 +1616,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #12
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld (12)`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #43
   DEBUG   machine:signal_latch_accumulator ACC <- ALU_OUT
@@ -1640,7 +1640,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #510
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld [12]`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #36
   DEBUG   machine:signal_latch_pc PC <- PC + 1
@@ -1657,7 +1657,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #510
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld [12]`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #39
   DEBUG   machine:signal_latch_pc PC <- PC + 1
@@ -1679,7 +1679,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #12
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld (12)`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #43
   DEBUG   machine:signal_latch_accumulator ACC <- ALU_OUT
@@ -1703,7 +1703,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #511
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld [12]`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #36
   DEBUG   machine:signal_latch_pc PC <- PC + 1
@@ -1720,7 +1720,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #511
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld [12]`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #39
   DEBUG   machine:signal_latch_pc PC <- PC + 1
@@ -1742,7 +1742,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #12
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld (12)`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #43
   DEBUG   machine:signal_latch_accumulator ACC <- ALU_OUT
@@ -1766,7 +1766,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #512
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld [12]`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #36
   DEBUG   machine:signal_latch_pc PC <- PC + 1
@@ -1783,7 +1783,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #512
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld [12]`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #39
   DEBUG   machine:signal_latch_pc PC <- PC + 1
@@ -1811,7 +1811,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #8
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld [12]`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #49
   DEBUG   machine:signal_latch_pc PC <- PC + 1
@@ -1833,7 +1833,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #12
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld (12)`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #53
   DEBUG   machine:signal_latch_accumulator ACC <- ALU_OUT
@@ -1857,7 +1857,7 @@ out_log: |
   DEBUG   machine:signal_read_memory Reading memory on AR #9
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
-  INFO    machine:decode_and_execute Executed instruction `ld 12`
+  INFO    machine:decode_and_execute Executed instruction `ld [12]`
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #49
   DEBUG   machine:signal_latch_pc PC <- PC + 1

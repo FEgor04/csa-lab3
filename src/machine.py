@@ -254,7 +254,7 @@ class ControlUnit:
         self.operand_fetch()
         self.execute()
         self._instruction_number += 1
-        self.logger.info(f"Executed instruction `{self.program.opcode} {self.program.arg}`", extra=self.get_extra())
+        self.logger.info(f"Executed instruction `{self.program}`", extra=self.get_extra())
 
 
 def simulate(
