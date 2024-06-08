@@ -90,9 +90,16 @@ class ControlUnit:
     operand: int
 
     _tick: int = 0
+    _instruction_number: int = 0
 
     def tick(self):
         self._tick += 1
+
+    def get_current_tick(self) -> int:
+        return self._tick
+
+    def get_instruction_number(self) -> int:
+        return self._instruction_number
 
     def __init__(self, pc: int, data_path: DataPath):
         self.program = None
@@ -111,17 +118,21 @@ class ControlUnit:
     def signal_latch_accumulator(self, sel: RegisterSelector):
         self.data_path.signal_latch_accumulator(sel, self.program_counter)
 
+    def signal_latch_program(self):
+        self.program = self.data_path.mem_out
+
     def program_fetch(self):
         self.signal_latch_address_register(
             RegisterSelector.PC,
         )
         self.data_path.signal_read_memory()
-        self.program = self.data_path.mem_out
+        self.signal_latch_program()
         self.tick()
 
     def address_fetch(self):
         """
         Цикл получения адреса операнда.
+        До него в program лежит текущая программа
         После него AR содержит адрес операнда текущей инструкции.
         """
         assert self.program is not None
@@ -137,19 +148,22 @@ class ControlUnit:
 
     def operand_fetch(self):
         """
-        Цикл получения операнда
+        Цикл получения операнда.
+        До него адрес операнда лежит в AR.
         После него MEM_OUT содержит операнд текущей инструкции.
         """
         assert self.program is not None
         if self.program.addressing is Addressing.IMMEDIATE or self.program.addressing is None:
             return
         self.data_path.signal_read_memory()
+        self.tick()
 
     def _execute_ld(self):
         self.signal_latch_accumulator(
             RegisterSelector.MEM,
         )
         self.signal_latch_pc(False)
+        self.tick()
 
     def _execute_arithmetic(self):
         self.signal_latch_buffer(
@@ -163,6 +177,7 @@ class ControlUnit:
                 RegisterSelector.ALU,
             )
         self.signal_latch_pc(False)
+        self.tick()
 
     def _execute_st(self):
         self.signal_latch_address_register(
@@ -172,10 +187,9 @@ class ControlUnit:
         self.data_path.alu.signal_sel_left(self.data_path.buffer_register, False)
         self.data_path.alu.signal_sel_right(self.data_path.accumulator, True)
         self.data_path.alu.signal_alu_operation(Opcode.ADD, {})
-        assert self.data_path.alu.out == self.data_path.accumulator, "ALU out should become equal to accumulator"
-
         self.data_path.signal_write_memory()
         self.signal_latch_pc(False)
+        self.tick()
 
     def execute(self):
         assert self.program.opcode is not Opcode.VAR, "program tried to execute VAR instruction"
@@ -189,17 +203,20 @@ class ControlUnit:
             self._execute_arithmetic()
         elif self.program.opcode is Opcode.JMP:
             self.signal_latch_pc(True)
+            self.tick()
         elif self.program.opcode is Opcode.JZ:
             self.signal_latch_pc(self.data_path.alu.zero)
+            self.tick()
 
     def decode_and_execute(self):
         self.program_fetch()
         self.address_fetch()
         self.operand_fetch()
         self.execute()
+        self._instruction_number += 1
 
     def __repr__(self):
-        return f"{self.program_counter:6d} | {self.data_path.accumulator:6d} | {self.data_path.buffer_register:6d} | {self.data_path.address_register:6d}"
+        return f"{self.program_counter:6d} | {self.data_path.accumulator:6d} | {self.data_path.buffer_register:6d} | {self.data_path.address_register:6d} | {self.get_instruction_number():6d} | {self.get_current_tick():6d}"
 
 
 def simulate(instructions: list[Instruction], pc, input_text) -> tuple[str, DataPath, ControlUnit]:
