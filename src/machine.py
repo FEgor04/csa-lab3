@@ -19,7 +19,7 @@ class DataPath:
     address_register: int
     mem_out: Instruction
 
-    def __init__(self, input_str: str, _remove_later, initial_memory: list[Instruction] = []):
+    def __init__(self, input_str: str, initial_memory: list[Instruction] = []):
         """
         Для простоты реализации в памяти хранятся инструкции.
         чтобы сохранить число необходимо указать `Opcode.VAR` и `Addressing.Immediate`
@@ -36,8 +36,11 @@ class DataPath:
         self.alu = ALU()
         self.logger = logging.getLogger(self.__class__.__name__)
         sh = logging.StreamHandler(sys.stderr)
-        sh.setFormatter(logging.Formatter("%(name)s\t%(levelname)s\tacc: %(acc)05d, ar: %(ar)04d, alu_out: "
-                                          "%(alu_out)05d\t\t%(message)s"))
+        sh.setFormatter(
+            logging.Formatter(
+                "%(name)s\t%(levelname)s\tacc: %(acc)05d, ar: %(ar)04d, alu_out: " "%(alu_out)05d\t\t%(message)s"
+            )
+        )
         self.logger.addHandler(sh)
         self.logger.setLevel(logging.DEBUG)
 
@@ -53,7 +56,7 @@ class DataPath:
         self.logger.debug(f"Reading memory on AR #{self.address_register}", extra=self._get_extra())
         if self.address_register == 2046:  # Input
             if len(self.input) == 0:
-                self.logger.warning(f"Input buffer is empty!")
+                self.logger.warning("Input buffer is empty!")
                 raise EOFError()
             self.logger.debug(f"Read symbol {self.input[0]} ({ord(self.input[0])})", extra=self._get_extra())
             symbol = ord(self.input[0])
@@ -132,7 +135,11 @@ class ControlUnit:
         self.logger = logging.getLogger(self.__class__.__name__)
         self.logger.handlers.clear()
         sh = logging.StreamHandler(sys.stderr)
-        sh.setFormatter(logging.Formatter("%(name)s\t%(levelname)s\tPC: %(pc)04d, tick: %(tick)06d, instr: %(instruction)05d\t\t%(message)s"))
+        sh.setFormatter(
+            logging.Formatter(
+                "%(name)s\t%(levelname)s\tPC: %(pc)04d, tick: %(tick)06d, instr: %(instruction)05d\t\t%(message)s"
+            )
+        )
         self.logger.addHandler(sh)
         self.logger.setLevel(logging.DEBUG)
 
@@ -247,7 +254,7 @@ class ControlUnit:
 
 
 def simulate(instructions: list[Instruction], pc, input_text) -> tuple[str, DataPath, ControlUnit]:
-    data_path = DataPath(input_text, 0, instructions)
+    data_path = DataPath(input_text, instructions)
     control_unit = ControlUnit(pc, data_path)
     try:
         for i in range(1000000):

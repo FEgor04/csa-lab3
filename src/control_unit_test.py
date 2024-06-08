@@ -7,14 +7,14 @@ from machine import ControlUnit, DataPath
 class ControlUnitTest(unittest.TestCase):
     def test_program_fetch(self):
         program = [Instruction(Opcode.LD, 50, Addressing.IMMEDIATE)]
-        data_path = DataPath("", print, program)
+        data_path = DataPath("", program)
         control_unit = ControlUnit(0, data_path)
         control_unit.program_fetch()
         assert program[0] == control_unit.program
 
     def test_address_fetch_direct(self):
         program = [Instruction(Opcode.LD, 50, Addressing.DIRECT)]
-        data_path = DataPath("", print, program)
+        data_path = DataPath("", program)
         control_unit = ControlUnit(0, data_path)
         control_unit.program_fetch()
         control_unit.address_fetch()
@@ -25,7 +25,7 @@ class ControlUnitTest(unittest.TestCase):
             Instruction(Opcode.LD, 1, Addressing.INDIRECT),
             Instruction(Opcode.VAR, 512, Addressing.IMMEDIATE),
         ]
-        data_path = DataPath("", print, program)
+        data_path = DataPath("", program)
         control_unit = ControlUnit(0, data_path)
         control_unit.program_fetch()
         control_unit.address_fetch()
@@ -35,7 +35,7 @@ class ControlUnitTest(unittest.TestCase):
         program = [
             Instruction(Opcode.LD, 50, Addressing.IMMEDIATE),
         ]
-        data_path = DataPath("", print, program)
+        data_path = DataPath("", program)
         control_unit = ControlUnit(0, data_path)
         control_unit.program_fetch()
         control_unit.address_fetch()
@@ -47,7 +47,7 @@ class ControlUnitTest(unittest.TestCase):
             Instruction(Opcode.LD, 1, Addressing.DIRECT),
             Instruction(Opcode.VAR, 512, Addressing.IMMEDIATE),
         ]
-        data_path = DataPath("", print, program)
+        data_path = DataPath("", program)
         control_unit = ControlUnit(0, data_path)
         control_unit.program_fetch()
         control_unit.address_fetch()
@@ -60,7 +60,7 @@ class ControlUnitTest(unittest.TestCase):
             Instruction(Opcode.VAR, 2, Addressing.IMMEDIATE),
             Instruction(Opcode.VAR, 512, Addressing.IMMEDIATE),
         ]
-        data_path = DataPath("", print, program)
+        data_path = DataPath("", program)
         control_unit = ControlUnit(0, data_path)
         control_unit.program_fetch()
         control_unit.address_fetch()
@@ -72,7 +72,7 @@ class ControlUnitTest(unittest.TestCase):
             Instruction(Opcode.LD, 42, Addressing.IMMEDIATE),
             Instruction(Opcode.ST, 2, Addressing.IMMEDIATE),
         ]
-        data_path = DataPath("", print, program)
+        data_path = DataPath("", program)
         control_unit = ControlUnit(0, data_path)
         control_unit.decode_and_execute()
         assert 42 == data_path.accumulator
@@ -84,7 +84,7 @@ class ControlUnitTest(unittest.TestCase):
             Instruction(Opcode.LD, 42, Addressing.IMMEDIATE),
             Instruction(Opcode.ADD, 42, Addressing.IMMEDIATE),
         ]
-        data_path = DataPath("", print, program)
+        data_path = DataPath("", program)
         control_unit = ControlUnit(0, data_path)
         control_unit.decode_and_execute()
         assert 1 == control_unit.program_counter
@@ -97,7 +97,7 @@ class ControlUnitTest(unittest.TestCase):
             Instruction(Opcode.LD, 42, Addressing.IMMEDIATE),
             Instruction(Opcode.MOD, 2, Addressing.IMMEDIATE),
         ]
-        data_path = DataPath("", print, program)
+        data_path = DataPath("", program)
         control_unit = ControlUnit(0, data_path)
         control_unit.decode_and_execute()
         assert 1 == control_unit.program_counter
@@ -109,7 +109,7 @@ class ControlUnitTest(unittest.TestCase):
         program = [
             Instruction(Opcode.JMP, 200, Addressing.IMMEDIATE),
         ]
-        data_path = DataPath("", print, program)
+        data_path = DataPath("", program)
         control_unit = ControlUnit(0, data_path)
         control_unit.decode_and_execute()
         assert 200 == control_unit.program_counter
@@ -122,7 +122,7 @@ class ControlUnitTest(unittest.TestCase):
             Instruction(Opcode.ADD, 420, Addressing.IMMEDIATE),  # 2, sets NZ to 00
             Instruction(Opcode.JZ, 0, Addressing.IMMEDIATE),  # 3
         ]
-        data_path = DataPath("", print, program)
+        data_path = DataPath("", program)
         control_unit = ControlUnit(0, data_path)
         control_unit.decode_and_execute()
         assert 2 == control_unit.program_counter
@@ -140,7 +140,7 @@ class ControlUnitTest(unittest.TestCase):
             Instruction(Opcode.LD, -420, Addressing.IMMEDIATE),
             Instruction(Opcode.CMP, 0, Addressing.IMMEDIATE),
         ]
-        data_path = DataPath("", print, program)
+        data_path = DataPath("", program)
         control_unit = ControlUnit(0, data_path)
         control_unit.decode_and_execute()
         control_unit.decode_and_execute()

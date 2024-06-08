@@ -6,7 +6,7 @@ from machine import DataPath
 
 class DataPathTest(unittest.TestCase):
     def test_read_input(self):
-        datapath = DataPath("kek", print)
+        datapath = DataPath("kek")
         datapath.address_register = 2046
         datapath.signal_read_memory()
         assert ord("k") == datapath.mem_out.arg
@@ -17,7 +17,7 @@ class DataPathTest(unittest.TestCase):
         pytest.raises(EOFError, datapath.signal_read_memory)
 
     def test_write_memory(self):
-        datapath = DataPath("", print)
+        datapath = DataPath("")
         datapath.alu.out = 1024
         datapath.address_register = 521
         datapath.signal_write_memory()

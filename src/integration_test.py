@@ -8,7 +8,7 @@ class IntegrationTest(unittest.TestCase):
     def test_sum(self):
         lines = ["RESULT: VAR 0", "START: LD 5", "ADD 10", "ST RESULT", "HLT"]
         instructions, pc = parse_lines(lines)
-        data_path = DataPath("", print, instructions)
+        data_path = DataPath("", instructions)
         control_unit = ControlUnit(pc, data_path)
         try:
             for i in range(10):
@@ -27,7 +27,7 @@ class IntegrationTest(unittest.TestCase):
             "HLT",
         ]
         instructions, pc = parse_lines(lines)
-        data_path = DataPath("5", print, instructions)
+        data_path = DataPath("5", instructions)
         control_unit = ControlUnit(pc, data_path)
         try:
             for i in range(100):
@@ -39,7 +39,7 @@ class IntegrationTest(unittest.TestCase):
     def test_output(self):
         lines = ["START: LD 'h'", "ST 2047", "HLT"]
         instructions, pc = parse_lines(lines)
-        data_path = DataPath("", print, instructions)
+        data_path = DataPath("", instructions)
         control_unit = ControlUnit(pc, data_path)
         try:
             for i in range(100):
