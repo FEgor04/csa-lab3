@@ -139,7 +139,7 @@ python3 machine.py <code_file> <input_file> <debug: true | false>
 
 Реализован в классе `DataPath`. АЛУ отдельно вынесен в класс `ALU` в модуле [alu](./src/alu.py).
 
-#### Сигналы
+#### Сигналы DataPath
 
 - `latch_acc` - защелкивает в аккумуляторе выбранное значение
 - `latch_ar` - защелкивает в adress register выбранное значение
@@ -150,14 +150,12 @@ python3 machine.py <code_file> <input_file> <debug: true | false>
 - `alu_modifier` - выбор модификатора ALU, возможные опции:
 +1, -1, инверсия левого/правого входа
 
-#### Флаги
+#### Флаги DataPath
 
 - `Z` - наличие нуля на выходе ALU
 - `N` - выход ALU < 0
 
-- TODO
-
-#### Тестирование
+#### Тестирование DataPath
 
 Для DataPath также реализованы unit-тесты в файле [datapath_test](./src/datapath_test.py).
 На данный момент в нем тестируются только операции чтения / записи в память.
@@ -171,6 +169,7 @@ python3 machine.py <code_file> <input_file> <debug: true | false>
 Реализован в классе `ControlUnit`.
 Метод `decode_and_execute` реализует цикл исполнения инструкции.
 На нем:
+
 - инструкция загружается в регистр `program` за 1 такт (метод `program_fetch`)
 - адрес операнда загружается в `AR` за 0 или 1 такт (метод `address_fetch`)
 - операнд загружается в регистр `MEM_OUT` за 0 или 1 такт
@@ -179,12 +178,12 @@ python3 machine.py <code_file> <input_file> <debug: true | false>
 Для разных типов инструкций (память, арифметика, контроль потока выполнения)
 реализованы разные методы
 
-#### Сигналы
+#### Сигналы CU
 
 - `latch_pc` - защелкивает значение `pc`
 - `latch_program` - защелкивает текущую инструкцию
 
-#### Тестирование
+#### Тестирование CU
 
 Control unit тестируется как golden тестами, так и дополнительно интеграционными
 тестами в файле [integration_test](./src/integration_test.py) и unit-тестами в
