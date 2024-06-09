@@ -10,7 +10,8 @@ program ::= line , [ "\n" , program ]
 
 line ::= line_instruction | line_variable
 
-line_variable ::= "VAR" , spacing , (LABEL | number | ("'", word_of_letters_and_digits, "'"))
+line_variable ::= "VAR" , spacing , var_argument
+var_argument ::= LABEL | number | ("'", word_of_letters_and_digits, "'")
 
 line_instruction ::= [ label , ":" , spacing ] , instruction
 
@@ -56,6 +57,7 @@ digit ::= "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
 ```
 
 ## Семантика языка
+
 Стратегия вычислений - последовательная. Метки имеют глобальную область видимости.
 Переопределение меток недопустимо. (*TODO: добавить тест на это*)
 Поддерживается исключительно целочисленный тип.
@@ -67,4 +69,4 @@ digit ::= "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
 (`VAR 'hello' -> VAR 'h', VAR 'e', ..., VAR 'o', VAR 0`)
 
 Выполнение инструкций начинается с инструкции, имеющей метку `START` или
-с самой первой ячейки памяти, если метка `START` отсутствует. 
+с самой первой ячейки памяти, если метка `START` отсутствует.
