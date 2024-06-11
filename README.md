@@ -703,9 +703,9 @@ Total ticks 87
 ```
 
 ```
-| ФИО                       | <алг>        | <LoC> | <code байт> | <code инстр.> | <инстр.> | <такт.> | <вариант> |
-| Федоров Егор Владимирович | hello        | 11    | -           | 23            | 99       | 237     | asm | acc | neum | hw | instr | struct | stream | mem | cstr | prob1 |
-| Федоров Егор Владимирович | cat          | 6     | -           | 6             | 29       | 65      | asm | acc | neum | hw | instr | struct | stream | mem | cstr | prob1 |
-| Федоров Егор Владимирович | hello_name   | 49    | -           | 57            | 179      | 433     | asm | acc | neum | hw | instr | struct | stream | mem | cstr | prob1 |
-| Федоров Егор Владимирович | prob1        | 42    | -           | 42            | 13063    | 30772   | asm | acc | neum | hw | instr | struct | stream | mem | cstr | prob1 |
+| ФИО                       | алг        | LoC | code байт | code инстр. | инстр. | такт. | вариант                                                              |
+| Федоров Егор Владимирович | hello      | 11  | -         | 23          | 99     | 237   | asm | acc | neum | hw | instr | struct | stream | mem | cstr | prob1 |
+| Федоров Егор Владимирович | cat        | 6   | -         | 6           | 29     | 65    | asm | acc | neum | hw | instr | struct | stream | mem | cstr | prob1 |
+| Федоров Егор Владимирович | hello_name | 49  | -         | 57          | 179    | 433   | asm | acc | neum | hw | instr | struct | stream | mem | cstr | prob1 |
+| Федоров Егор Владимирович | prob1      | 42  | -         | 42          | 13063  | 30772 | asm | acc | neum | hw | instr | struct | stream | mem | cstr | prob1 |
 ```
