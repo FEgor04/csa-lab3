@@ -39,6 +39,7 @@ def parse_labels(lines: list[str]) -> dict[str, int]:
         line = lines[i]
         label, _, _ = split_instruction(line)
         if is_label(label):
+            assert label not in labels, f"Labels must not have duplicates. See label {label}"
             labels[label] = i
     return labels
 

@@ -1,5 +1,6 @@
 import unittest
 
+import pytest
 from isa import Addressing, Instruction, Opcode
 from translator import expand_lines, parse_labels, parse_lines, split_instruction
 
@@ -113,3 +114,7 @@ class TestTranslator(unittest.TestCase):
             "VAR 0",
         ]
         assert expand_lines(lines) == expected
+
+    def test_label_duplicate(self):
+        lines = ["LABEL: HLT", "LABEL: HLT"]
+        pytest.raises(AssertionError, lambda: parse_lines(lines))
