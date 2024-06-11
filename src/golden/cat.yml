@@ -571,6 +571,39 @@ out_stdout: |
   hello world!!!
   Total instructions 73
   Total ticks 162
-out_code: '{"pc": 0, "instructions": [["ld", 2046, "direct"], ["cmp", 0, "immediate"],
-  ["jz", 5, "immediate"], ["st", 2047, "immediate"], ["jmp", 0, "immediate"], ["hlt",
-  null, null]]}'
+out_code: |-
+  {
+    "pc": 0,
+    "instructions": [
+      [
+        "ld",
+        2046,
+        "direct"
+      ],
+      [
+        "cmp",
+        0,
+        "immediate"
+      ],
+      [
+        "jz",
+        5,
+        "immediate"
+      ],
+      [
+        "st",
+        2047,
+        "immediate"
+      ],
+      [
+        "jmp",
+        0,
+        "immediate"
+      ],
+      [
+        "hlt",
+        null,
+        null
+      ]
+    ]
+  }

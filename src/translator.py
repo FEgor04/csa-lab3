@@ -128,7 +128,7 @@ def convert_to_json(instructions: list[Instruction], pc: int) -> str:
         "pc": pc,
         "instructions": instructions,
     }
-    return json.dumps(code)
+    return json.dumps(code, indent=2)
 
 
 def main(input_file, output_file):

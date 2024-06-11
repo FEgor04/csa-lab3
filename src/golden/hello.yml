@@ -826,11 +826,124 @@ out_stdout: |
   hello, world
   Total instructions 99
   Total ticks 237
-out_code: '{"pc": 14, "instructions": [["var", 104, "immediate"], ["var", 101, "immediate"],
-  ["var", 108, "immediate"], ["var", 108, "immediate"], ["var", 111, "immediate"],
-  ["var", 44, "immediate"], ["var", 32, "immediate"], ["var", 119, "immediate"], ["var",
-  111, "immediate"], ["var", 114, "immediate"], ["var", 108, "immediate"], ["var",
-  100, "immediate"], ["var", 0, "immediate"], ["var", 0, "immediate"], ["ld", 13,
-  "indirect"], ["cmp", 0, "immediate"], ["jz", 22, "immediate"], ["st", 2047, "immediate"],
-  ["ld", 13, "direct"], ["add", 1, "immediate"], ["st", 13, "immediate"], ["jmp",
-  14, "immediate"], ["hlt", null, null]]}'
+out_code: |-
+  {
+    "pc": 14,
+    "instructions": [
+      [
+        "var",
+        104,
+        "immediate"
+      ],
+      [
+        "var",
+        101,
+        "immediate"
+      ],
+      [
+        "var",
+        108,
+        "immediate"
+      ],
+      [
+        "var",
+        108,
+        "immediate"
+      ],
+      [
+        "var",
+        111,
+        "immediate"
+      ],
+      [
+        "var",
+        44,
+        "immediate"
+      ],
+      [
+        "var",
+        32,
+        "immediate"
+      ],
+      [
+        "var",
+        119,
+        "immediate"
+      ],
+      [
+        "var",
+        111,
+        "immediate"
+      ],
+      [
+        "var",
+        114,
+        "immediate"
+      ],
+      [
+        "var",
+        108,
+        "immediate"
+      ],
+      [
+        "var",
+        100,
+        "immediate"
+      ],
+      [
+        "var",
+        0,
+        "immediate"
+      ],
+      [
+        "var",
+        0,
+        "immediate"
+      ],
+      [
+        "ld",
+        13,
+        "indirect"
+      ],
+      [
+        "cmp",
+        0,
+        "immediate"
+      ],
+      [
+        "jz",
+        22,
+        "immediate"
+      ],
+      [
+        "st",
+        2047,
+        "immediate"
+      ],
+      [
+        "ld",
+        13,
+        "direct"
+      ],
+      [
+        "add",
+        1,
+        "immediate"
+      ],
+      [
+        "st",
+        13,
+        "immediate"
+      ],
+      [
+        "jmp",
+        14,
+        "immediate"
+      ],
+      [
+        "hlt",
+        null,
+        null
+      ]
+    ]
+  }
