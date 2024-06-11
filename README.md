@@ -246,8 +246,6 @@ python3 machine.py <code_file> <input_file> <debug: true | false>
 значение с выхода ALU
 - `alu_operation` - выбор операции ALU.
 Возможные опции: ADD, SUB, MUL, DIV, MOD, CMP
-- `alu_modifier` - выбор модификатора ALU, возможные опции:
-+1, -1, инверсия левого/правого входа
 
 #### Флаги DataPath
 
