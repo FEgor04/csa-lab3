@@ -1,6 +1,6 @@
-<mxfile host="Electron" modified="2024-06-09T10:17:45.651Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.4.8 Chrome/124.0.6367.233 Electron/30.0.9 Safari/537.36" etag="TRGVuoTWk6LuiEzE4xno" version="24.4.8" type="device">
+<mxfile host="Electron" modified="2024-06-11T18:52:58.365Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.4.8 Chrome/124.0.6367.233 Electron/30.0.9 Safari/537.36" etag="-zTfHpDlbo9TcTqBkEuk" version="24.4.8" type="device">
   <diagram id="v-JDOOZyUSPcI_IkAvMy" name="Страница — 1">
-    <mxGraphModel dx="1302" dy="756" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1077" dy="626" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -88,7 +88,7 @@
         </mxCell>
         <mxCell id="d9vYGI-vkbRghDKvO_qK-5" value="latch_program" style="endArrow=classic;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" target="d9vYGI-vkbRghDKvO_qK-1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="730" y="590" as="sourcePoint" />
+            <mxPoint x="770" y="585" as="sourcePoint" />
             <mxPoint x="730" y="440" as="targetPoint" />
           </mxGeometry>
         </mxCell>
