@@ -212,7 +212,7 @@ class ControlUnit:
     def _execute_arithmetic(self):
         self.data_path.alu.signal_sel_left(self.data_path.mem_out.arg, True)
         self.data_path.alu.signal_sel_right(self.data_path.accumulator, True)
-        self.data_path.alu.signal_alu_operation(self.program.opcode, {})
+        self.data_path.alu.signal_alu_operation(self.program.opcode)
         if self.program.opcode is not Opcode.CMP:
             self.signal_latch_accumulator(
                 RegisterSelector.ALU,
@@ -227,7 +227,7 @@ class ControlUnit:
         # Pass accumulator through the ALU
         self.data_path.alu.signal_sel_left(self.data_path.mem_out.arg, False)
         self.data_path.alu.signal_sel_right(self.data_path.accumulator, True)
-        self.data_path.alu.signal_alu_operation(Opcode.ADD, {})
+        self.data_path.alu.signal_alu_operation(Opcode.ADD)
         self.data_path.signal_write_memory()
         self.signal_latch_pc(False)
         self.tick()
