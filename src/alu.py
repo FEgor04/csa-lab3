@@ -1,8 +1,18 @@
 from __future__ import annotations
 
 from enum import Enum
+from typing import Callable
 
 from isa import Opcode
+
+operations: dict[Opcode, Callable[[int, int], int]] = {
+    Opcode.ADD: lambda x, y: x + y,
+    Opcode.SUB: lambda x, y: x - y,
+    Opcode.MUL: lambda x, y: x * y,
+    Opcode.DIV: lambda x, y: x // y,
+    Opcode.MOD: lambda x, y: x % y,
+    Opcode.CMP: lambda x, y: x - y,
+}
 
 
 class ALUModifier(int, Enum):
@@ -50,16 +60,7 @@ class ALU:
 
     def signal_alu_operation(self, operation: Opcode, modifiers: set[ALUModifier]):
         left, right = self.process_modifiers(modifiers)
-        if operation is Opcode.ADD:
-            out = left + right
-        if operation in {Opcode.SUB, Opcode.CMP}:
-            out = right - left  # accumulator - buffer
-        if operation is Opcode.DIV:
-            out = right // left
-        if operation is Opcode.MUL:
-            out = right * left
-        if operation is Opcode.MOD:
-            out = right % left
+        out = operations[operation](right, left)
         if operation is not Opcode.CMP:
             self.out = out
         self.negative = out < 0
