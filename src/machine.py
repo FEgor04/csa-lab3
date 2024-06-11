@@ -78,7 +78,7 @@ class DataPath:
             return
         assert 0 <= self.address_register < 2046
         self.memory[self.address_register] = Instruction(Opcode.VAR, self.alu.out)
-        self.logger.debug(f"MEM[{self.address_register}] <- {self.alu.out}")
+        self.logger.debug(f"MEM[{self.address_register}] <- {self.alu.out}", extra=self._get_extra())
 
     def signal_latch_address_register(self, sel: RegisterSelector, pc: int):
         if sel is RegisterSelector.ALU:
