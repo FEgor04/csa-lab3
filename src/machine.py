@@ -58,13 +58,15 @@ class DataPath:
             if len(self.input) == 0:
                 self.logger.warning("Input buffer is empty!")
                 raise EOFError()
-            self.logger.info(f"Read: {self.input[0]!r} ({ord(self.input[0])})", extra=self._get_extra())
             symbol = ord(self.input[0])
+            self.logger.info(f"Input: {self.input[0]!r} ({symbol})", extra=self._get_extra())
             self.input = self.input[1:]
             self.mem_out = Instruction(Opcode.VAR, symbol, Addressing.IMMEDIATE)
+            self.logger.debug(f"MEM_OUT <- {chr(symbol)!r} ({symbol})", extra=self._get_extra())
             return
         assert 0 <= self.address_register < 2046
         self.mem_out = self.memory[self.address_register]
+        self.logger.debug(f"MEM_OUT <- MEM[{self.address_register}]", extra=self._get_extra())
 
     def signal_write_memory(self):
         assert self.address_register != 2046, "program tried to write to input port"
@@ -76,30 +78,31 @@ class DataPath:
             return
         assert 0 <= self.address_register < 2046
         self.memory[self.address_register] = Instruction(Opcode.VAR, self.alu.out)
+        self.logger.debug(f"MEM[{self.address_register}] <- {self.alu.out}")
 
     def signal_latch_address_register(self, sel: RegisterSelector, pc: int):
         if sel is RegisterSelector.ALU:
-            self.logger.debug("AR <- ALU_OUT", extra=self._get_extra())
             self.address_register = self.alu.out
+            self.logger.debug("AR <- ALU_OUT", extra=self._get_extra())
         elif sel is RegisterSelector.PC:
-            self.logger.debug("AR <- PC", extra=self._get_extra())
             self.address_register = pc
+            self.logger.debug("AR <- PC", extra=self._get_extra())
         elif sel is RegisterSelector.MEM:
             assert self.mem_out.arg is not None, "mem_out should have an argument"
-            self.logger.debug("AR <- MEM_OUT", extra=self._get_extra())
             self.address_register = self.mem_out.arg
+            self.logger.debug("AR <- MEM_OUT", extra=self._get_extra())
 
     def signal_latch_accumulator(self, sel: RegisterSelector, pc: int):
         if sel is RegisterSelector.ALU:
-            self.logger.debug("ACC <- ALU_OUT", extra=self._get_extra())
             self.accumulator = self.alu.out
+            self.logger.debug("ACC <- ALU_OUT", extra=self._get_extra())
         elif sel is RegisterSelector.PC:
-            self.logger.debug("ACC <- PC", extra=self._get_extra())
             self.accumulator = pc
+            self.logger.debug("ACC <- PC", extra=self._get_extra())
         elif sel is RegisterSelector.MEM:
             assert self.mem_out.arg is not None, "mem_out should have an argument"
-            self.logger.debug("ACC <- MEM_OUT", extra=self._get_extra())
             self.accumulator = self.mem_out.arg
+            self.logger.debug("ACC <- MEM_OUT", extra=self._get_extra())
 
 
 class ControlUnit:

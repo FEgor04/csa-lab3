@@ -9,10 +9,12 @@ in_stdin: hello world!!!
 out_log: |
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #0
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[0]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
   DEBUG   machine:signal_read_memory Reading memory on AR #2046
-  INFO    machine:signal_read_memory Read: 'h' (104)
+  INFO    machine:signal_read_memory Input: 'h' (104)
+  DEBUG   machine:signal_read_memory MEM_OUT <- 'h' (104)
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
@@ -20,18 +22,21 @@ out_log: |
   INFO    machine:decode_and_execute Executed instruction `ld (2046)` in 3 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #1
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[1]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_pc PC <- PC + 1
   DEBUG   machine:tick          tick!
   INFO    machine:decode_and_execute Executed instruction `cmp 0` in 2 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #2
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[2]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_pc PC <- PC + 1
   DEBUG   machine:tick          tick!
   INFO    machine:decode_and_execute Executed instruction `jz 5` in 2 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #3
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[3]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
   DEBUG   machine:signal_write_memory Writing to memory on AR #2047
@@ -41,16 +46,19 @@ out_log: |
   INFO    machine:decode_and_execute Executed instruction `st 2047` in 2 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #4
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[4]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_pc PC <- MEM_OUT
   DEBUG   machine:tick          tick!
   INFO    machine:decode_and_execute Executed instruction `jmp 0` in 2 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #0
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[0]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
   DEBUG   machine:signal_read_memory Reading memory on AR #2046
-  INFO    machine:signal_read_memory Read: 'e' (101)
+  INFO    machine:signal_read_memory Input: 'e' (101)
+  DEBUG   machine:signal_read_memory MEM_OUT <- 'e' (101)
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
@@ -58,18 +66,21 @@ out_log: |
   INFO    machine:decode_and_execute Executed instruction `ld (2046)` in 3 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #1
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[1]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_pc PC <- PC + 1
   DEBUG   machine:tick          tick!
   INFO    machine:decode_and_execute Executed instruction `cmp 0` in 2 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #2
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[2]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_pc PC <- PC + 1
   DEBUG   machine:tick          tick!
   INFO    machine:decode_and_execute Executed instruction `jz 5` in 2 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #3
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[3]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
   DEBUG   machine:signal_write_memory Writing to memory on AR #2047
@@ -79,16 +90,19 @@ out_log: |
   INFO    machine:decode_and_execute Executed instruction `st 2047` in 2 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #4
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[4]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_pc PC <- MEM_OUT
   DEBUG   machine:tick          tick!
   INFO    machine:decode_and_execute Executed instruction `jmp 0` in 2 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #0
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[0]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
   DEBUG   machine:signal_read_memory Reading memory on AR #2046
-  INFO    machine:signal_read_memory Read: 'l' (108)
+  INFO    machine:signal_read_memory Input: 'l' (108)
+  DEBUG   machine:signal_read_memory MEM_OUT <- 'l' (108)
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
@@ -96,18 +110,21 @@ out_log: |
   INFO    machine:decode_and_execute Executed instruction `ld (2046)` in 3 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #1
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[1]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_pc PC <- PC + 1
   DEBUG   machine:tick          tick!
   INFO    machine:decode_and_execute Executed instruction `cmp 0` in 2 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #2
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[2]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_pc PC <- PC + 1
   DEBUG   machine:tick          tick!
   INFO    machine:decode_and_execute Executed instruction `jz 5` in 2 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #3
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[3]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
   DEBUG   machine:signal_write_memory Writing to memory on AR #2047
@@ -117,16 +134,19 @@ out_log: |
   INFO    machine:decode_and_execute Executed instruction `st 2047` in 2 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #4
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[4]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_pc PC <- MEM_OUT
   DEBUG   machine:tick          tick!
   INFO    machine:decode_and_execute Executed instruction `jmp 0` in 2 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #0
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[0]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
   DEBUG   machine:signal_read_memory Reading memory on AR #2046
-  INFO    machine:signal_read_memory Read: 'l' (108)
+  INFO    machine:signal_read_memory Input: 'l' (108)
+  DEBUG   machine:signal_read_memory MEM_OUT <- 'l' (108)
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
@@ -134,18 +154,21 @@ out_log: |
   INFO    machine:decode_and_execute Executed instruction `ld (2046)` in 3 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #1
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[1]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_pc PC <- PC + 1
   DEBUG   machine:tick          tick!
   INFO    machine:decode_and_execute Executed instruction `cmp 0` in 2 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #2
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[2]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_pc PC <- PC + 1
   DEBUG   machine:tick          tick!
   INFO    machine:decode_and_execute Executed instruction `jz 5` in 2 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #3
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[3]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
   DEBUG   machine:signal_write_memory Writing to memory on AR #2047
@@ -155,16 +178,19 @@ out_log: |
   INFO    machine:decode_and_execute Executed instruction `st 2047` in 2 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #4
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[4]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_pc PC <- MEM_OUT
   DEBUG   machine:tick          tick!
   INFO    machine:decode_and_execute Executed instruction `jmp 0` in 2 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #0
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[0]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
   DEBUG   machine:signal_read_memory Reading memory on AR #2046
-  INFO    machine:signal_read_memory Read: 'o' (111)
+  INFO    machine:signal_read_memory Input: 'o' (111)
+  DEBUG   machine:signal_read_memory MEM_OUT <- 'o' (111)
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
@@ -172,18 +198,21 @@ out_log: |
   INFO    machine:decode_and_execute Executed instruction `ld (2046)` in 3 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #1
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[1]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_pc PC <- PC + 1
   DEBUG   machine:tick          tick!
   INFO    machine:decode_and_execute Executed instruction `cmp 0` in 2 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #2
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[2]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_pc PC <- PC + 1
   DEBUG   machine:tick          tick!
   INFO    machine:decode_and_execute Executed instruction `jz 5` in 2 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #3
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[3]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
   DEBUG   machine:signal_write_memory Writing to memory on AR #2047
@@ -193,16 +222,19 @@ out_log: |
   INFO    machine:decode_and_execute Executed instruction `st 2047` in 2 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #4
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[4]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_pc PC <- MEM_OUT
   DEBUG   machine:tick          tick!
   INFO    machine:decode_and_execute Executed instruction `jmp 0` in 2 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #0
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[0]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
   DEBUG   machine:signal_read_memory Reading memory on AR #2046
-  INFO    machine:signal_read_memory Read: ' ' (32)
+  INFO    machine:signal_read_memory Input: ' ' (32)
+  DEBUG   machine:signal_read_memory MEM_OUT <- ' ' (32)
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
@@ -210,18 +242,21 @@ out_log: |
   INFO    machine:decode_and_execute Executed instruction `ld (2046)` in 3 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #1
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[1]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_pc PC <- PC + 1
   DEBUG   machine:tick          tick!
   INFO    machine:decode_and_execute Executed instruction `cmp 0` in 2 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #2
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[2]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_pc PC <- PC + 1
   DEBUG   machine:tick          tick!
   INFO    machine:decode_and_execute Executed instruction `jz 5` in 2 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #3
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[3]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
   DEBUG   machine:signal_write_memory Writing to memory on AR #2047
@@ -231,16 +266,19 @@ out_log: |
   INFO    machine:decode_and_execute Executed instruction `st 2047` in 2 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #4
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[4]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_pc PC <- MEM_OUT
   DEBUG   machine:tick          tick!
   INFO    machine:decode_and_execute Executed instruction `jmp 0` in 2 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #0
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[0]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
   DEBUG   machine:signal_read_memory Reading memory on AR #2046
-  INFO    machine:signal_read_memory Read: 'w' (119)
+  INFO    machine:signal_read_memory Input: 'w' (119)
+  DEBUG   machine:signal_read_memory MEM_OUT <- 'w' (119)
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
@@ -248,18 +286,21 @@ out_log: |
   INFO    machine:decode_and_execute Executed instruction `ld (2046)` in 3 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #1
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[1]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_pc PC <- PC + 1
   DEBUG   machine:tick          tick!
   INFO    machine:decode_and_execute Executed instruction `cmp 0` in 2 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #2
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[2]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_pc PC <- PC + 1
   DEBUG   machine:tick          tick!
   INFO    machine:decode_and_execute Executed instruction `jz 5` in 2 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #3
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[3]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
   DEBUG   machine:signal_write_memory Writing to memory on AR #2047
@@ -269,16 +310,19 @@ out_log: |
   INFO    machine:decode_and_execute Executed instruction `st 2047` in 2 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #4
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[4]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_pc PC <- MEM_OUT
   DEBUG   machine:tick          tick!
   INFO    machine:decode_and_execute Executed instruction `jmp 0` in 2 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #0
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[0]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
   DEBUG   machine:signal_read_memory Reading memory on AR #2046
-  INFO    machine:signal_read_memory Read: 'o' (111)
+  INFO    machine:signal_read_memory Input: 'o' (111)
+  DEBUG   machine:signal_read_memory MEM_OUT <- 'o' (111)
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
@@ -286,18 +330,21 @@ out_log: |
   INFO    machine:decode_and_execute Executed instruction `ld (2046)` in 3 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #1
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[1]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_pc PC <- PC + 1
   DEBUG   machine:tick          tick!
   INFO    machine:decode_and_execute Executed instruction `cmp 0` in 2 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #2
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[2]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_pc PC <- PC + 1
   DEBUG   machine:tick          tick!
   INFO    machine:decode_and_execute Executed instruction `jz 5` in 2 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #3
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[3]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
   DEBUG   machine:signal_write_memory Writing to memory on AR #2047
@@ -307,16 +354,19 @@ out_log: |
   INFO    machine:decode_and_execute Executed instruction `st 2047` in 2 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #4
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[4]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_pc PC <- MEM_OUT
   DEBUG   machine:tick          tick!
   INFO    machine:decode_and_execute Executed instruction `jmp 0` in 2 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #0
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[0]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
   DEBUG   machine:signal_read_memory Reading memory on AR #2046
-  INFO    machine:signal_read_memory Read: 'r' (114)
+  INFO    machine:signal_read_memory Input: 'r' (114)
+  DEBUG   machine:signal_read_memory MEM_OUT <- 'r' (114)
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
@@ -324,18 +374,21 @@ out_log: |
   INFO    machine:decode_and_execute Executed instruction `ld (2046)` in 3 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #1
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[1]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_pc PC <- PC + 1
   DEBUG   machine:tick          tick!
   INFO    machine:decode_and_execute Executed instruction `cmp 0` in 2 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #2
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[2]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_pc PC <- PC + 1
   DEBUG   machine:tick          tick!
   INFO    machine:decode_and_execute Executed instruction `jz 5` in 2 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #3
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[3]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
   DEBUG   machine:signal_write_memory Writing to memory on AR #2047
@@ -345,16 +398,19 @@ out_log: |
   INFO    machine:decode_and_execute Executed instruction `st 2047` in 2 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #4
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[4]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_pc PC <- MEM_OUT
   DEBUG   machine:tick          tick!
   INFO    machine:decode_and_execute Executed instruction `jmp 0` in 2 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #0
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[0]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
   DEBUG   machine:signal_read_memory Reading memory on AR #2046
-  INFO    machine:signal_read_memory Read: 'l' (108)
+  INFO    machine:signal_read_memory Input: 'l' (108)
+  DEBUG   machine:signal_read_memory MEM_OUT <- 'l' (108)
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
@@ -362,18 +418,21 @@ out_log: |
   INFO    machine:decode_and_execute Executed instruction `ld (2046)` in 3 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #1
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[1]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_pc PC <- PC + 1
   DEBUG   machine:tick          tick!
   INFO    machine:decode_and_execute Executed instruction `cmp 0` in 2 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #2
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[2]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_pc PC <- PC + 1
   DEBUG   machine:tick          tick!
   INFO    machine:decode_and_execute Executed instruction `jz 5` in 2 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #3
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[3]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
   DEBUG   machine:signal_write_memory Writing to memory on AR #2047
@@ -383,16 +442,19 @@ out_log: |
   INFO    machine:decode_and_execute Executed instruction `st 2047` in 2 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #4
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[4]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_pc PC <- MEM_OUT
   DEBUG   machine:tick          tick!
   INFO    machine:decode_and_execute Executed instruction `jmp 0` in 2 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #0
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[0]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
   DEBUG   machine:signal_read_memory Reading memory on AR #2046
-  INFO    machine:signal_read_memory Read: 'd' (100)
+  INFO    machine:signal_read_memory Input: 'd' (100)
+  DEBUG   machine:signal_read_memory MEM_OUT <- 'd' (100)
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
@@ -400,18 +462,21 @@ out_log: |
   INFO    machine:decode_and_execute Executed instruction `ld (2046)` in 3 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #1
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[1]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_pc PC <- PC + 1
   DEBUG   machine:tick          tick!
   INFO    machine:decode_and_execute Executed instruction `cmp 0` in 2 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #2
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[2]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_pc PC <- PC + 1
   DEBUG   machine:tick          tick!
   INFO    machine:decode_and_execute Executed instruction `jz 5` in 2 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #3
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[3]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
   DEBUG   machine:signal_write_memory Writing to memory on AR #2047
@@ -421,16 +486,19 @@ out_log: |
   INFO    machine:decode_and_execute Executed instruction `st 2047` in 2 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #4
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[4]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_pc PC <- MEM_OUT
   DEBUG   machine:tick          tick!
   INFO    machine:decode_and_execute Executed instruction `jmp 0` in 2 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #0
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[0]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
   DEBUG   machine:signal_read_memory Reading memory on AR #2046
-  INFO    machine:signal_read_memory Read: '!' (33)
+  INFO    machine:signal_read_memory Input: '!' (33)
+  DEBUG   machine:signal_read_memory MEM_OUT <- '!' (33)
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
@@ -438,18 +506,21 @@ out_log: |
   INFO    machine:decode_and_execute Executed instruction `ld (2046)` in 3 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #1
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[1]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_pc PC <- PC + 1
   DEBUG   machine:tick          tick!
   INFO    machine:decode_and_execute Executed instruction `cmp 0` in 2 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #2
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[2]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_pc PC <- PC + 1
   DEBUG   machine:tick          tick!
   INFO    machine:decode_and_execute Executed instruction `jz 5` in 2 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #3
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[3]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
   DEBUG   machine:signal_write_memory Writing to memory on AR #2047
@@ -459,16 +530,19 @@ out_log: |
   INFO    machine:decode_and_execute Executed instruction `st 2047` in 2 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #4
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[4]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_pc PC <- MEM_OUT
   DEBUG   machine:tick          tick!
   INFO    machine:decode_and_execute Executed instruction `jmp 0` in 2 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #0
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[0]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
   DEBUG   machine:signal_read_memory Reading memory on AR #2046
-  INFO    machine:signal_read_memory Read: '!' (33)
+  INFO    machine:signal_read_memory Input: '!' (33)
+  DEBUG   machine:signal_read_memory MEM_OUT <- '!' (33)
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
@@ -476,18 +550,21 @@ out_log: |
   INFO    machine:decode_and_execute Executed instruction `ld (2046)` in 3 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #1
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[1]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_pc PC <- PC + 1
   DEBUG   machine:tick          tick!
   INFO    machine:decode_and_execute Executed instruction `cmp 0` in 2 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #2
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[2]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_pc PC <- PC + 1
   DEBUG   machine:tick          tick!
   INFO    machine:decode_and_execute Executed instruction `jz 5` in 2 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #3
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[3]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
   DEBUG   machine:signal_write_memory Writing to memory on AR #2047
@@ -497,16 +574,19 @@ out_log: |
   INFO    machine:decode_and_execute Executed instruction `st 2047` in 2 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #4
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[4]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_pc PC <- MEM_OUT
   DEBUG   machine:tick          tick!
   INFO    machine:decode_and_execute Executed instruction `jmp 0` in 2 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #0
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[0]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
   DEBUG   machine:signal_read_memory Reading memory on AR #2046
-  INFO    machine:signal_read_memory Read: '!' (33)
+  INFO    machine:signal_read_memory Input: '!' (33)
+  DEBUG   machine:signal_read_memory MEM_OUT <- '!' (33)
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
@@ -514,18 +594,21 @@ out_log: |
   INFO    machine:decode_and_execute Executed instruction `ld (2046)` in 3 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #1
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[1]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_pc PC <- PC + 1
   DEBUG   machine:tick          tick!
   INFO    machine:decode_and_execute Executed instruction `cmp 0` in 2 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #2
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[2]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_pc PC <- PC + 1
   DEBUG   machine:tick          tick!
   INFO    machine:decode_and_execute Executed instruction `jz 5` in 2 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #3
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[3]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
   DEBUG   machine:signal_write_memory Writing to memory on AR #2047
@@ -535,16 +618,19 @@ out_log: |
   INFO    machine:decode_and_execute Executed instruction `st 2047` in 2 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #4
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[4]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_pc PC <- MEM_OUT
   DEBUG   machine:tick          tick!
   INFO    machine:decode_and_execute Executed instruction `jmp 0` in 2 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #0
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[0]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_address_register AR <- MEM_OUT
   DEBUG   machine:signal_read_memory Reading memory on AR #2046
-  INFO    machine:signal_read_memory Read: '\x00' (0)
+  INFO    machine:signal_read_memory Input: '\x00' (0)
+  DEBUG   machine:signal_read_memory MEM_OUT <- '\x00' (0)
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_accumulator ACC <- MEM_OUT
   DEBUG   machine:signal_latch_pc PC <- PC + 1
@@ -552,18 +638,21 @@ out_log: |
   INFO    machine:decode_and_execute Executed instruction `ld (2046)` in 3 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #1
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[1]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_pc PC <- PC + 1
   DEBUG   machine:tick          tick!
   INFO    machine:decode_and_execute Executed instruction `cmp 0` in 2 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #2
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[2]
   DEBUG   machine:tick          tick!
   DEBUG   machine:signal_latch_pc PC <- MEM_OUT
   DEBUG   machine:tick          tick!
   INFO    machine:decode_and_execute Executed instruction `jz 5` in 2 ticks
   DEBUG   machine:signal_latch_address_register AR <- PC
   DEBUG   machine:signal_read_memory Reading memory on AR #5
+  DEBUG   machine:signal_read_memory MEM_OUT <- MEM[5]
   DEBUG   machine:tick          tick!
 out_stdout: |
   ============================================================
