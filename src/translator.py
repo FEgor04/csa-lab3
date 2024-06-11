@@ -139,6 +139,8 @@ def main(input_file, output_file):
     json = convert_to_json(instructions, pc)
     with open(output_file, "w", encoding="utf-8") as f:
         f.write(json)
+    print(f"Input file LoC: {len(lines)}")
+    print(f"Code instr: {len(instructions)}")
 
 
 if __name__ == "__main__":
