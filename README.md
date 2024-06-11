@@ -326,9 +326,11 @@ golden тест: [hello_username](./src/golden/hello_name.yml)
 golden тест: [prob1.yml](./examples/prob1.asm)
 
 ### Пример работы
+
 Рассмотрим работу транслятора и процессора на примере алгоритма `cat`.
 
 #### Трансляция
+
 ```bash
 $ python3 src/translator.py examples/cat.asm compiled.json
 
@@ -337,6 +339,7 @@ Code instr: 6
 ```
 
 #### Запуск
+
 ```bash
 $ cat input.txt
 Hello!
@@ -345,7 +348,8 @@ $ python3 src/machine.py compiled.json input.txt true
 ```
 
 #### Журнал
-```
+
+```text
 DataPath        DEBUG   acc: 00000, ar: 0000, alu: 00000                                AR <- PC
 DataPath        DEBUG   acc: 00000, ar: 0000, alu: 00000                                Reading memory on AR #0
 DataPath        DEBUG   acc: 00000, ar: 0000, alu: 00000                                MEM_OUT <- MEM[0]
@@ -702,7 +706,7 @@ Total instructions 39
 Total ticks 87
 ```
 
-```
+```text
 | ФИО                       | алг        | LoC | code байт | code инстр. | инстр. | такт. | вариант                                                              |
 | Федоров Егор Владимирович | hello      | 11  | -         | 23          | 99     | 237   | asm | acc | neum | hw | instr | struct | stream | mem | cstr | prob1 |
 | Федоров Егор Владимирович | cat        | 6   | -         | 6           | 29     | 65    | asm | acc | neum | hw | instr | struct | stream | mem | cstr | prob1 |
