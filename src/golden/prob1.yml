@@ -13114,6 +13114,8 @@ out_log: |
   INFO    machine:decode_and_execute Executed instruction `cmp 500` in 2 ticks
   INFO    machine:decode_and_execute Executed instruction `jz 41` in 2 ticks
 out_stdout: |
+  Input file LoC: 43
+  Code instr: 43
   ============================================================
   Program halted successfully
   233168

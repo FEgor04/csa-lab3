@@ -3132,6 +3132,8 @@ out_log: |
   DEBUG   machine:signal_read_memory MEM_OUT <- MEM[56]
   DEBUG   machine:tick          tick!
 out_stdout: |
+  Input file LoC: 49
+  Code instr: 57
   ============================================================
   Program halted successfully
   Hello, Egor Fedorov!

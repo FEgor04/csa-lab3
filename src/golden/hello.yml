@@ -971,6 +971,8 @@ out_log: |
   DEBUG   machine:signal_read_memory MEM_OUT <- MEM[22]
   DEBUG   machine:tick          tick!
 out_stdout: |
+  Input file LoC: 11
+  Code instr: 23
   ============================================================
   Program halted successfully
   hello, world
