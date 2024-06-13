@@ -38,7 +38,7 @@ class DataPath:
         sh = logging.StreamHandler(sys.stderr)
         sh.setFormatter(
             logging.Formatter(
-                "%(name)s\t%(levelname)s\tacc: %(acc)05d, ar: %(ar)04d, alu: " "%(alu_out)05d\t\t\t\t%(message)s"
+                "%(name)s\t%(levelname)s\tacc: %(acc)5d, ar: %(ar)4d, alu: " "%(alu_out)5d\t\t\t\t%(message)s"
             )
         )
         self.logger.addHandler(sh)
@@ -143,8 +143,8 @@ class ControlUnit:
         sh = logging.StreamHandler(sys.stderr)
         sh.setFormatter(
             logging.Formatter(
-                "%(name)s\t%(levelname)s\tPC: %(pc)04d, tick: %(tick)06d, instr: %(instruction)05d, acc: %(acc)05d, "
-                "ar: %(ar)04d\t%(message)s"
+                "%(name)s\t%(levelname)s\tPC: %(pc)4d, tick: %(tick)6d, instr: %(instruction)5d, acc: %(acc)5d, "
+                "ar: %(ar)4d\t%(message)s"
             )
         )
         self.logger.addHandler(sh)
