@@ -196,6 +196,7 @@ digit ::= "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
 Инструкции будут загружены начиная с нулевой ячейки.
 
 Пример скомпилированного файла:
+
 ```bash
 python3 src/translator.py examples/hello_username.asm compiled.json
 ```
