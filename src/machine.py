@@ -17,7 +17,7 @@ class RegisterSelector(Enum):
 class DataPath:
     accumulator: int
     address_register: int
-    mem_out: Instruction
+    mem_out: Instruction | None
 
     def __init__(self, input_str: str, initial_memory: list[Instruction] = []):
         """
@@ -34,11 +34,12 @@ class DataPath:
         self.input = input_str
         self.output: list[str] = []
         self.alu = ALU()
+        self.mem_out = None
         self.logger = logging.getLogger(self.__class__.__name__)
         sh = logging.StreamHandler(sys.stderr)
         sh.setFormatter(
             logging.Formatter(
-                "%(name)s\t%(levelname)s\tacc: %(acc)5d, ar: %(ar)4d, alu: " "%(alu_out)5d\t\t\t\t%(message)s"
+                "%(name)s\t%(levelname)s\tacc: %(acc)5d, ar: %(ar)4d, alu: %(alu_out)5d, mem_out: %(mem_out)5d\t\t\t\t%(message)s"
             )
         )
         self.logger.addHandler(sh)
@@ -49,6 +50,7 @@ class DataPath:
             "acc": self.accumulator,
             "ar": self.address_register,
             "alu_out": self.alu.out,
+            "mem_out": self.mem_out.arg if (self.mem_out is not None and self.mem_out.arg is not None) else 0,
         }
 
     def signal_read_memory(self):
@@ -88,6 +90,7 @@ class DataPath:
             self.address_register = pc
             self.logger.debug("AR <- PC", extra=self._get_extra())
         elif sel is RegisterSelector.MEM:
+            assert self.mem_out is not None, "mem_out should not be None"
             assert self.mem_out.arg is not None, "mem_out should have an argument"
             self.address_register = self.mem_out.arg
             self.logger.debug("AR <- MEM_OUT", extra=self._get_extra())
@@ -100,6 +103,7 @@ class DataPath:
             self.accumulator = pc
             self.logger.debug("ACC <- PC", extra=self._get_extra())
         elif sel is RegisterSelector.MEM:
+            assert self.mem_out is not None, "mem_out should not be None"
             assert self.mem_out.arg is not None, "mem_out should have an argument"
             self.accumulator = self.mem_out.arg
             self.logger.debug("ACC <- MEM_OUT", extra=self._get_extra())
@@ -133,6 +137,9 @@ class ControlUnit:
             "pc": self.program_counter,
             "acc": self.data_path.accumulator,
             "ar": self.data_path.address_register,
+            "mem_out": self.data_path.mem_out.arg
+            if (self.data_path.mem_out is not None and self.data_path.mem_out.arg is not None)
+            else 0,
         }
 
     def __init__(self, pc: int, data_path: DataPath):
@@ -143,7 +150,7 @@ class ControlUnit:
         sh = logging.StreamHandler(sys.stderr)
         sh.setFormatter(
             logging.Formatter(
-                "%(name)s\t%(levelname)s\tPC: %(pc)4d, tick: %(tick)6d, instr: %(instruction)5d, acc: %(acc)5d, "
+                "%(name)s\t%(levelname)s\tPC: %(pc)4d, tick: %(tick)6d, instr: %(instruction)5d, acc: %(acc)5d, mem_out: %(mem_out)5d, "
                 "ar: %(ar)4d\t%(message)s"
             )
         )
@@ -152,6 +159,7 @@ class ControlUnit:
 
     def signal_latch_pc(self, sel: bool):
         if sel:
+            assert self.data_path.mem_out is not None, "mem_out should not be None"
             assert self.data_path.mem_out.arg is not None, "instruction should have an argument"
             self.program_counter = self.data_path.mem_out.arg
             self.logger.debug("PC <- MEM_OUT", extra=self.get_extra())
