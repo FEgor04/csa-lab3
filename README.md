@@ -11,7 +11,7 @@ program ::= line , [ "\n" , program ]
 line ::= line_instruction | line_variable
 
 line_variable ::= "VAR" , spacing , var_argument
-var_argument ::= LABEL | number | ("'", word_of_letters_and_digits, "'")
+var_argument ::= LABEL | number | string_literal
 
 line_instruction ::= [ label , ":" , spacing ] , instruction
 
@@ -34,9 +34,9 @@ instruction_name ::=  | "LD"
                       | "HLT"
 
 instruction_arg ::= 
-    | (label | positive_number)
-    | (addressation_direct_left, (label | number | literal), addressation_direct_right)
-    | (addressation_indirect_left, (label | number | literal), addressation_indirect_right)
+    | (label | number | char_literal)
+    | (addressation_direct_left, (label | number | char_literal), addressation_direct_right)
+    | (addressation_indirect_left, (label | number | char_literal), addressation_indirect_right)
 
 addressation_direct_left = "("
 addressation_direct_right = ")"
@@ -44,13 +44,15 @@ addressation_direct_right = ")"
 addressation_indirect_left = "["
 addressation_indirect_right = "]"
 
-word_of_lettrs_and_digits := letter_or_digit , [ word_of_letters_and_digits ]
+string_literal ::= "'", word_of_letters_and_digits, "'"
+char_literal ::= "'" , letter , "'"
+
+word_of_letters_and_digits := letter_or_digit , [ word_of_letters_and_digits ]
 word_of_letters := letter , [ word_of_letters ]
 
 number ::= [ "+" | "-" ] | positive_number
 positive_number ::= digit , [ positive_number ]
 
-literal ::= "'" , letter , "'"
 letter_or_digit ::= letter | digit
 lettter ::= "a-z" | "A-Z"
 digit ::= "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
