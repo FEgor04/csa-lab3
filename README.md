@@ -195,6 +195,30 @@ digit ::= "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
 должны быть загружены в память при запуске.
 Инструкции будут загружены начиная с нулевой ячейки.
 
+Пример скомпилированного файла:
+```bash
+python3 src/translator.py examples/hello_username.asm compiled.json
+```
+
+```json
+{
+  "pc": 3,
+  "instructions": [
+    [
+      "var",
+      0,
+      "immediate"
+    ],
+    [
+      "var",
+      0,
+      "immediate"
+    ],
+    ...
+  ]
+}
+```
+
 ## Транслятор
 
 Реализован в модуле [translator](./src/translator.py).
