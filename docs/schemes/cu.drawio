@@ -1,6 +1,6 @@
-<mxfile host="Electron" modified="2024-06-11T18:52:58.365Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.4.8 Chrome/124.0.6367.233 Electron/30.0.9 Safari/537.36" etag="-zTfHpDlbo9TcTqBkEuk" version="24.4.8" type="device">
+<mxfile host="Electron" modified="2024-06-13T17:26:10.106Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.4.8 Chrome/124.0.6367.243 Electron/30.1.0 Safari/537.36" etag="5-yDf89TlzRAvTSB92wk" version="24.4.8" type="device">
   <diagram id="v-JDOOZyUSPcI_IkAvMy" name="Страница — 1">
-    <mxGraphModel dx="1077" dy="626" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1562" dy="907" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -60,7 +60,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="l8fY_HSaeyg_I-ThemF9-1" value="Program Executor" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+        <mxCell id="l8fY_HSaeyg_I-ThemF9-1" value="Instruction Decoder" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="470" y="465" width="180" height="120" as="geometry" />
         </mxCell>
         <mxCell id="l8fY_HSaeyg_I-ThemF9-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;shape=flexArrow;" parent="1" source="l8fY_HSaeyg_I-ThemF9-6" target="FJJfB8WgnBZrv7iy5En1-1" edge="1">
