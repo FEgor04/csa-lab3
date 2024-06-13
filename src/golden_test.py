@@ -9,7 +9,7 @@ import translator
 
 
 @pytest.mark.golden_test("golden/*.yml")
-def test_translator_and_machine(golden, caplog):
+def test_translator_and_machine(golden):
     with tempfile.TemporaryDirectory() as tmpdirname:
         source = os.path.join(tmpdirname, "source.asm")
         input_stream = os.path.join(tmpdirname, "input.txt")
@@ -22,13 +22,14 @@ def test_translator_and_machine(golden, caplog):
             file.write(golden["in_stdin"])
 
         with contextlib.redirect_stdout(io.StringIO()) as stdout:
-            translator.main(source, target)
-            print("============================================================")
-            machine.main(target, input_stream, debug_log)
+            with contextlib.redirect_stderr(io.StringIO()) as stderr:
+                translator.main(source, target)
+                print("============================================================")
+                machine.main(target, input_stream, debug_log)
 
         with open(target, encoding="utf-8") as file:
             code = file.read()
 
         assert code == golden.out["out_code"]
         assert stdout.getvalue() == golden.out["out_stdout"]
-        assert caplog.text == golden.out["out_log"]
+        assert stderr.getvalue() == golden.out["out_log"]
