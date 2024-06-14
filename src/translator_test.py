@@ -2,7 +2,7 @@ import unittest
 
 import pytest
 from isa import Addressing, Instruction, Opcode
-from translator import expand_lines, parse_labels, parse_lines, split_instruction, remove_comment
+from translator import expand_lines, parse_labels, parse_lines, remove_comment, split_instruction
 
 
 class TestTranslator(unittest.TestCase):
@@ -120,13 +120,7 @@ class TestTranslator(unittest.TestCase):
         pytest.raises(AssertionError, lambda: parse_lines(lines))
 
     def test_remove_comment(self):
-        lines = [
-            "# comment",
-            "VAR 'a' # comment"
-        ]
-        expected = [
-            "",
-            "VAR 'a'"
-        ]
+        lines = ["# comment", "VAR 'a' # comment"]
+        expected = ["", "VAR 'a'"]
         actual = remove_comment(lines)
         assert actual == expected
