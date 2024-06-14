@@ -19,7 +19,7 @@ def is_label(s: str) -> bool:
 
 
 def parse_lines(lines: list[str]) -> tuple[list[Instruction], int]:
-    lines = expand_lines(lines)
+    lines = expand_lines(remove_comment(lines))
     instructions = []
     labels = parse_labels(lines)
     for i in range(len(lines)):
@@ -131,6 +131,8 @@ def convert_to_json(instructions: list[Instruction], pc: int) -> str:
     }
     return json.dumps(code, indent=2)
 
+def remove_comment(lines: list[str]) -> list[str]:
+    return list(map(lambda line: line.split("#")[0].strip(), lines))
 
 def main(input_file, output_file):
     with open(input_file, encoding="utf-8") as f:

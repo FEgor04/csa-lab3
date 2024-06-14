@@ -20,7 +20,7 @@ class IntegrationTest(unittest.TestCase):
     def test_mul_input(self):
         lines = [
             "RESULT: VAR 0",
-            "START: LD (2046)",
+            "START: LD (2046) # read from input device",
             "SUB '0'",
             "MUL 10",
             "ST RESULT",

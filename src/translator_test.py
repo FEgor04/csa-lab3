@@ -2,7 +2,7 @@ import unittest
 
 import pytest
 from isa import Addressing, Instruction, Opcode
-from translator import expand_lines, parse_labels, parse_lines, split_instruction
+from translator import expand_lines, parse_labels, parse_lines, split_instruction, remove_comment
 
 
 class TestTranslator(unittest.TestCase):
@@ -118,3 +118,15 @@ class TestTranslator(unittest.TestCase):
     def test_label_duplicate(self):
         lines = ["LABEL: HLT", "LABEL: HLT"]
         pytest.raises(AssertionError, lambda: parse_lines(lines))
+
+    def test_remove_comment(self):
+        lines = [
+            "# comment",
+            "VAR 'a' # comment"
+        ]
+        expected = [
+            "",
+            "VAR 'a'"
+        ]
+        actual = remove_comment(lines)
+        assert actual == expected

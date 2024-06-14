@@ -8,16 +8,18 @@
 ```ebnf
 program ::= line , [ "\n" , program ]
 
-line ::= line_instruction | line_variable
+line ::= line_instruction | line_variable | line_comment
 
-line_variable ::= "VAR" , spacing , var_argument
+line_comment ::= ";" , <anything>
+
+line_variable ::= "VAR" , spacing , var_argument , [ "#", <anything> ]
 var_argument ::= LABEL | number | string_literal
 
-line_instruction ::= [ label , ":" , spacing ] , instruction
+line_instruction ::= [ label , ":" , spacing ] , instruction , [ "#", <anything> ]
 
 label ::= word_of_letters_and_digits
 
-instruction ::= instruction_name , spacing , instruction_arg
+instruction ::= instruction_name , [spacing , instruction_arg]
 
 spacing ::= "\t" , " " , [ spacing ]
 
