@@ -353,7 +353,7 @@ golden тест: [hello.yml](./src/golden/hello.yml)
 - `hello_username`. Реализован в [hello_name.asm](./examples/hello_username.asm),
 golden тест: [hello_username](./src/golden/hello_name.yml)
 - `prob1`. Реализован в [prob1.asm](./examples/prob1.asm),
-golden тест: [prob1.yml](./examples/prob1.asm)
+golden тест: [prob1.yml](./src/golden/prob1.yml)
 
 ### Пример работы
 
